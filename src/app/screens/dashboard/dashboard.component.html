@@ -4,76 +4,125 @@
     <button type="button" class="btn btn-primary" style="width: 8rem;"
         (click)="openVerticallyCentered(contentEnroll)">ENROLL</button>
 </div> -->
-<app-navbar></app-navbar>
-<div class="d-flex flex-row justify-content-around mt-2">
-  <div class="card p-4" style="width: 19vw">
-    <div class="d-flex flex-row justify-content-between">
-      <div class="d-flex flex-column">
-        <h4 class="text-white">₹ {{ total }}</h4>
-        <div class="font-weight-normal" style="color: #ffffff7a">
-          Total Collected
+<div class="cam-mob-scanner" style="height: 100vh; background-color: black" >
+  <div
+    class="d-flex justify-content-center align-items-center"
+    style="height: 100%"
+  >
+    <div  *ngIf="isStarted === false"
+      class="d-flex flex-column align-items-center justify-content-center"
+      (click)="start()"
+    >
+      <i
+        class="fa-solid fa-camera pointer"
+        style="color: blueviolet; font-size: 7rem"
+      ></i>
+      <div class="text-white">click to scan barcode</div>
+    </div>
+
+    <barcode-scanner-livestream
+      type="code_128"
+      (valueChanges)="onValueChanges($event)"
+    ></barcode-scanner-livestream>
+  </div>
+
+</div>
+<app-navbar class="clip1"></app-navbar>
+<div class="clip1">
+  <div class="d-flex flex-row justify-content-around mt-2">
+    <div class="card p-4" style="width: 19vw">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-column">
+          <h4 class="text-white">₹ {{ total }}</h4>
+          <div class="font-weight-normal" style="color: #ffffff7a">
+            Total Collected
+          </div>
         </div>
-      </div>
-      <div class="icon iconBox d-flex justify-content-center align-items-center">
-        <i class="fa-solid fa-indian-rupee-sign" style="color: #00d25b; font-size: 1.3rem;"></i>
+        <div
+          class="icon iconBox d-flex justify-content-center align-items-center"
+        >
+          <i
+            class="fa-solid fa-indian-rupee-sign"
+            style="color: #00d25b; font-size: 1.3rem"
+          ></i>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="card p-4" style="width: 19vw">
-    <div class="d-flex flex-row justify-content-between">
-      <div class="d-flex flex-column">
-        <h4 class="text-white">{{ enrolled.data.length }}</h4>
-        <div class="font-weight-normal" style="color: #ffffff7a">
-          Total Enrolled
+    <div class="card p-4" style="width: 19vw">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-column">
+          <h4 class="text-white">{{ enrolled.data.length }}</h4>
+          <div class="font-weight-normal" style="color: #ffffff7a">
+            Total Enrolled
+          </div>
         </div>
-      </div>
-      <div class="icon iconBox d-flex justify-content-center align-items-center">
-        <i class="fa-solid fa-user" style="color: #00d25b; font-size: 1.3rem;"></i>
+        <div
+          class="icon iconBox d-flex justify-content-center align-items-center"
+        >
+          <i
+            class="fa-solid fa-user"
+            style="color: #00d25b; font-size: 1.3rem"
+          ></i>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="card p-4" style="width: 19vw">
-    <div class="d-flex flex-row justify-content-between">
-      <div class="d-flex flex-column">
-        <h4 class="text-white">₹ {{ total }}</h4>
-        <div class="font-weight-normal" style="color: #ffffff7a">
-          Total Collected
+    <div class="card p-4" style="width: 19vw">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-column">
+          <h4 class="text-white">₹ {{ total }}</h4>
+          <div class="font-weight-normal" style="color: #ffffff7a">
+            Total Collected
+          </div>
         </div>
-      </div>
-      <div class="icon iconBox d-flex justify-content-center align-items-center">
-        <i class="fa-solid fa-indian-rupee-sign" style="color: #00d25b; font-size: 1.3rem;"></i>
+        <div
+          class="icon iconBox d-flex justify-content-center align-items-center"
+        >
+          <i
+            class="fa-solid fa-indian-rupee-sign"
+            style="color: #00d25b; font-size: 1.3rem"
+          ></i>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="card p-4" style="width: 19vw">
-    <div class="d-flex flex-row justify-content-between">
-      <div class="d-flex flex-column">
-        <h4 class="text-white">₹ {{ total }}</h4>
-        <div class="font-weight-normal" style="color: #ffffff7a">
-          Total Collected
+    <div class="card p-4" style="width: 19vw">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-column">
+          <h4 class="text-white">₹ {{ total }}</h4>
+          <div class="font-weight-normal" style="color: #ffffff7a">
+            Total Collected
+          </div>
         </div>
-      </div>
-      <div class="icon iconBox d-flex justify-content-center align-items-center">
-        <i class="fa-solid fa-indian-rupee-sign" style="color: #00d25b; font-size: 1.3rem;"></i>
+        <div
+          class="icon iconBox d-flex justify-content-center align-items-center"
+        >
+          <i
+            class="fa-solid fa-indian-rupee-sign"
+            style="color: #00d25b; font-size: 1.3rem"
+          ></i>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="card p-4" style="width: 19vw">
-    <div class="d-flex flex-row justify-content-between">
-      <div class="d-flex flex-column">
-        <h4 class="text-white">₹ {{ total }}</h4>
-        <div class="font-weight-normal" style="color: #ffffff7a">
-          Total Collected
+    <div class="card p-4" style="width: 19vw">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-column">
+          <h4 class="text-white">₹ {{ total }}</h4>
+          <div class="font-weight-normal" style="color: #ffffff7a">
+            Total Collected
+          </div>
         </div>
-      </div>
-      <div class="icon iconBox d-flex justify-content-center align-items-center">
-        <i class="fa-solid fa-indian-rupee-sign" style="color: #00d25b; font-size: 1.3rem;"></i>
+        <div
+          class="icon iconBox d-flex justify-content-center align-items-center"
+        >
+          <i
+            class="fa-solid fa-indian-rupee-sign"
+            style="color: #00d25b; font-size: 1.3rem"
+          ></i>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-<app-bottom-action></app-bottom-action>
+<app-bottom-action class="clip1"></app-bottom-action>
 
 <!-- <app-schemes-list></app-schemes-list> -->
 <!-- <app-enrolled-list></app-enrolled-list> -->

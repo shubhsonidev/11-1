@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, TemplateRef, inject } from '@angular/core';
+import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiUrlService } from 'src/app/service/api-url.service';
 import { ToastrService } from 'ngx-toastr';
@@ -9,6 +9,7 @@ import { messageConfig } from 'src/app/components/navbar/navbar.component';
 import { MessageService } from 'src/app/service/message.service';
 import { MessageConfigService } from 'src/app/service/message-config.service';
 import { EnrolledService, enrolledResponse } from 'src/app/service/enrolled.service';
+import { BarcodeScannerLivestreamComponent } from "ngx-barcode-scanner";
 
 @Component({
   selector: 'app-dashboard',
@@ -45,7 +46,10 @@ export class DashboardComponent {
   payload = [];
   data: any[] = [];
   total: any;
-
+  isStarted = false;
+  @ViewChild(BarcodeScannerLivestreamComponent)
+  barcodeScanner: BarcodeScannerLivestreamComponent = new BarcodeScannerLivestreamComponent;
+  barcodeValue: any;
 
 
   constructor(
@@ -78,6 +82,21 @@ export class DashboardComponent {
     }
   }
   
+  start() {
+    this.isStarted = true;
+    this.barcodeScanner.start();
+  }
+
+  onValueChanges(result: { codeResult: { code: any; }; }) {
+this.barcodeScanner.stop();
+
+    this.barcodeValue = result.codeResult.code;
+    console.log(this.barcodeValue)
+this.toastr.success(this.barcodeValue)
+
+  }
+
+
   calculateTotalAndFetchEnrolled() {
     this.total = this.calculateTotalPaid(this.enrolled.data);
 

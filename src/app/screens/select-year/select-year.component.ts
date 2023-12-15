@@ -50,10 +50,12 @@ export class SelectYearComponent {
       this.router.navigate(['/dashboard']);
     }
 
-    this.loader = true;
 
+
+  this.loader = true;
 
     this.http.get<yearsResponse>(this.apiservice.url + "apifor=years").subscribe(response => {
+      this.years.data = response.data;
       this.data = response.data;
       this.loader = false;
     })

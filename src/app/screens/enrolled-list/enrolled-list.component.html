@@ -2,7 +2,6 @@
 <app-navbar></app-navbar>
 <app-bottom-action></app-bottom-action>
 
-
 <app-loader [loading]="loader" [message]="'Saving EMI..'">
     <div style="overflow: scroll; height: 86vh;">
     <div class="d-flex flex-row justify-content-center align-items-center" >
@@ -290,16 +289,27 @@
 
 
 
-<ng-template #barcode let-modal>
-    <div>
+<ng-template #barcode let-modal >
+
+
+    <div class="modal-header">
+        <h4 class="modal-title">Alert </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="m-4 d-flex justify-content-center align-items-center">
         <div id="print-section">
             <ngx-barcode6
-            [bc-format]="'code39'"
+            [bc-format]="'code128'"
             [bc-value]="selectedCode"
             [bc-display-value]="true"
           >
           </ngx-barcode6>
         </div>
-          <button printSectionId="print-section" ngxPrint>print</button> 
     </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cancel</button>
+        <button type="button" printSectionId="print-section" class="btn btn-primary" ngxPrint>Print</button>
+    </div>
+   
 </ng-template>

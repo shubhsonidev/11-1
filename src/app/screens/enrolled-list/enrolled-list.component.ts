@@ -51,7 +51,7 @@ export class EnrolledListComponent {
 
   openVerticallyCenteredBarcode(content: TemplateRef<any>, code: any) {
     this.selectedCode = code;
-    this.modalService.open(content, { centered: true, size: 'lg' });
+    this.modalService.open(content, { centered: true, size: 'md' });
   }
 
   payEmi(amount: any, sheetName: any, code: any, emiNumber: any) {

@@ -15,6 +15,7 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApiInterceptor } from './api-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxBarcode6Module } from 'ngx-barcode6';
+import { BarcodeScannerLivestreamModule } from "ngx-barcode-scanner";
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -25,6 +26,7 @@ import { OtpVerifyComponent } from './screens/otp-verify/otp-verify.component';
 import { BottomActionComponent } from './components/bottom-action/bottom-action.component';
 
 import {NgxPrintModule} from 'ngx-print';
+import { ScannerComponent } from './components/scanner/scanner.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import {NgxPrintModule} from 'ngx-print';
     EnrolledListComponent,
     OtpVerifyComponent,
 
-    BottomActionComponent
+    BottomActionComponent,
+     ScannerComponent
   ],
   imports: [
     NgbDatepickerModule,
@@ -48,6 +51,7 @@ import {NgxPrintModule} from 'ngx-print';
     FormsModule,
     NgbModule,
     NgxBarcode6Module,
+    BarcodeScannerLivestreamModule,
     HttpClientModule,
     BrowserAnimationsModule,
     NgxPrintModule,

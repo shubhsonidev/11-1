@@ -4,6 +4,7 @@
   left: 50px;
 }
 
+
 .card{
   background-color: #1a1c24f3;
   border-radius: 4px;
@@ -14,4 +15,27 @@
   background-color: rgba(0, 210, 91, 0.199);
   border-radius: 6px;
 
+}
+
+.cam-mob-scanner{
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .clip1{
+    display: none ;
+    
+  }
+.cam-mob-scanner{
+  display: block;;
+}
+}
+@media only screen and (min-width: 601px) {
+  .clip1{
+    display: block ;
+    
+  }
+.cam-mob-scanner{
+  display: none;;
+}
 }
