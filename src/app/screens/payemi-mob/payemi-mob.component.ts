@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiUrlService } from 'src/app/service/api-url.service';
 import { EnrolledService, enrolledResponse } from 'src/app/service/enrolled.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-payemi-mob',
   templateUrl: './payemi-mob.component.html',
@@ -16,11 +16,12 @@ export class PayemiMobComponent {
     public enrolled: EnrolledService,
     private toastr: ToastrService,
     private http: HttpClient,
-    private apiservice: ApiUrlService
+    private apiservice: ApiUrlService,
+    private location: Location
   ) {}
 
   data: any[] = [];
-  selectedEnrolled: any;
+  selectedEnrolled: any = null;
   param1: any;
   loader: boolean = false;
 
@@ -48,6 +49,9 @@ export class PayemiMobComponent {
     });
   }
 
+  goBack(){
+    this.location.back();
+  }
   processData() {
     for (let i = 0; i < this.enrolled.data.length; i++) {
       if (this.enrolled.data[i].code.toString() === this.param1) {

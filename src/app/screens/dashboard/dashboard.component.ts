@@ -97,7 +97,7 @@ this.barcodeScanner.stop();
 
     this.barcodeValue = result.codeResult.code;
     console.log(this.barcodeValue)
-this.toastr.success(this.barcodeValue)
+// this.toastr.success(this.barcodeValue)
 this.router.navigate(['/pay-emi'], { queryParams: {code: this.barcodeValue}});
 
   }
