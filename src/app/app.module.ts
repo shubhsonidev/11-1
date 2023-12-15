@@ -27,6 +27,7 @@ import { BottomActionComponent } from './components/bottom-action/bottom-action.
 
 import {NgxPrintModule} from 'ngx-print';
 import { ScannerComponent } from './components/scanner/scanner.component';
+import { PayemiMobComponent } from './screens/payemi-mob/payemi-mob.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ScannerComponent } from './components/scanner/scanner.component';
     OtpVerifyComponent,
 
     BottomActionComponent,
-     ScannerComponent
+     ScannerComponent,
+     PayemiMobComponent
   ],
   imports: [
     NgbDatepickerModule,

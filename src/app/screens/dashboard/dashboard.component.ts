@@ -10,6 +10,7 @@ import { MessageService } from 'src/app/service/message.service';
 import { MessageConfigService } from 'src/app/service/message-config.service';
 import { EnrolledService, enrolledResponse } from 'src/app/service/enrolled.service';
 import { BarcodeScannerLivestreamComponent } from "ngx-barcode-scanner";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -59,9 +60,11 @@ export class DashboardComponent {
     private schemeService: SchemeService,
     private messageConfigService: MessageConfigService,
     public enrolled: EnrolledService,
+    private router: Router,
   ) { }
   private modalService = inject(NgbModal);
   ngOnInit(): void {
+    this.loader = true;
     this.year = localStorage.getItem('selectedYear');
   
     if (this.schemeService.data.length === 0) {
@@ -73,9 +76,11 @@ export class DashboardComponent {
   
           // Calculate total after data is fetched
           this.calculateTotalAndFetchEnrolled();
+
         });
     } else {
       this.schemeData = this.schemeService.data;
+      this.loader = false;
   
       // Calculate total if data is already available
       this.calculateTotalAndFetchEnrolled();
@@ -93,32 +98,36 @@ this.barcodeScanner.stop();
     this.barcodeValue = result.codeResult.code;
     console.log(this.barcodeValue)
 this.toastr.success(this.barcodeValue)
+this.router.navigate(['/pay-emi'], { queryParams: {code: this.barcodeValue}});
 
   }
 
 
   calculateTotalAndFetchEnrolled() {
     this.total = this.calculateTotalPaid(this.enrolled.data);
-
   
-    if(this.enrolled.data.length === 0){
-    this.enrolled.fetch().subscribe(
-      (response: enrolledResponse) => {
-        this.enrolled.data = response.data
-        this.data = response.data;
-
-        // Recalculate total after enrolled data is fetched
-        this.total = this.calculateTotalPaid(this.enrolled.data);
-      },
-      (error) => {
-        console.error('Error fetching enrolled data:', error);
-      }
-    );
-    }
-    else{
-
+    if (this.enrolled.data.length === 0) {
+      this.enrolled.fetch().subscribe(
+        (response: enrolledResponse) => {
+          this.enrolled.data = response.data;
+          this.data = response.data;
+  
+          // Recalculate total after enrolled data is fetched
+          this.total = this.calculateTotalPaid(this.enrolled.data);
+          
+          this.loader = false; // Move the loader assignment here
+        },
+        (error) => {
+          console.error('Error fetching enrolled data:', error);
+          this.loader = false; // Move the loader assignment here
+        }
+      );
+    } else {
+      // In case data is already available
+      this.loader = false; // Move the loader assignment here
     }
   }
+  
   
   
 
