@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+<div class="d-flex flex-row justify-content-center align-items-center">
+    <table class="table mt-4" style="width: 98vw;">
+        <thead>
+            <tr>
+                <th scope="col">Sr No.</th>
+                <th scope="col">Scheme Name</th>
+                <th scope="col">Prefix</th>
+                <th scope="col">Year</th>
+                <th scope="col">Inst 1</th>
+                <th scope="col">Inst 2</th>
+                <th scope="col">Inst 3</th>
+                <th scope="col">Inst 4</th>
+                <th scope="col">Inst 5</th>
+                <th scope="col">Inst 6</th>
+                <th scope="col">Inst 7</th>
+                <th scope="col">Inst 8</th>
+                <th scope="col">Inst 9</th>
+                <th scope="col">Inst 10</th>
+                <th scope="col">Inst 11</th>
+                <th scope="col">Inst 12</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let scheme of data; let i = index">
+                <th>{{i+1}}</th>
+                <th>{{scheme.name}}</th>
+                <th>{{scheme.prefix}}</th>
+                <th>{{scheme.year}}</th>
+                <th [ngStyle]="{'background-color': scheme.benefit == 1 ? '#90EE8F' : 'white'}">{{scheme.inst1}}
+                </th>
+                <th [ngStyle]="{'background-color': scheme.benefit == 2 ? '#90EE8F' : 'white'}">{{scheme.inst2}}</th>
+                <th [ngStyle]="{'background-color': scheme.benefit == 3 ? '#90EE8F' : 'white'}">{{scheme.inst3}}</th>
+                <th [ngStyle]="{'background-color': scheme.benefit == 4 ? '#90EE8F' : 'white'}">{{scheme.inst4}}</th>
+                <th [ngStyle]="{'background-color': scheme.benefit == 5 ? '#90EE8F' : 'white'}">{{scheme.inst5}}</th>
+                <th [ngStyle]="{'background-color': scheme.benefit == 6 ? '#90EE8F' : 'white'}">{{scheme.inst6}}</th>
+                <th [ngStyle]="{'background-color': scheme.benefit == 7 ? '#90EE8F' : 'white'}">{{scheme.inst7}}</th>
+                <th [ngStyle]="{'background-color': scheme.benefit == 8 ? '#90EE8F' : 'white'}">{{scheme.inst8}}</th>
+                <th [ngStyle]="{'background-color': scheme.benefit == 9 ? '#90EE8F' : 'white'}">{{scheme.inst9}}</th>
+                <th [ngStyle]="{'background-color': scheme.benefit == 10 ? '#90EE8F' : 'white'}">{{scheme.inst10}}</th>
+                <th [ngStyle]="{'background-color': scheme.benefit == 11 ? '#90EE8F' : 'white'}">{{scheme.inst11}}</th>
+                <th [ngStyle]="{'background-color': scheme.benefit == 12 ? '#90EE8F' : 'white'}">{{scheme.inst12}}</th>
+                <th><button type="button" class="btn btn-success" style="padding: 0px 10px;">Edit</button></th>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,40 @@
+<app-block-loader [loading]="loader" [message]="loadMessage">
+    <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+        <button class="btn btn-outline-primary mb-2 me-2 mt-3" (click)="openVerticallyCentered(content)">
+            Add year
+        </button>
+        <div class="col d-flex justify-content-center align-items-center">
+
+            <div ngbDropdown class="d-inline-block">
+                <button type="button" class="btn btn-outline-primary drop" id="dropdownBasic1" ngbDropdownToggle>
+                    {{selectedYear}}
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="width: 70vw;">
+                    <button ngbDropdownItem (click)="selectYear(year.years)" *ngFor="let year of data"
+                        style="text-align: center;">{{year.years}}</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="button-18 mb-4" [disabled]="selectedYear == 'Select Year'" (click)="navigateToDashboard()"
+            role="button">Continue</button>
+    </div>
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title">Add Year</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="input-group mb-1 p-3">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="year"
+                placeholder="Add Year Here..." aria-describedby="basic-addon1">
+        </div>
+        <div class="d-flex justify-content-center align-items-center mb-2" style="width: 100%;">
+            <button type="button" (click)="addYear()" class="btn btn-primary" style="width: 6rem;">Save</button>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </ng-template>
+</app-block-loader>

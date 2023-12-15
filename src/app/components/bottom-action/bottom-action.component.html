@@ -1,0 +1,225 @@
+<app-loader [loading]="loading" [message]="'Sending Reminder...'">
+<div class="button-grp">
+
+
+    <button type="button" class="btn btn-primary me-3" style="width: 8rem;"
+        (click)="openVerticallyCentered(contents)">ADD SCHEME</button>
+    <button type="button" class="btn btn-primary me-3" style="width: 8rem;"
+        (click)="openVerticallyCentered(contentEnroll)">ENROLL</button>
+    <button type="button" class="btn btn-primary" style="width: 15rem;"
+        (click)="openVerticallyCentered(delay)">SEND REMINDER TO ALL</button>
+       
+
+</div>
+</app-loader>
+
+
+<ng-template #contents let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">ADD SCHEME </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="p-4">
+        <div class="d-flex flex-row gap-4 justify-content-around align-items-center w-100">
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">Scheme name</label>
+                <input type="text" autocomplete="off" style="text-transform:uppercase" class="form-control"
+                    id="exampleInputEmail1" [ngModelOptions]="{standalone: true}" [(ngModel)]="schemeName"
+                    aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">Prefix</label>
+                <input style="text-transform:uppercase" type="text" autocomplete="off" class="form-control"
+                    id="exampleInputEmail1" [ngModelOptions]="{standalone: true}" [(ngModel)]="prefix"
+                    aria-describedby="emailHelp">
+            </div>
+        </div>
+        <div class="d-flex flex-row mb-3 gap-4 justify-content-around align-items-center w-100">
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">Year</label>
+                <input style="text-transform:uppercase" type="text" autocomplete="off" class="form-control"
+                    id="exampleInputEmail1" [ngModelOptions]="{standalone: true}" [(ngModel)]="year" disabled
+                    aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">Benefit installment number</label>
+                <input style="text-transform:uppercase" type="number" autocomplete="off" class="form-control"
+                    id="exampleInputEmail1" [ngModelOptions]="{standalone: true}" [(ngModel)]="benefit"
+                    aria-describedby="emailHelp">
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-center align-items-center">
+            <h5 class="me-3">Installments</h5>
+            <hr style="width: 100%;">
+        </div>
+
+
+        <div class="d-flex flex-row gap-4 justify-content-around align-items-center w-100">
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">1</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="e1" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">2</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="e2" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">3</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="e3" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">4</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="e4" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">5</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="e5" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">6</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="e6" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+        </div>
+        <div class="d-flex flex-row gap-4 justify-content-around align-items-center w-100">
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">7</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="e7" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">8</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="e8" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">9</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="e9" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">10</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="e10" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">11</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="e11" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">12</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="e12" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" *ngIf="loader" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            <span role="status">Loading...</span>
+        </button>
+
+        <button type="button" class="btn btn-primary" *ngIf="loader == false" (click)="addScheme()">Save</button>
+    </div>
+</ng-template>
+
+<ng-template #contentEnroll let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">ENROLL NEW CUSTOMER</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="p-4">
+        <div class="d-flex flex-row gap-4 justify-content-around align-items-center w-100">
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">Customer name</label>
+                <input type="text" autocomplete="off" style="text-transform:uppercase" class="form-control"
+                    id="exampleInputEmail1" [ngModelOptions]="{standalone: true}" [(ngModel)]="custName"
+                    aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 w-100">
+                <label for="exampleInputEmail1" class="form-label">Number</label>
+                <input style="text-transform:uppercase" type="number" autocomplete="off" class="form-control"
+                    id="exampleInputEmail1" [ngModelOptions]="{standalone: true}" [(ngModel)]="custNumber"
+                    aria-describedby="emailHelp">
+            </div>
+        </div>
+
+        <div class=" d-flex flex-column justify-content-center align-items-center">
+            <label for="exampleInputEmail1" class="form-label" style="width: 100%;">Scheme</label>
+
+            <div ngbDropdown class="d-inline-block" style="width: 100%;">
+                <button type="button" class="btn btn-outline-primary drop" id="dropdownBasic1" ngbDropdownToggle
+                    style="width: 48.3%;">
+                    {{selectedSchemeName}}
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="width: 48.3%;">
+                    <button ngbDropdownItem (click)="selectScheme(scheme)" *ngFor="let scheme of schemeData"
+                        style="text-align: center;">{{scheme.name}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" *ngIf="loader" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            <span role="status">Loading...</span>
+        </button>
+
+        <button type="button" class="btn btn-primary" *ngIf="loader == false" (click)="enroll()">Save</button>
+    </div>
+</ng-template>
+
+<ng-template #delay let-modal style="width: 50%;">
+    <div class="modal-header">
+        <h4 class="modal-title">DELAY SETTING</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="p-4">
+        <div class=" d-flex flex-column justify-content-center align-items-center">
+            <label for="exampleInputEmail1" class="form-label" style="width: 48.3%;">DELAY TIME IN SECONDS</label>
+
+            <div ngbDropdown class="d-inline-block d-flex justify-content-center align-items-center" style="width: 100%;">
+                <button type="button" class="btn btn-outline-primary drop" id="dropdownBasic1" ngbDropdownToggle
+                    style="width: 48.3%;">
+                    {{selectedDelay}}
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="width: 48.3%;">
+                    <button ngbDropdownItem (click)="selectDelay(2)" 
+                        style="text-align: center;">2</button>
+                    <button ngbDropdownItem (click)="selectDelay(3)" 
+                        style="text-align: center;">3</button>
+                    <button ngbDropdownItem (click)="selectDelay(4)" 
+                        style="text-align: center;">4</button>
+                    <button ngbDropdownItem (click)="selectDelay(5)" 
+                        style="text-align: center;">5</button>
+                    <button ngbDropdownItem (click)="selectDelay(6)" 
+                        style="text-align: center;">6</button>
+                    <button ngbDropdownItem (click)="selectDelay(7)" 
+                        style="text-align: center;">7</button>
+                    <button ngbDropdownItem (click)="selectDelay(8)" 
+                        style="text-align: center;">8</button>
+                    <button ngbDropdownItem (click)="selectDelay(0)" 
+                        style="text-align: center;">9</button>
+                    <button ngbDropdownItem (click)="selectDelay(10)" 
+                        style="text-align: center;">10</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" *ngIf="loader" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            <span role="status">Loading...</span>
+        </button>
+
+        <button type="button" class="btn btn-primary" *ngIf="loader == false" (click)="sendReminderToAll()">Send</button>
+    </div>
+</ng-template>
