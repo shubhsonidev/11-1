@@ -16,6 +16,8 @@ import { ApiInterceptor } from './api-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxBarcode6Module } from 'ngx-barcode6';
 import { BarcodeScannerLivestreamModule } from "ngx-barcode-scanner";
+import { FilterPipe } from './filter.pipe';
+
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -41,7 +43,7 @@ import { PayemiMobComponent } from './screens/payemi-mob/payemi-mob.component';
     SchemesListComponent,
     EnrolledListComponent,
     OtpVerifyComponent,
-
+    FilterPipe,
     BottomActionComponent,
      ScannerComponent,
      PayemiMobComponent

@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, NgModule, TemplateRef, ViewChild, inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ApiUrlService } from 'src/app/service/api-url.service';
 import { EnrolledService, enrolledResponse } from 'src/app/service/enrolled.service';
+
+
 
 @Component({
   selector: 'app-enrolled-list',
@@ -13,6 +15,7 @@ import { EnrolledService, enrolledResponse } from 'src/app/service/enrolled.serv
 export class EnrolledListComponent {
   isChecked: any;
   loader: boolean = false;
+  searchTerm: string = ''; 
   selectedCode: any;
   constructor(
     public enrolled: EnrolledService,

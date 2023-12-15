@@ -4,6 +4,22 @@
 
 <app-loader [loading]="loader" [message]="'Saving EMI..'">
     <div style="overflow: scroll; height: 86vh;">
+        <div class="d-flex flex-row justify-content-center align-items-center">
+            <!-- Add a search input field -->
+
+
+            <input style="    width: 15rem;
+            "
+            type="text"
+            autocomplete="off"
+
+            class="form-control"
+placeholder="Search here"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="searchTerm"
+
+          />
+        </div>
     <div class="d-flex flex-row justify-content-center align-items-center" >
         <table class="table" style="width: 98vw;">
             <thead>
@@ -29,7 +45,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let enrolled of enrolled.data; let i = index">
+                <tr *ngFor="let enrolled of enrolled.data | filter: searchTerm;; let i = index">
                     <th>{{i+1}}</th>
                     <th>{{enrolled.name}}</th>
                     <th>{{enrolled.number}}</th>
@@ -120,7 +136,7 @@
                 <tbody>
                     <tr >
                         <th scope="row">1</th>
-                        <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 1 ? '#90EE8F' : 'white'}"> {{selectedEnrolled.inst1amount}}</td>
+                        <td  [ngStyle]="{'background-color': selectedEnrolled.benefit == 1 ? '#90EE8F' : 'white'}"> {{selectedEnrolled.inst1amount}}</td>
                         <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 1 ? '#90EE8F' : 'white'}">
                             <div *ngIf="selectedEnrolled.benefit == 1">Benefit</div>
                             <div *ngIf="selectedEnrolled.benefit != 1">Paid</div></td>
@@ -129,11 +145,14 @@
                             <button *ngIf="selectedEnrolled.inst1 !== selectedEnrolled.inst1amount" type="button"
                                 class="btn btn-info py-0 ps-2 pe-2"
                                 (click)="payEmi(selectedEnrolled.inst1amount,selectedEnrolled.sheetName,selectedEnrolled.code,1)">Pay</button>
+                            <button *ngIf="selectedEnrolled.inst1 === selectedEnrolled.inst1amount" type="button"
+                                class="btn btn-danger py-0 ps-2 pe-2"
+                                (click)="payEmi('',selectedEnrolled.sheetName,selectedEnrolled.code,1)">Delete</button>
                         </td>
                     </tr>
                     <tr >
                         <th scope="row">2</th>
-                        <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 2 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst2amount}}</td>
+                        <td  [ngStyle]="{'background-color': selectedEnrolled.benefit == 2 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst2amount}}</td>
                         <td *ngIf="selectedEnrolled.inst2 ===selectedEnrolled.inst2amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 2 ? '#90EE8F' : 'white'}">
                             <div *ngIf="selectedEnrolled.benefit == 2">Benefit</div>
                             <div *ngIf="selectedEnrolled.benefit != 2">Paid</div></td>
@@ -142,11 +161,14 @@
                             <button *ngIf="selectedEnrolled.inst2 !== selectedEnrolled.inst2amount" type="button"
                                 class="btn btn-info py-0 ps-2 pe-2"
                                 (click)="payEmi(selectedEnrolled.inst2amount,selectedEnrolled.sheetName,selectedEnrolled.code,2)">Pay</button>
+                            <button *ngIf="selectedEnrolled.inst2 === selectedEnrolled.inst2amount" type="button"
+                                class="btn btn-danger py-0 ps-2 pe-2"
+                                (click)="payEmi('',selectedEnrolled.sheetName,selectedEnrolled.code,2)">Delete</button>
                         </td>
                     </tr>
                     <tr >
                         <th scope="row">3</th>
-                        <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 3 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst3amount}}</td>
+                        <td  [ngStyle]="{'background-color': selectedEnrolled.benefit == 3 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst3amount}}</td>
                         <td *ngIf="selectedEnrolled.inst3 ===selectedEnrolled.inst3amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 3 ? '#90EE8F' : 'white'}">
                             <div *ngIf="selectedEnrolled.benefit == 3">Benefit</div>
                             <div *ngIf="selectedEnrolled.benefit != 3">Paid</div></td>
@@ -155,11 +177,14 @@
                             <button *ngIf="selectedEnrolled.inst3 !== selectedEnrolled.inst3amount" type="button"
                                 class="btn btn-info py-0 ps-2 pe-2"
                                 (click)="payEmi(selectedEnrolled.inst3amount,selectedEnrolled.sheetName,selectedEnrolled.code,3)">Pay</button>
+                                <button *ngIf="selectedEnrolled.inst3 === selectedEnrolled.inst3amount" type="button"
+                                class="btn btn-danger py-0 ps-2 pe-2"
+                                (click)="payEmi('',selectedEnrolled.sheetName,selectedEnrolled.code,3)">Delete</button>
                         </td>
                     </tr>
                     <tr >
                         <th scope="row">4</th>
-                        <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 4 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst4amount}}</td>
+                        <td  [ngStyle]="{'background-color': selectedEnrolled.benefit == 4 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst4amount}}</td>
                         <td *ngIf="selectedEnrolled.inst4 ===selectedEnrolled.inst4amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 4 ? '#90EE8F' : 'white'}">
                             <div *ngIf="selectedEnrolled.benefit == 4">Benefit</div>
                             <div *ngIf="selectedEnrolled.benefit != 4">Paid</div></td>
@@ -168,11 +193,14 @@
                             <button *ngIf="selectedEnrolled.inst4 !== selectedEnrolled.inst4amount" type="button"
                                 class="btn btn-info py-0 ps-2 pe-2"
                                 (click)="payEmi(selectedEnrolled.inst4amount,selectedEnrolled.sheetName,selectedEnrolled.code,4)">Pay</button>
+                                <button *ngIf="selectedEnrolled.inst4 === selectedEnrolled.inst4amount" type="button"
+                                class="btn btn-danger py-0 ps-2 pe-2"
+                                (click)="payEmi('',selectedEnrolled.sheetName,selectedEnrolled.code,4)">Delete</button>
                         </td>
                     </tr>
                     <tr >
                         <th scope="row">5</th>
-                        <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 5 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst5amount}}</td>
+                        <td  [ngStyle]="{'background-color': selectedEnrolled.benefit == 5 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst5amount}}</td>
                         <td *ngIf="selectedEnrolled.inst5 ===selectedEnrolled.inst5amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 5 ? '#90EE8F' : 'white'}">
                             <div *ngIf="selectedEnrolled.benefit == 5">Benefit</div>
                             <div *ngIf="selectedEnrolled.benefit != 5">Paid</div></td>
@@ -181,11 +209,14 @@
                             <button *ngIf="selectedEnrolled.inst5 !== selectedEnrolled.inst5amount" type="button"
                                 class="btn btn-info py-0 ps-2 pe-2"
                                 (click)="payEmi(selectedEnrolled.inst5amount,selectedEnrolled.sheetName,selectedEnrolled.code,5)">Pay</button>
+                                <button *ngIf="selectedEnrolled.inst5 === selectedEnrolled.inst5amount" type="button"
+                                class="btn btn-danger py-0 ps-2 pe-2"
+                                (click)="payEmi('',selectedEnrolled.sheetName,selectedEnrolled.code,5)">Delete</button>
                         </td>
                     </tr>
                     <tr >
                         <th scope="row">6</th>
-                        <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 6 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst6amount}}</td>
+                        <td  [ngStyle]="{'background-color': selectedEnrolled.benefit == 6 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst6amount}}</td>
                         <td *ngIf="selectedEnrolled.inst6 ===selectedEnrolled.inst6amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 6 ? '#90EE8F' : 'white'}">
                             <div *ngIf="selectedEnrolled.benefit == 6">Benefit</div>
                             <div *ngIf="selectedEnrolled.benefit != 6">Paid</div></td>
@@ -194,11 +225,14 @@
                             <button *ngIf="selectedEnrolled.inst6 !== selectedEnrolled.inst6amount" type="button"
                                 class="btn btn-info py-0 ps-2 pe-2"
                                 (click)="payEmi(selectedEnrolled.inst6amount,selectedEnrolled.sheetName,selectedEnrolled.code,6)">Pay</button>
+                                <button *ngIf="selectedEnrolled.inst6 === selectedEnrolled.inst6amount" type="button"
+                                class="btn btn-danger py-0 ps-2 pe-2"
+                                (click)="payEmi('',selectedEnrolled.sheetName,selectedEnrolled.code,6)">Delete</button>
                         </td>
                     </tr>
                     <tr >
                         <th scope="row">7</th>
-                        <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 7 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst7amount}}</td>
+                        <td  [ngStyle]="{'background-color': selectedEnrolled.benefit == 7 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst7amount}}</td>
                         <td *ngIf="selectedEnrolled.inst7 ===selectedEnrolled.inst7amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 7 ? '#90EE8F' : 'white'}">
                             <div *ngIf="selectedEnrolled.benefit == 7">Benefit</div>
                             <div *ngIf="selectedEnrolled.benefit != 7">Paid</div></td>
@@ -207,11 +241,14 @@
                             <button *ngIf="selectedEnrolled.inst7 !== selectedEnrolled.inst7amount" type="button"
                                 class="btn btn-info py-0 ps-2 pe-2"
                                 (click)="payEmi(selectedEnrolled.inst7amount,selectedEnrolled.sheetName,selectedEnrolled.code,7)">Pay</button>
+                                <button *ngIf="selectedEnrolled.inst7 === selectedEnrolled.inst7amount" type="button"
+                                class="btn btn-danger py-0 ps-2 pe-2"
+                                (click)="payEmi('',selectedEnrolled.sheetName,selectedEnrolled.code,7)">Delete</button>
                         </td>
                     </tr>
                     <tr >
                         <th scope="row">8</th>
-                        <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 8 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst8amount}}</td>
+                        <td  [ngStyle]="{'background-color': selectedEnrolled.benefit == 8 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst8amount}}</td>
                         <td *ngIf="selectedEnrolled.inst8 ===selectedEnrolled.inst8amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 8 ? '#90EE8F' : 'white'}">
                             <div *ngIf="selectedEnrolled.benefit == 8">Benefit</div>
                             <div *ngIf="selectedEnrolled.benefit != 8">Paid</div></td>
@@ -221,11 +258,14 @@
                             <button *ngIf="selectedEnrolled.inst8 !== selectedEnrolled.inst8amount" type="button"
                                 class="btn btn-info py-0 ps-2 pe-2"
                                 (click)="payEmi(selectedEnrolled.inst8amount,selectedEnrolled.sheetName,selectedEnrolled.code,8)">Pay</button>
+                                <button *ngIf="selectedEnrolled.inst8 === selectedEnrolled.inst8amount" type="button"
+                                class="btn btn-danger py-0 ps-2 pe-2"
+                                (click)="payEmi('',selectedEnrolled.sheetName,selectedEnrolled.code,8)">Delete</button>
                         </td>
                     </tr>
                     <tr >
                         <th scope="row">9</th>
-                        <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 9 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst9amount}}</td>
+                        <td  [ngStyle]="{'background-color': selectedEnrolled.benefit == 9 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst9amount}}</td>
                         <td *ngIf="selectedEnrolled.inst9 ===selectedEnrolled.inst9amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 9 ? '#90EE8F' : 'white'}">
                             <div *ngIf="selectedEnrolled.benefit == 9">Benefit</div>
                             <div *ngIf="selectedEnrolled.benefit != 9">Paid</div></td>
@@ -235,11 +275,14 @@
                             <button *ngIf="selectedEnrolled.inst9 !== selectedEnrolled.inst9amount" type="button"
                                 class="btn btn-info py-0 ps-2 pe-2"
                                 (click)="payEmi(selectedEnrolled.inst9amount,selectedEnrolled.sheetName,selectedEnrolled.code,9)">Pay</button>
+                                <button *ngIf="selectedEnrolled.inst9 === selectedEnrolled.inst9amount" type="button"
+                                class="btn btn-danger py-0 ps-2 pe-2"
+                                (click)="payEmi('',selectedEnrolled.sheetName,selectedEnrolled.code,9)">Delete</button>
                         </td>
                     </tr>
                     <tr >
                         <th scope="row">10</th>
-                        <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 10 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst10amount}}</td>
+                        <td  [ngStyle]="{'background-color': selectedEnrolled.benefit == 10 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst10amount}}</td>
                         <td *ngIf="selectedEnrolled.inst10 ===selectedEnrolled.inst10amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 10 ? '#90EE8F' : 'white'}">
                             <div *ngIf="selectedEnrolled.benefit == 10">Benefit</div>
                             <div *ngIf="selectedEnrolled.benefit != 10">Paid</div></td>
@@ -249,11 +292,14 @@
                             <button *ngIf="selectedEnrolled.inst10 !== selectedEnrolled.inst10amount" type="button"
                                 class="btn btn-info py-0 ps-2 pe-2"
                                 (click)="payEmi(selectedEnrolled.inst10amount,selectedEnrolled.sheetName,selectedEnrolled.code,10)">Pay</button>
+                                <button *ngIf="selectedEnrolled.inst10 === selectedEnrolled.inst10amount" type="button"
+                                class="btn btn-danger py-0 ps-2 pe-2"
+                                (click)="payEmi('',selectedEnrolled.sheetName,selectedEnrolled.code,10)">Delete</button>
                         </td>
                     </tr>
                     <tr >
                         <th scope="row">11</th>
-                        <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 11 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst11amount}}</td>
+                        <td  [ngStyle]="{'background-color': selectedEnrolled.benefit == 11 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst11amount}}</td>
                         <td *ngIf="selectedEnrolled.inst11 ===selectedEnrolled.inst11amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 11 ? '#90EE8F' : 'white'}"><div *ngIf="selectedEnrolled.benefit == 11">Benefit</div>
                             <div *ngIf="selectedEnrolled.benefit != 11">Paid</div></td>
                         <td *ngIf="selectedEnrolled.inst11 !== selectedEnrolled.inst11amount"></td>
@@ -262,11 +308,14 @@
                             <button *ngIf="selectedEnrolled.inst11 !== selectedEnrolled.inst11amount" type="button"
                                 class="btn btn-info py-0 ps-2 pe-2"
                                 (click)="payEmi(selectedEnrolled.inst11amount,selectedEnrolled.sheetName,selectedEnrolled.code,11)">Pay</button>
+                                <button *ngIf="selectedEnrolled.inst11 === selectedEnrolled.inst11amount" type="button"
+                                class="btn btn-danger py-0 ps-2 pe-2"
+                                (click)="payEmi('',selectedEnrolled.sheetName,selectedEnrolled.code,11)">Delete</button>
                         </td>
                     </tr>
                     <tr >
                         <th scope="row">12</th>
-                        <td *ngIf="selectedEnrolled.inst1 ===selectedEnrolled.inst1amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 12 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst12amount}}</td>
+                        <td  [ngStyle]="{'background-color': selectedEnrolled.benefit == 12 ? '#90EE8F' : 'white'}">{{selectedEnrolled.inst12amount}}</td>
                         <td *ngIf="selectedEnrolled.inst12 === selectedEnrolled.inst12amount" [ngStyle]="{'background-color': selectedEnrolled.benefit == 12 ? '#90EE8F' : 'white'}">
                             <div *ngIf="selectedEnrolled.benefit == 12">Benefit</div>
                             <div *ngIf="selectedEnrolled.benefit != 12">Paid</div>
@@ -277,6 +326,9 @@
                             <button *ngIf="selectedEnrolled.inst12 !== selectedEnrolled.inst12amount" type="button"
                                 class="btn btn-info py-0 ps-2 pe-2"
                                 (click)="payEmi(selectedEnrolled.inst12amount,selectedEnrolled.sheetName,selectedEnrolled.code,12)">Pay</button>
+                                <button *ngIf="selectedEnrolled.inst12 === selectedEnrolled.inst12amount" type="button"
+                                class="btn btn-danger py-0 ps-2 pe-2"
+                                (click)="payEmi('',selectedEnrolled.sheetName,selectedEnrolled.code,12)">Delete</button>
                         </td>
                     </tr>
 
@@ -303,6 +355,11 @@
             [bc-format]="'code128'"
             [bc-value]="selectedCode"
             [bc-display-value]="true"
+
+
+            [bc-width]="5"
+
+
           >
           </ngx-barcode6>
         </div>
