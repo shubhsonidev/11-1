@@ -19,6 +19,7 @@ export class SchemesListComponent {
 
 
   ngOnInit(): void {
+
     var year = localStorage.getItem('selectedYear')
     if (this.schemeService.data.length === 0) {
 

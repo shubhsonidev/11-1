@@ -15,6 +15,7 @@ export class FilterPipe implements PipeTransform {
             return (
                 item.name.toLowerCase().includes(searchText) ||
 item.number.toString().toLowerCase().includes(searchText ) ||
+item.schemeName.toString().toLowerCase().includes(searchText ) ||
                 item.code.toString().toLowerCase().includes(searchText)
             );
         });
