@@ -57,7 +57,7 @@ export class EnrolledListComponent {
         });
     } else {
       this.schemeData = this.schemeService.data;
-      this.loader = true;
+      this.loader = false;
     }
 
     if (this.enrolled.data.length === 0) {
