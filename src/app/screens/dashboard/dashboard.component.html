@@ -6,9 +6,12 @@
 </div> -->
 <app-block-loader [loading]="loader" [message]="'Fetching Data...'" >
 <div class="cam-mob-scanner" style="height: 100vh; background-color: black" >
+<div class="d-flex justify-content-center align-items-center p-3">
+  <button type="button" class="btn btn-primary me-3" style="width: 8rem;"
+  (click)="openVerticallyCentered(yearmodal)">Change Year</button></div>
   <div
     class="d-flex justify-content-center align-items-center"
-    style="height: 100%"
+    style="height: 80%"
   >
     <div  *ngIf="isStarted === false"
       class="d-flex flex-column align-items-center justify-content-center"
@@ -18,7 +21,7 @@
         class="fa-solid fa-camera pointer"
         style="color: blueviolet; font-size: 7rem"
       ></i>
-      <div class="text-white">click to scan barcode</div>
+      <div class="text-white">Click to scan barcode</div>
     </div>
 
     <barcode-scanner-livestream
@@ -469,3 +472,16 @@
 </ng-template>
 
 </app-block-loader>
+
+<ng-template #yearmodal let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title">Alert </h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <p class="p-3">Are you sure you want to change year ?</p>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">No</button>
+      <button type="button" class="btn btn-primary" (click)="navigateToSelect()">Yes</button>
+  </div>
+</ng-template>

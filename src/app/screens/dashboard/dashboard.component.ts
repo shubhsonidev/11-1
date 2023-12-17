@@ -141,7 +141,11 @@ this.router.navigate(['/pay-emi'], { queryParams: {code: this.barcodeValue}});
 
     return totalPaid;
   }
-
+  navigateToSelect() {
+    localStorage.removeItem('selectedYear')
+    this.router.navigate(['/selectYear'])
+    this.modalService.dismissAll()
+  }
 
   openVerticallyCentered(content: TemplateRef<any>) {
     this.modalService.open(content, { centered: true, size: 'lg' });
