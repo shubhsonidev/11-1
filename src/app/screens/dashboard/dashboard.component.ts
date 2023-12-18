@@ -1,5 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Inject, TemplateRef, ViewChild, inject } from '@angular/core';
+import {
+  Component,
+  Inject,
+  TemplateRef,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiUrlService } from 'src/app/service/api-url.service';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +22,6 @@ import {
 } from 'src/app/service/enrolled.service';
 import { BarcodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-dashboard',
@@ -60,7 +65,7 @@ export class DashboardComponent {
     new BarcodeScannerLivestreamComponent();
   barcodeValue: any;
   schemeNumber: any = null;
-
+  totalmonthamt: any = 0;
   public chartOptions!: AgChartOptions;
   constructor(
     private toastr: ToastrService,
@@ -68,23 +73,19 @@ export class DashboardComponent {
     private apiservice: ApiUrlService,
     private schemeService: SchemeService,
     private messageConfigService: MessageConfigService,
-    
-    public enrolled: EnrolledService,
-    private router: Router,
 
-  ) {
-  }
-  
+    public enrolled: EnrolledService,
+    private router: Router
+  ) {}
+
   private modalService = inject(NgbModal);
   ngOnInit(): void {
-
-
-   
-  
     this.loader = true;
     this.year = localStorage.getItem('selectedYear');
 
     if (this.schemeService.data.length === 0) {
+      this.loader = true;
+
       this.http
         .get<schemesResponse>(
           this.apiservice.url + 'apifor=schemes' + '&year=' + this.year
@@ -96,39 +97,34 @@ export class DashboardComponent {
 
           // Calculate total after data is fetched
           this.calculateTotalAndFetchEnrolled();
-
-
-        
+          this.loader = true;
         });
     } else {
       this.schemeData = this.schemeService.data;
-      this.loader = false;
+      this.loader = true;
 
       // Calculate total if data is already available
       this.calculateTotalAndFetchEnrolled();
     }
 
-
-
-    if(this.schemeNumber != null){
+    if (this.schemeNumber != null) {
       this.chartOptions = {
         data: this.schemeNumber,
         theme: 'ag-default-dark',
-  
+
         background: {
           fill: '#24272F',
-      },
+        },
         series: [{ type: 'pie', angleKey: 'number', legendItemKey: 'name' }],
       };
-    }else{
+    } else {
       this.chartOptions = {
-        data: [
-        ],
+        data: [],
         theme: 'ag-default-dark',
-  
+
         background: {
           fill: '#24272F',
-      },
+        },
         series: [{ type: 'pie', angleKey: 'number', legendItemKey: 'name' }],
       };
     }
@@ -151,6 +147,8 @@ export class DashboardComponent {
   }
 
   calculateTotalAndFetchEnrolled() {
+    this.loader = true;
+
     this.total = this.calculateTotalPaid(this.enrolled.data);
     this.totalAmont = this.calculateTotalAmount(this.enrolled.data);
     this.schemeNumber = this.countEntriesByScheme(this.enrolled.data);
@@ -160,7 +158,6 @@ export class DashboardComponent {
           this.enrolled.data = response.data;
           this.data = response.data;
 
-
           this.total = this.calculateTotalPaid(this.enrolled.data);
           this.totalAmont = this.calculateTotalAmount(this.enrolled.data);
           this.schemeNumber = this.countEntriesByScheme(this.enrolled.data);
@@ -169,11 +166,13 @@ export class DashboardComponent {
             theme: 'ag-default-dark',
             background: {
               fill: '#24272F',
-          },
-            series: [{ type: 'pie', angleKey: 'number', legendItemKey: 'name' }],
+            },
+            series: [
+              { type: 'pie', angleKey: 'number', legendItemKey: 'name' },
+            ],
           };
 
-          this.loader = false; 
+          this.loader = false;
         },
         (error) => {
           console.error('Error fetching enrolled data:', error);
@@ -181,17 +180,47 @@ export class DashboardComponent {
         }
       );
     } else {
-
-      this.loader = false; 
+      this.loader = false;
     }
   }
-  getData(){
-return this.schemeNumber
-}
-  countEntriesByScheme(
-    data: any[]
-  ): { name: string; number: number; sum: number, turnover: number }[] {
-    const schemeCount: { [key: string]: { number: number; sum: number , turnover: number} } = {};
+
+  countEntriesByScheme(data: any[]): {
+    name: string;
+    number: number;
+    sum: number;
+    turnover: number;
+    month1coll: number;
+    month2coll: number;
+    month3coll: number;
+    month4coll: number;
+    month5coll: number;
+    month6coll: number;
+    month7coll: number;
+    month8coll: number;
+    month9coll: number;
+    month10coll: number;
+    month11coll: number;
+    month12coll: number;
+  }[] {
+    const schemeCount: {
+      [key: string]: {
+        number: number;
+        sum: number;
+        turnover: number;
+        month1coll: number;
+        month2coll: number;
+        month3coll: number;
+        month4coll: number;
+        month5coll: number;
+        month6coll: number;
+        month7coll: number;
+        month8coll: number;
+        month9coll: number;
+        month10coll: number;
+        month11coll: number;
+        month12coll: number;
+      };
+    } = {};
 
     data.forEach((entry) => {
       const schemeName = entry.schemeName;
@@ -226,18 +255,95 @@ return this.schemeNumber
         schemeCount[schemeName].number++;
         schemeCount[schemeName].sum += instSum;
         schemeCount[schemeName].turnover += instAmountSum;
+        schemeCount[schemeName].month1coll += entry.inst1amount;
+        schemeCount[schemeName].month2coll += entry.inst2amount;
+        schemeCount[schemeName].month3coll += entry.inst3amount;
+        schemeCount[schemeName].month4coll += entry.inst4amount;
+        schemeCount[schemeName].month5coll += entry.inst5amount;
+        schemeCount[schemeName].month6coll += entry.inst6amount;
+        schemeCount[schemeName].month7coll += entry.inst7amount;
+        schemeCount[schemeName].month8coll += entry.inst8amount;
+        schemeCount[schemeName].month9coll += entry.inst9amount;
+        schemeCount[schemeName].month10coll += entry.inst10amount;
+        schemeCount[schemeName].month11coll += entry.inst11amount;
+        schemeCount[schemeName].month12coll += entry.inst12amount;
+        schemeCount[schemeName].turnover += instAmountSum;
       } else {
-        schemeCount[schemeName] = { number: 1, sum: instSum, turnover: instAmountSum };
+        schemeCount[schemeName] = {
+          number: 1,
+          sum: instSum,
+          turnover: instAmountSum,
+          month1coll: entry.inst1amount,
+          month2coll: entry.inst2amount,
+          month3coll: entry.inst3amount,
+          month4coll: entry.inst4amount,
+          month5coll: entry.inst5amount,
+          month6coll: entry.inst6amount,
+          month7coll: entry.inst7amount,
+          month8coll: entry.inst8amount,
+          month9coll: entry.inst9amount,
+          month10coll: entry.inst10amount,
+          month11coll: entry.inst11amount,
+          month12coll: entry.inst12amount,
+        };
       }
     });
 
-    // Convert schemeCount object to an array of objects
     const resultArray = Object.entries(schemeCount).map(
-      ([name, { number, sum,turnover }]) => ({ name, number, sum,turnover })
+      ([
+        name,
+        {
+          number,
+          sum,
+          turnover,
+          month1coll,
+          month2coll,
+          month3coll,
+          month4coll,
+          month5coll,
+          month6coll,
+          month7coll,
+          month8coll,
+          month9coll,
+          month10coll,
+          month11coll,
+          month12coll,
+        },
+      ]) => ({
+        name,
+        number,
+        sum,
+        turnover,
+        month1coll,
+        month2coll,
+        month3coll,
+        month4coll,
+        month5coll,
+        month6coll,
+        month7coll,
+        month8coll,
+        month9coll,
+        month10coll,
+        month11coll,
+        month12coll,
+      })
     );
 
     return resultArray;
   }
+
+  getTotalSum(property: string): number {
+    // Check if this.schemeNumber is not null
+    if (this.schemeNumber !== null) {
+      this.totalmonthamt = this.schemeNumber.reduce((sum: any, item: { [x: string]: any; }) => sum + (item[property] || 0), 0);
+    } else {
+      // Handle the case where this.schemeNumber is null
+      this.totalmonthamt = 0;
+    }
+  
+    return this.totalmonthamt;
+  }
+  
 
   calculateTotalPaid(dataList: any[]): number {
     let totalPaid = 0;
