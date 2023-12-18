@@ -2,7 +2,7 @@
 <app-navbar></app-navbar>
 <app-bottom-action></app-bottom-action>
 
-<app-loader [loading]="loader" [message]="'Saving EMI..'">
+<app-loader [loading]="loader" [message]="'Saving...'">
     <div style="overflow: scroll; height: 86vh;" >
         <div class="d-flex flex-row gap-2">
         <div class="d-flex flex-row justify-content-center align-items-center">
@@ -90,8 +90,8 @@ select scheme            </button>
                         {{enrolled.inst12}}
                     </th>
                     <th>
-                        <button type="button" class="btn btn-warning me-2" style="padding: 0px 10px;"> <i
-                                class="fa-solid fa-pen" style="color: white;"></i></button>
+                        <button type="button" class="btn btn-warning me-2" style="padding: 0px 10px;" (click)="openVerticallyCenteredEdit(contentEdit, enrolled)"> <i
+                                class="fa-solid fa-pen" style="color: white;"  ></i></button>
                         <button type="button" class="btn btn-success me-2" style="padding: 0px 10px;"
                             (click)="openVerticallyCentered(contentEnroll, enrolled)"><i class="fa-solid fa-plus"
                                 style="color: white;"></i></button>
@@ -356,7 +356,7 @@ select scheme            </button>
 
 
     <div class="modal-header">
-        <h4 class="modal-title">Alert </h4>
+        <h4 class="modal-title">Barcode </h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
 
@@ -378,6 +378,30 @@ select scheme            </button>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cancel</button>
         <button type="button" printSectionId="print-section" class="btn btn-primary" ngxPrint>Print</button>
+    </div>
+   
+</ng-template>
+
+<ng-template #contentEdit let-modal >
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Details </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+  <div class="p-4">
+    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <input type="text" autocomplete="off" style="text-transform:uppercase" class="form-control"
+        id="exampleInputEmail1" [ngModelOptions]="{standalone: true}" [(ngModel)]="editName"
+        aria-describedby="emailHelp">
+        
+    <label for="exampleInputEmail1" class="form-label">Number</label>
+    <input type="number" autocomplete="off" maxlength="10" style="text-transform:uppercase" class="form-control"
+        id="exampleInputEmail1" [ngModelOptions]="{standalone: true}" [(ngModel)]="editNumber"
+        aria-describedby="emailHelp">
+  </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cancel</button>
+        <button type="button"  class="btn btn-primary"   (click)="editDetails(editSheet,editCode)">Save</button>
     </div>
    
 </ng-template>

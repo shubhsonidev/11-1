@@ -4,484 +4,538 @@
     <button type="button" class="btn btn-primary" style="width: 8rem;"
         (click)="openVerticallyCentered(contentEnroll)">ENROLL</button>
 </div> -->
-<app-block-loader [loading]="loader" [message]="'Fetching Data...'" >
-<div class="cam-mob-scanner" style="height: 100vh; background-color: black" >
-<div class="d-flex justify-content-center align-items-center p-3">
-  <button type="button" class="btn btn-primary me-3" style="width: 8rem;"
-  (click)="openVerticallyCentered(yearmodal)">Change Year</button></div>
-  <div
-    class="d-flex justify-content-center align-items-center"
-    style="height: 80%"
-  >
-    <div  *ngIf="isStarted === false"
-      class="d-flex flex-column align-items-center justify-content-center"
-      (click)="start()"
-    >
-      <i
-        class="fa-solid fa-camera pointer"
-        style="color: blueviolet; font-size: 7rem"
-      ></i>
-      <div class="text-white">Click to scan barcode</div>
-    </div>
 
-    <barcode-scanner-livestream
-      type="code_128"
-      (valueChanges)="onValueChanges($event)"
-    ></barcode-scanner-livestream>
-  </div>
 
-</div>
-<app-navbar class="clip1"></app-navbar>
-<div class="clip1">
-  <div class="d-flex flex-row justify-content-around mt-2">
-    <div class="card p-4" style="width: 19vw">
-      <div class="d-flex flex-row justify-content-between">
-        <div class="d-flex flex-column">
-          <h4 class="text-white">₹ {{ total }}</h4>
-          <div class="font-weight-normal" style="color: #ffffff7a">
-            Total Collected
-          </div>
-        </div>
-        <div
-          class="icon iconBox d-flex justify-content-center align-items-center"
-        >
-          <i
-            class="fa-solid fa-indian-rupee-sign"
-            style="color: #00d25b; font-size: 1.3rem"
-          ></i>
-        </div>
-      </div>
-    </div>
-    <div class="card p-4" style="width: 19vw">
-      <div class="d-flex flex-row justify-content-between">
-        <div class="d-flex flex-column">
-          <h4 class="text-white">{{ enrolled.data.length }}</h4>
-          <div class="font-weight-normal" style="color: #ffffff7a">
-            Total Enrolled
-          </div>
-        </div>
-        <div
-          class="icon iconBox d-flex justify-content-center align-items-center"
-        >
-          <i
-            class="fa-solid fa-user"
-            style="color: #00d25b; font-size: 1.3rem"
-          ></i>
-        </div>
-      </div>
-    </div>
-    <div class="card p-4" style="width: 19vw">
-      <div class="d-flex flex-row justify-content-between">
-        <div class="d-flex flex-column">
-          <h4 class="text-white">₹ {{ total }}</h4>
-          <div class="font-weight-normal" style="color: #ffffff7a">
-            Total Collected
-          </div>
-        </div>
-        <div
-          class="icon iconBox d-flex justify-content-center align-items-center"
-        >
-          <i
-            class="fa-solid fa-indian-rupee-sign"
-            style="color: #00d25b; font-size: 1.3rem"
-          ></i>
-        </div>
-      </div>
-    </div>
-    <div class="card p-4" style="width: 19vw">
-      <div class="d-flex flex-row justify-content-between">
-        <div class="d-flex flex-column">
-          <h4 class="text-white">₹ {{ total }}</h4>
-          <div class="font-weight-normal" style="color: #ffffff7a">
-            Total Collected
-          </div>
-        </div>
-        <div
-          class="icon iconBox d-flex justify-content-center align-items-center"
-        >
-          <i
-            class="fa-solid fa-indian-rupee-sign"
-            style="color: #00d25b; font-size: 1.3rem"
-          ></i>
-        </div>
-      </div>
-    </div>
-    <div class="card p-4" style="width: 19vw">
-      <div class="d-flex flex-row justify-content-between">
-        <div class="d-flex flex-column">
-          <h4 class="text-white">₹ {{ total }}</h4>
-          <div class="font-weight-normal" style="color: #ffffff7a">
-            Total Collected
-          </div>
-        </div>
-        <div
-          class="icon iconBox d-flex justify-content-center align-items-center"
-        >
-          <i
-            class="fa-solid fa-indian-rupee-sign"
-            style="color: #00d25b; font-size: 1.3rem"
-          ></i>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<app-bottom-action class="clip1"></app-bottom-action>
-
-<!-- <app-schemes-list></app-schemes-list> -->
-<!-- <app-enrolled-list></app-enrolled-list> -->
-<ng-template #contents let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">ADD SCHEME</h4>
-    <button
-      type="button"
-      class="btn-close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    ></button>
-  </div>
-  <div class="p-4">
-    <div
-      class="d-flex flex-row gap-4 justify-content-around align-items-center w-100"
-    >
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">Scheme name</label>
-        <input
-          type="text"
-          autocomplete="off"
-          style="text-transform: uppercase"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="schemeName"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">Prefix</label>
-        <input
-          style="text-transform: uppercase"
-          type="text"
-          autocomplete="off"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="prefix"
-          aria-describedby="emailHelp"
-        />
-      </div>
-    </div>
-    <div
-      class="d-flex flex-row mb-3 gap-4 justify-content-around align-items-center w-100"
-    >
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">Year</label>
-        <input
-          style="text-transform: uppercase"
-          type="text"
-          autocomplete="off"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="year"
-          disabled
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label"
-          >Benefit installment number</label
-        >
-        <input
-          style="text-transform: uppercase"
-          type="number"
-          autocomplete="off"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="benefit"
-          aria-describedby="emailHelp"
-        />
-      </div>
-    </div>
-
-    <div class="d-flex flex-row justify-content-center align-items-center">
-      <h5 class="me-3">Installments</h5>
-      <hr style="width: 100%" />
-    </div>
-
-    <div
-      class="d-flex flex-row gap-4 justify-content-around align-items-center w-100"
-    >
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">1</label>
-        <input
-          type="number"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="e1"
-          autocomplete="off"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">2</label>
-        <input
-          type="number"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="e2"
-          autocomplete="off"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">3</label>
-        <input
-          type="number"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="e3"
-          autocomplete="off"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">4</label>
-        <input
-          type="number"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="e4"
-          autocomplete="off"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">5</label>
-        <input
-          type="number"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="e5"
-          autocomplete="off"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">6</label>
-        <input
-          type="number"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="e6"
-          autocomplete="off"
-          aria-describedby="emailHelp"
-        />
-      </div>
-    </div>
-    <div
-      class="d-flex flex-row gap-4 justify-content-around align-items-center w-100"
-    >
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">7</label>
-        <input
-          type="number"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="e7"
-          autocomplete="off"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">8</label>
-        <input
-          type="number"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="e8"
-          autocomplete="off"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">9</label>
-        <input
-          type="number"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="e9"
-          autocomplete="off"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">10</label>
-        <input
-          type="number"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="e10"
-          autocomplete="off"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">11</label>
-        <input
-          type="number"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="e11"
-          autocomplete="off"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">12</label>
-        <input
-          type="number"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="e12"
-          autocomplete="off"
-          aria-describedby="emailHelp"
-        />
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-primary" *ngIf="loader" type="button" disabled>
-      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-      <span role="status">Loading...</span>
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-primary"
-      *ngIf="loader == false"
-      (click)="addScheme()"
-    >
-      Save
-    </button>
-  </div>
-</ng-template>
-
-<ng-template #contentEnroll let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">ENROLL NEW CUSTOMER</h4>
-    <button
-      type="button"
-      class="btn-close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    ></button>
-  </div>
-  <div class="p-4">
-    <div
-      class="d-flex flex-row gap-4 justify-content-around align-items-center w-100"
-    >
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">Customer name</label>
-        <input
-          type="text"
-          autocomplete="off"
-          style="text-transform: uppercase"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="custName"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 w-100">
-        <label for="exampleInputEmail1" class="form-label">Number</label>
-        <input
-          style="text-transform: uppercase"
-          type="number"
-          autocomplete="off"
-          class="form-control"
-          id="exampleInputEmail1"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="custNumber"
-          aria-describedby="emailHelp"
-        />
-      </div>
-    </div>
-
-    <div class="d-flex flex-column justify-content-center align-items-center">
-      <label for="exampleInputEmail1" class="form-label" style="width: 100%"
-        >Scheme</label
+<app-block-loader [loading]="loader" [message]="'Fetching Data...'">
+  <div class="cam-mob-scanner" style="height: 100vh; background-color: black">
+    <div class="d-flex justify-content-center align-items-center p-3">
+      <button
+        type="button"
+        class="btn btn-primary me-3"
+        style="width: 8rem"
+        (click)="openVerticallyCentered(yearmodal)"
       >
+        Change Year
+      </button>
+    </div>
+    <div
+      class="d-flex justify-content-center align-items-center"
+      style="height: 80%"
+    >
+      <div
+        *ngIf="isStarted === false"
+        class="d-flex flex-column align-items-center justify-content-center"
+        (click)="start()"
+      >
+        <i
+          class="fa-solid fa-camera pointer"
+          style="color: blueviolet; font-size: 7rem"
+        ></i>
+        <div class="text-white">Click to scan barcode</div>
+      </div>
 
-      <div ngbDropdown class="d-inline-block" style="width: 100%">
-        <button
-          type="button"
-          class="btn btn-outline-primary drop"
-          id="dropdownBasic1"
-          ngbDropdownToggle
-          style="width: 48.3%"
-        >
-          {{ selectedSchemeName }}
-        </button>
-        <div
-          ngbDropdownMenu
-          aria-labelledby="dropdownBasic1"
-          style="width: 48.3%"
-        >
-          <button
-            ngbDropdownItem
-            (click)="selectScheme(scheme)"
-            *ngFor="let scheme of schemeData"
-            style="text-align: center"
+      <barcode-scanner-livestream
+        type="code_128"
+        (valueChanges)="onValueChanges($event)"
+      ></barcode-scanner-livestream>
+    </div>
+  </div>
+  <app-navbar class="clip1"></app-navbar>
+  <div class="clip1">
+    <div class="d-flex flex-row justify-content-around mt-2">
+      <div class="card p-4" style="width: 19vw">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex flex-column">
+            <h4 class="text-white">₹ {{ total }}</h4>
+            <div class="font-weight-normal" style="color: #ffffff7a">
+              Total Collected
+            </div>
+          </div>
+          <div
+            class="icon iconBox d-flex justify-content-center align-items-center"
           >
-            {{ scheme.name }}
-          </button>
+            <i
+              class="fa-solid fa-indian-rupee-sign"
+              style="color: #00d25b; font-size: 1.3rem"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div class="card p-4" style="width: 19vw">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex flex-column">
+            <h4 class="text-white">{{ enrolled.data.length }}</h4>
+            <div class="font-weight-normal" style="color: #ffffff7a">
+              Total Enrolled
+            </div>
+          </div>
+          <div
+            class="icon iconBox d-flex justify-content-center align-items-center"
+          >
+            <i
+              class="fa-solid fa-user"
+              style="color: #00d25b; font-size: 1.3rem"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div class="card p-4" style="width: 19vw">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex flex-column">
+            <h4 class="text-white">₹ {{ totalAmont }}</h4>
+            <div class="font-weight-normal" style="color: #ffffff7a">
+              Total Turnover
+            </div>
+          </div>
+          <div
+            class="icon iconBox d-flex justify-content-center align-items-center"
+          >
+            <i
+              class="fa-solid fa-landmark"
+              style="color: #00d25b; font-size: 1.3rem"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div class="card p-4" style="width: 19vw">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex flex-column">
+            <h4 class="text-white">₹ {{ totalAmont - total }}</h4>
+            <div class="font-weight-normal" style="color: #ffffff7a">
+              Amount left
+            </div>
+          </div>
+          <div
+            class="icon iconBox d-flex justify-content-center align-items-center"
+          >
+            <i
+              class="fa-solid fa-arrow-right-arrow-left"
+              style="color: #00d25b; font-size: 1.3rem"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div class="card p-4" style="width: 19vw">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex flex-column">
+            <h4 class="text-white">₹ NA</h4>
+            <div class="font-weight-normal" style="color: #ffffff7a">
+              EXTRA SPACE
+            </div>
+          </div>
+          <div
+            class="icon iconBox d-flex justify-content-center align-items-center"
+          >
+            <i
+              class="fa-solid fa-indian-rupee-sign"
+              style="color: #00d25b; font-size: 1.3rem"
+            ></i>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button class="btn btn-primary" *ngIf="loader" type="button" disabled>
-      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-      <span role="status">Loading...</span>
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-primary"
-      *ngIf="loader == false"
-      (click)="enroll()"
-    >
-      Save
-    </button>
+  <div class="card p-3 m-2" style="width: 30vw; height: 65vh;">
+    <div class="d-flex flex-row justify-content-between w-100">
+      <div class="d-flex flex-column w-100">
+        <h6 class="text-white">No of Enrolled in schemes</h6>
+        <div class="d-flex flex-column gap-3 mt-3">
+          <table class="table table-dark table-striped">
+            <thead>
+              <tr style="text-align: center;">
+                <th scope="col" style="text-align: left;">Name</th>
+                <th scope="col">Enrolled</th>
+                <th scope="col">Total Collected</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let scheme of schemeNumber" style="text-align: center;">
+                <td style="text-align: left;">{{scheme.name}}</td>
+                <td>{{scheme.number}}</td>
+                <td>{{scheme.sum}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
-</ng-template>
+  <app-bottom-action class="clip1"></app-bottom-action>
 
+  <!-- <app-schemes-list></app-schemes-list> -->
+  <!-- <app-enrolled-list></app-enrolled-list> -->
+  <ng-template #contents let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">ADD SCHEME</h4>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="p-4">
+      <div
+        class="d-flex flex-row gap-4 justify-content-around align-items-center w-100"
+      >
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">Scheme name</label>
+          <input
+            type="text"
+            autocomplete="off"
+            style="text-transform: uppercase"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="schemeName"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">Prefix</label>
+          <input
+            style="text-transform: uppercase"
+            type="text"
+            autocomplete="off"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="prefix"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row mb-3 gap-4 justify-content-around align-items-center w-100"
+      >
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">Year</label>
+          <input
+            style="text-transform: uppercase"
+            type="text"
+            autocomplete="off"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="year"
+            disabled
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label"
+            >Benefit installment number</label
+          >
+          <input
+            style="text-transform: uppercase"
+            type="number"
+            autocomplete="off"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="benefit"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+
+      <div class="d-flex flex-row justify-content-center align-items-center">
+        <h5 class="me-3">Installments</h5>
+        <hr style="width: 100%" />
+      </div>
+
+      <div
+        class="d-flex flex-row gap-4 justify-content-around align-items-center w-100"
+      >
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">1</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="e1"
+            autocomplete="off"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">2</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="e2"
+            autocomplete="off"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">3</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="e3"
+            autocomplete="off"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">4</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="e4"
+            autocomplete="off"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">5</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="e5"
+            autocomplete="off"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">6</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="e6"
+            autocomplete="off"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row gap-4 justify-content-around align-items-center w-100"
+      >
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">7</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="e7"
+            autocomplete="off"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">8</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="e8"
+            autocomplete="off"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">9</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="e9"
+            autocomplete="off"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">10</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="e10"
+            autocomplete="off"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">11</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="e11"
+            autocomplete="off"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">12</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="e12"
+            autocomplete="off"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" *ngIf="loader" type="button" disabled>
+        <span
+          class="spinner-border spinner-border-sm"
+          aria-hidden="true"
+        ></span>
+        <span role="status">Loading...</span>
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        *ngIf="loader == false"
+        (click)="addScheme()"
+      >
+        Save
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #contentEnroll let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">ENROLL NEW CUSTOMER</h4>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="p-4">
+      <div
+        class="d-flex flex-row gap-4 justify-content-around align-items-center w-100"
+      >
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label"
+            >Customer name</label
+          >
+          <input
+            type="text"
+            autocomplete="off"
+            style="text-transform: uppercase"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="custName"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3 w-100">
+          <label for="exampleInputEmail1" class="form-label">Number</label>
+          <input
+            style="text-transform: uppercase"
+            type="number"
+            autocomplete="off"
+            class="form-control"
+            id="exampleInputEmail1"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="custNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <label for="exampleInputEmail1" class="form-label" style="width: 100%"
+          >Scheme</label
+        >
+
+        <div ngbDropdown class="d-inline-block" style="width: 100%">
+          <button
+            type="button"
+            class="btn btn-outline-primary drop"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+            style="width: 48.3%"
+          >
+            {{ selectedSchemeName }}
+          </button>
+          <div
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic1"
+            style="width: 48.3%"
+          >
+            <button
+              ngbDropdownItem
+              (click)="selectScheme(scheme)"
+              *ngFor="let scheme of schemeData"
+              style="text-align: center"
+            >
+              {{ scheme.name }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" *ngIf="loader" type="button" disabled>
+        <span
+          class="spinner-border spinner-border-sm"
+          aria-hidden="true"
+        ></span>
+        <span role="status">Loading...</span>
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        *ngIf="loader == false"
+        (click)="enroll()"
+      >
+        Save
+      </button>
+    </div>
+  </ng-template>
 </app-block-loader>
 
 <ng-template #yearmodal let-modal>
   <div class="modal-header">
-      <h4 class="modal-title">Alert </h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    <h4 class="modal-title">Alert</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
   </div>
 
   <p class="p-3">Are you sure you want to change year ?</p>
   <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">No</button>
-      <button type="button" class="btn btn-primary" (click)="navigateToSelect()">Yes</button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="modal.close('Close click')"
+    >
+      No
+    </button>
+    <button type="button" class="btn btn-primary" (click)="navigateToSelect()">
+      Yes
+    </button>
   </div>
 </ng-template>

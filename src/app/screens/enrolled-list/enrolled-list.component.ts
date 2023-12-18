@@ -26,6 +26,8 @@ export class EnrolledListComponent {
   loader: boolean = false;
   searchTerm: string = '';
   selectedCode: any;
+  editSheet: any;
+  editCode: any;
   constructor(
     public enrolled: EnrolledService,
     private toastr: ToastrService,
@@ -39,7 +41,8 @@ export class EnrolledListComponent {
   emis: number[] = [];
   selectedEnrolled: any;
   schemeData: any;
-
+editName: any;
+editNumber: any;
   ngOnInit(): void {
     var year = localStorage.getItem('selectedYear');
 
@@ -83,6 +86,14 @@ export class EnrolledListComponent {
     this.selectedCode = code;
     this.modalService.open(content, { centered: true, size: 'md' });
   }
+
+  openVerticallyCenteredEdit(content: TemplateRef<any>, enrolled: any) {
+    this.editName = enrolled.name;
+    this.editNumber = enrolled.number;
+    this.editSheet = enrolled.sheetName;
+    this.editCode = enrolled.code;
+    this.modalService.open(content, { centered: true, size: 'md' });
+  }
   selectSearch(value: any) {
     this.searchTerm = value;
   }
@@ -107,6 +118,42 @@ export class EnrolledListComponent {
       .subscribe((res) => {
         if (res.data[0].status === 'success') {
           this.toastr.success('EMI Paid Successfully');
+          this.loader = false;
+          this.enrolled.fetch().subscribe(
+            (response: enrolledResponse) => {
+              this.enrolled.data = response.data;
+              this.data = response.data;
+            },
+            (error) => {
+              console.error('Error fetching data:', error);
+            }
+          );
+
+          this.modalService.dismissAll();
+        } else {
+          alert('error');
+          this.loader = false;
+        }
+      });
+    // }
+  }
+  editDetails( sheetName: any, code: any, ) {
+    this.loader = true;
+    this.http
+      .get<any>(
+        this.apiservice.url +
+          'apifor=editEnrolled&sheetName=' +
+          sheetName +
+          '&code=' +
+          code +
+          '&custNumber=' +
+          this.editName.toUpperCase() +
+          '&custName=' +
+          this.editNumber
+      )
+      .subscribe((res) => {
+        if (res.data[0].status === 'success') {
+          this.toastr.success('Details saved successfully');
           this.loader = false;
           this.enrolled.fetch().subscribe(
             (response: enrolledResponse) => {
