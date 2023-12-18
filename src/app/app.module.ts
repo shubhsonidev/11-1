@@ -17,9 +17,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxBarcode6Module } from 'ngx-barcode6';
 import { BarcodeScannerLivestreamModule } from "ngx-barcode-scanner";
 import { FilterPipe } from './filter.pipe';
-import { NgChartsModule } from 'ng2-charts';
+import { AgChartsAngularModule } from 'ag-charts-angular';
+import { AgChartOptions } from 'ag-charts-community';
 
-import {  NgChartsConfiguration } from 'ng2-charts';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -52,6 +52,7 @@ import { PayemiMobComponent } from './screens/payemi-mob/payemi-mob.component';
   ],
   imports: [
     NgbDatepickerModule,
+    AgChartsAngularModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -62,7 +63,6 @@ import { PayemiMobComponent } from './screens/payemi-mob/payemi-mob.component';
     BrowserAnimationsModule,
     NgxPrintModule,
     ToastrModule.forRoot(),
-    NgChartsModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
@@ -71,7 +71,6 @@ import { PayemiMobComponent } from './screens/payemi-mob/payemi-mob.component';
       useClass: ApiInterceptor,
       multi: true
     },
-    { provide: NgChartsConfiguration, useValue: { generateColors: false }}
   ],
   bootstrap: [AppComponent]
 })

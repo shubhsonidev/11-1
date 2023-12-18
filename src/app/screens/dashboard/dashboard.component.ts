@@ -1,13 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, Inject, TemplateRef, ViewChild, inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiUrlService } from 'src/app/service/api-url.service';
 import { ToastrService } from 'ngx-toastr';
 import { SchemeService } from 'src/app/service/scheme.service';
 import { schemesResponse } from '../schemes-list/schemes-list.component';
-import { messageConfig } from 'src/app/components/navbar/navbar.component';
-import { MessageService } from 'src/app/service/message.service';
+
 import { MessageConfigService } from 'src/app/service/message-config.service';
+import { AgChartsAngularModule } from 'ag-charts-angular';
+import { AgChartOptions } from 'ag-charts-community';
+
 import {
   EnrolledService,
   enrolledResponse,
@@ -15,7 +17,6 @@ import {
 import { BarcodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
 import { Router } from '@angular/router';
 
-import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
 
 @Component({
   selector: 'app-dashboard',
@@ -58,20 +59,28 @@ export class DashboardComponent {
   barcodeScanner: BarcodeScannerLivestreamComponent =
     new BarcodeScannerLivestreamComponent();
   barcodeValue: any;
-  schemeNumber: any;
+  schemeNumber: any = null;
 
-
+  public chartOptions!: AgChartOptions;
   constructor(
     private toastr: ToastrService,
     private http: HttpClient,
     private apiservice: ApiUrlService,
     private schemeService: SchemeService,
     private messageConfigService: MessageConfigService,
+    
     public enrolled: EnrolledService,
-    private router: Router
-  ) {}
+    private router: Router,
+
+  ) {
+  }
+  
   private modalService = inject(NgbModal);
   ngOnInit(): void {
+
+
+   
+  
     this.loader = true;
     this.year = localStorage.getItem('selectedYear');
 
@@ -87,6 +96,9 @@ export class DashboardComponent {
 
           // Calculate total after data is fetched
           this.calculateTotalAndFetchEnrolled();
+
+
+        
         });
     } else {
       this.schemeData = this.schemeService.data;
@@ -94,6 +106,31 @@ export class DashboardComponent {
 
       // Calculate total if data is already available
       this.calculateTotalAndFetchEnrolled();
+    }
+
+
+
+    if(this.schemeNumber != null){
+      this.chartOptions = {
+        data: this.schemeNumber,
+        theme: 'ag-default-dark',
+  
+        background: {
+          fill: '#24272F',
+      },
+        series: [{ type: 'pie', angleKey: 'number', legendItemKey: 'name' }],
+      };
+    }else{
+      this.chartOptions = {
+        data: [
+        ],
+        theme: 'ag-default-dark',
+  
+        background: {
+          fill: '#24272F',
+      },
+        series: [{ type: 'pie', angleKey: 'number', legendItemKey: 'name' }],
+      };
     }
   }
 
@@ -123,27 +160,38 @@ export class DashboardComponent {
           this.enrolled.data = response.data;
           this.data = response.data;
 
-          // Recalculate total after enrolled data is fetched
+
           this.total = this.calculateTotalPaid(this.enrolled.data);
           this.totalAmont = this.calculateTotalAmount(this.enrolled.data);
           this.schemeNumber = this.countEntriesByScheme(this.enrolled.data);
-          this.loader = false; // Move the loader assignment here
+          this.chartOptions = {
+            data: this.schemeNumber,
+            theme: 'ag-default-dark',
+            background: {
+              fill: '#24272F',
+          },
+            series: [{ type: 'pie', angleKey: 'number', legendItemKey: 'name' }],
+          };
+
+          this.loader = false; 
         },
         (error) => {
           console.error('Error fetching enrolled data:', error);
-          this.loader = false; // Move the loader assignment here
+          this.loader = false;
         }
       );
     } else {
-      // In case data is already available
-      this.loader = false; // Move the loader assignment here
+
+      this.loader = false; 
     }
   }
-
+  getData(){
+return this.schemeNumber
+}
   countEntriesByScheme(
     data: any[]
-  ): { name: string; number: number; sum: number }[] {
-    const schemeCount: { [key: string]: { number: number; sum: number } } = {};
+  ): { name: string; number: number; sum: number, turnover: number }[] {
+    const schemeCount: { [key: string]: { number: number; sum: number , turnover: number} } = {};
 
     data.forEach((entry) => {
       const schemeName = entry.schemeName;
@@ -160,18 +208,32 @@ export class DashboardComponent {
         (+entry.inst10 || 0) +
         (+entry.inst11 || 0) +
         (+entry.inst12 || 0);
+      const instAmountSum =
+        (+entry.inst1amount || 0) +
+        (+entry.inst2amount || 0) +
+        (+entry.inst3amount || 0) +
+        (+entry.inst4amount || 0) +
+        (+entry.inst5amount || 0) +
+        (+entry.inst6amount || 0) +
+        (+entry.inst7amount || 0) +
+        (+entry.inst8amount || 0) +
+        (+entry.inst9amount || 0) +
+        (+entry.inst10amount || 0) +
+        (+entry.inst11amount || 0) +
+        (+entry.inst12amount || 0);
 
       if (schemeName in schemeCount) {
         schemeCount[schemeName].number++;
         schemeCount[schemeName].sum += instSum;
+        schemeCount[schemeName].turnover += instAmountSum;
       } else {
-        schemeCount[schemeName] = { number: 1, sum: instSum };
+        schemeCount[schemeName] = { number: 1, sum: instSum, turnover: instAmountSum };
       }
     });
 
     // Convert schemeCount object to an array of objects
     const resultArray = Object.entries(schemeCount).map(
-      ([name, { number, sum }]) => ({ name, number, sum })
+      ([name, { number, sum,turnover }]) => ({ name, number, sum,turnover })
     );
 
     return resultArray;
