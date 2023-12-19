@@ -267,7 +267,6 @@ export class DashboardComponent {
         schemeCount[schemeName].month10coll += entry.inst10amount;
         schemeCount[schemeName].month11coll += entry.inst11amount;
         schemeCount[schemeName].month12coll += entry.inst12amount;
-        schemeCount[schemeName].turnover += instAmountSum;
       } else {
         schemeCount[schemeName] = {
           number: 1,

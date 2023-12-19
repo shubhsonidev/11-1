@@ -128,12 +128,12 @@
     </div>
   </div>
   <div class="d-flex flex-row justify-content-around">
-    <div class="card p-3 mt-2" style="width: 30rem; height: 65vh; max-width: 30rem; overflow-x: auto;">
-      <div class="d-flex flex-row justify-content-between w-100">
-        <div class="d-flex flex-column w-100">
+    <div class="card p-3 mt-2" style=" height: 65vh; max-width: 30rem; overflow-x: auto;">
+      <div class="d-flex flex-row justify-content-between " style="max-width: 30rem;">
+        <div class="d-flex flex-column " style="overflow: scroll;">
           <h6 class="text-white">Month-wise Collection</h6>
           <div class="d-flex flex-row justify-content-center align-items-center">
-            <div class="d-flex m-2 flex-column gap-2 mt-3 text-white" style="width: 10rem;">
+            <div class="d-flex m-2 flex-column gap-2 mt-3 text-white">
               <div>Scheme Name</div>
               <div>Month 1</div>
               <div>Month 2</div>
@@ -149,7 +149,7 @@
               <div>Month 12</div>
             </div>
             <div style="border-left: 1px #ffffff3b solid; height: 95%;"></div>
-            <div class="d-flex m-2 flex-column gap-2 mt-3 text-white" *ngFor="let scheme of schemeNumber" >
+            <!-- <div class="d-flex m-2 flex-column gap-2 mt-3 text-white" *ngFor="let scheme of schemeNumber" >
               <div style="text-align: center;">{{ scheme.name }}</div>
               <div style="text-align: center;">{{ scheme.month1coll }}</div>
               <div style="text-align: center;">{{ scheme.month2coll }}</div>
@@ -163,7 +163,7 @@
               <div style="text-align: center;">{{ scheme.month10coll }}</div>
               <div style="text-align: center;">{{ scheme.month11coll }}</div>
               <div style="text-align: center;">{{ scheme.month12coll }}</div>
-            </div>
+            </div> -->
             <div style="border-left: 1px #ffffff3b solid; height: 95%;"></div>
             <div class="d-flex m-2 flex-column gap-2 mt-3 text-white" >
               <div style="text-align: center;">TOTAL</div>

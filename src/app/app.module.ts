@@ -20,6 +20,7 @@ import { FilterPipe } from './filter.pipe';
 import { AgChartsAngularModule } from 'ag-charts-angular';
 import { AgChartOptions } from 'ag-charts-community';
 
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -59,6 +60,7 @@ import { PayemiMobComponent } from './screens/payemi-mob/payemi-mob.component';
     NgbModule,
     NgxBarcode6Module,
     BarcodeScannerLivestreamModule,
+    NgbTooltipModule,
     HttpClientModule,
     BrowserAnimationsModule,
     NgxPrintModule,

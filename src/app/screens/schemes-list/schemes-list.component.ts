@@ -68,6 +68,20 @@ export interface schemes {
   inst10amount: string;
   inst11amount: string;
   inst12amount: string;
+  inst1date: string;
+  inst2date: string;
+  inst3date: string;
+  inst4date: string;
+  inst5date: string;
+  inst6date: string;
+  inst7date: string;
+  inst8date: string;
+  inst9date: string;
+  inst10date:	string;
+  inst11date:	string;
+  inst12date:	string;
+  matured: boolean;
+  createdAt: string;
 
 
 

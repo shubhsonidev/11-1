@@ -15,6 +15,9 @@ import {
 } from 'src/app/service/enrolled.service';
 import { SchemeService } from 'src/app/service/scheme.service';
 import { schemesResponse } from '../schemes-list/schemes-list.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @Component({
   selector: 'app-enrolled-list',
@@ -26,6 +29,8 @@ export class EnrolledListComponent {
   loader: boolean = false;
   searchTerm: string = '';
   selectedCode: any;
+  maturityCode: any;
+  maturityScheme: any;
   editSheet: any;
   editCode: any;
   constructor(
@@ -77,6 +82,34 @@ editNumber: any;
       this.data = this.enrolled.data;
     }
   }
+
+  formatDateTime(timestamp: string): string {
+    const dateObj = new Date(timestamp);
+    const formattedDate = this.formatDate(dateObj);
+    const formattedTime = this.formatTime(dateObj);
+
+    return `Paid on ${formattedDate} - ${formattedTime}`;
+  }
+
+  private formatDate(date: Date): string {
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    return `${this.addZero(day)}/${this.addZero(month)}/${year}`;
+  }
+
+  private formatTime(date: Date): string {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    return `${this.addZero(hours)}:${this.addZero(minutes)}`;
+  }
+
+  private addZero(value: number): string {
+    return value < 10 ? `0${value}` : `${value}`;
+  }
+
   openVerticallyCentered(content: TemplateRef<any>, account: any) {
     this.modalService.open(content, { centered: true, size: 'lg' });
     this.selectedEnrolled = account;
@@ -85,6 +118,11 @@ editNumber: any;
   openVerticallyCenteredBarcode(content: TemplateRef<any>, code: any) {
     this.selectedCode = code;
     this.modalService.open(content, { centered: true, size: 'md' });
+  }
+  openVerticallyCenteredMaturity(content: TemplateRef<any>, code: any, sheetname: any) {
+this.maturityCode = code;
+this.maturityScheme = sheetname
+    this.modalService.open(content, { centered: true, size: 'sm' });
   }
 
   openVerticallyCenteredEdit(content: TemplateRef<any>, enrolled: any) {
@@ -136,6 +174,37 @@ editNumber: any;
         }
       });
     // }
+  }
+  mature( sheetName: any, code: any) {
+    this.loader = true;
+    this.http
+      .get<any>(
+        this.apiservice.url +
+          'apifor=maturity&sheetName=' +
+          sheetName +
+          '&code=' +
+          code 
+      )
+      .subscribe((res) => {
+        if (res.data[0].status === 'success') {
+          this.toastr.success('Matured Successfully');
+          this.loader = false;
+          this.enrolled.fetch().subscribe(
+            (response: enrolledResponse) => {
+              this.enrolled.data = response.data;
+              this.data = response.data;
+            },
+            (error) => {
+              console.error('Error fetching data:', error);
+            }
+          );
+
+          this.modalService.dismissAll();
+        } else {
+          alert('error');
+          this.loader = false;
+        }
+      });
   }
   editDetails( sheetName: any, code: any, ) {
     this.loader = true;

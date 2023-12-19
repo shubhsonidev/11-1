@@ -71,7 +71,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr
+          <tr  [ngClass]="{'table-danger': enrolled.matured == true }"
             *ngFor="
               let enrolled of enrolled.data | filter : searchTerm;
               let i = index
@@ -84,84 +84,84 @@
             <th>{{ enrolled.schemeName }}</th>
             <th
               [ngStyle]="{
-                'background-color': enrolled.benefit == 1 ? '#90EE8F' : 'white'
+                'background-color': enrolled.benefit == 1 ? '#90EE8F' : ''
               }"
             >
               {{ enrolled.inst1 }}
             </th>
             <th
               [ngStyle]="{
-                'background-color': enrolled.benefit == 2 ? '#90EE8F' : 'white'
+                'background-color': enrolled.benefit == 2 ? '#90EE8F' : ''
               }"
             >
               {{ enrolled.inst2 }}
             </th>
             <th
               [ngStyle]="{
-                'background-color': enrolled.benefit == 3 ? '#90EE8F' : 'white'
+                'background-color': enrolled.benefit == 3 ? '#90EE8F' : ''
               }"
             >
               {{ enrolled.inst3 }}
             </th>
             <th
               [ngStyle]="{
-                'background-color': enrolled.benefit == 4 ? '#90EE8F' : 'white'
+                'background-color': enrolled.benefit == 4 ? '#90EE8F' : ''
               }"
             >
               {{ enrolled.inst4 }}
             </th>
             <th
               [ngStyle]="{
-                'background-color': enrolled.benefit == 5 ? '#90EE8F' : 'white'
+                'background-color': enrolled.benefit == 5 ? '#90EE8F' : ''
               }"
             >
               {{ enrolled.inst5 }}
             </th>
             <th
               [ngStyle]="{
-                'background-color': enrolled.benefit == 6 ? '#90EE8F' : 'white'
+                'background-color': enrolled.benefit == 6 ? '#90EE8F' : ''
               }"
             >
               {{ enrolled.inst6 }}
             </th>
             <th
               [ngStyle]="{
-                'background-color': enrolled.benefit == 7 ? '#90EE8F' : 'white'
+                'background-color': enrolled.benefit == 7 ? '#90EE8F' : ''
               }"
             >
               {{ enrolled.inst7 }}
             </th>
             <th
               [ngStyle]="{
-                'background-color': enrolled.benefit == 8 ? '#90EE8F' : 'white'
+                'background-color': enrolled.benefit == 8 ? '#90EE8F' : ''
               }"
             >
               {{ enrolled.inst8 }}
             </th>
             <th
               [ngStyle]="{
-                'background-color': enrolled.benefit == 9 ? '#90EE8F' : 'white'
+                'background-color': enrolled.benefit == 9 ? '#90EE8F' : ''
               }"
             >
               {{ enrolled.inst9 }}
             </th>
             <th
               [ngStyle]="{
-                'background-color': enrolled.benefit == 10 ? '#90EE8F' : 'white'
+                'background-color': enrolled.benefit == 10 ? '#90EE8F' : ''
               }"
             >
               {{ enrolled.inst10 }}
             </th>
             <th
               [ngStyle]="{
-                'background-color': enrolled.benefit == 11 ? '#90EE8F' : 'white'
+                'background-color': enrolled.benefit == 11 ? '#90EE8F' : ''
               }"
             >
               {{ enrolled.inst11 }}
             </th>
             <th
               [ngStyle]="{
-                'background-color': enrolled.benefit == 12 ? '#90EE8F' : 'white'
+                'background-color': enrolled.benefit == 12 ? '#90EE8F' : ''
               }"
             >
               {{ enrolled.inst12 }}
@@ -179,6 +179,7 @@
                 type="button"
                 class="btn btn-success me-2"
                 style="padding: 0px 10px"
+
                 (click)="openVerticallyCentered(contentEnroll, enrolled)"
               >
                 <i class="fa-solid fa-plus" style="color: white"></i>
@@ -187,6 +188,7 @@
                 type="button"
                 class="btn btn-info"
                 style="padding: 0px 10px"
+
                 (click)="openVerticallyCenteredBarcode(barcode, enrolled.code)"
               >
                 <i class="fa-solid fa-barcode" style="color: white"></i>
@@ -267,6 +269,18 @@
           </h4>
         </div>
       </div>
+      <div>
+        <button *ngIf="selectedEnrolled.matured == false"
+                type="button"
+                class="btn btn-info py-0 ps-2 pe-2"
+                (click)="
+                 openVerticallyCenteredMaturity(maturityconfirm,selectedEnrolled.code,selectedEnrolled.sheetName)
+                "
+              >
+                Mature Card
+              </button>
+              <h4 *ngIf="selectedEnrolled.matured == true" class="text-white">Card Matured</h4>
+      </div>
     </div>
     <div class="d-flex flex-column align-items-center" style="width: 50%">
       <h4 class="scheme-name p-2 mb-0">{{ selectedEnrolled.schemeName }}</h4>
@@ -298,13 +312,14 @@
                   selectedEnrolled.benefit == 1 ? '#90EE8F' : 'white'
               }"
             >
-              <div *ngIf="selectedEnrolled.benefit == 1">Benefit</div>
-              <div *ngIf="selectedEnrolled.benefit != 1">Paid</div>
+              <div *ngIf="selectedEnrolled.benefit == 1">Benefit <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst1date)"></i></div>
+              
+              <div *ngIf="selectedEnrolled.benefit != 1" >Paid <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst1date)"></i></div>
             </td>
             <td
               *ngIf="selectedEnrolled.inst1 !== selectedEnrolled.inst1amount"
             ></td>
-            <td>
+            <td *ngIf="selectedEnrolled.matured == false">
               <button
                 *ngIf="selectedEnrolled.inst1 !== selectedEnrolled.inst1amount"
                 type="button"
@@ -336,6 +351,7 @@
                 Delete
               </button>
             </td>
+            <td *ngIf="selectedEnrolled.matured != false"></td>
           </tr>
           <tr>
             <th scope="row">2</th>
@@ -354,13 +370,13 @@
                   selectedEnrolled.benefit == 2 ? '#90EE8F' : 'white'
               }"
             >
-              <div *ngIf="selectedEnrolled.benefit == 2">Benefit</div>
-              <div *ngIf="selectedEnrolled.benefit != 2">Paid</div>
+              <div *ngIf="selectedEnrolled.benefit == 2">Benefit <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst2date)"></i></div>
+              <div *ngIf="selectedEnrolled.benefit != 2">Paid <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst2date)"></i></div>
             </td>
             <td
               *ngIf="selectedEnrolled.inst2 !== selectedEnrolled.inst2amount"
             ></td>
-            <td>
+            <td *ngIf="selectedEnrolled.matured== false">
               <button
                 *ngIf="selectedEnrolled.inst2 !== selectedEnrolled.inst2amount"
                 type="button"
@@ -392,6 +408,8 @@
                 Delete
               </button>
             </td>
+            <td *ngIf="selectedEnrolled.matured != false"></td>
+
           </tr>
           <tr>
             <th scope="row">3</th>
@@ -410,13 +428,13 @@
                   selectedEnrolled.benefit == 3 ? '#90EE8F' : 'white'
               }"
             >
-              <div *ngIf="selectedEnrolled.benefit == 3">Benefit</div>
-              <div *ngIf="selectedEnrolled.benefit != 3">Paid</div>
+              <div *ngIf="selectedEnrolled.benefit == 3">Benefit <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst3date)"></i></div>
+              <div *ngIf="selectedEnrolled.benefit != 3">Paid <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst3date)"></i></div>
             </td>
             <td
               *ngIf="selectedEnrolled.inst3 !== selectedEnrolled.inst3amount"
             ></td>
-            <td>
+            <td *ngIf="selectedEnrolled.matured== false">
               <button
                 *ngIf="selectedEnrolled.inst3 !== selectedEnrolled.inst3amount"
                 type="button"
@@ -448,6 +466,8 @@
                 Delete
               </button>
             </td>
+            <td *ngIf="selectedEnrolled.matured != false"></td>
+
           </tr>
           <tr>
             <th scope="row">4</th>
@@ -466,13 +486,13 @@
                   selectedEnrolled.benefit == 4 ? '#90EE8F' : 'white'
               }"
             >
-              <div *ngIf="selectedEnrolled.benefit == 4">Benefit</div>
-              <div *ngIf="selectedEnrolled.benefit != 4">Paid</div>
+              <div *ngIf="selectedEnrolled.benefit == 4">Benefit <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst4date)"></i></div>
+              <div *ngIf="selectedEnrolled.benefit != 4">Paid <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst4date)"></i></div>
             </td>
             <td
               *ngIf="selectedEnrolled.inst4 !== selectedEnrolled.inst4amount"
             ></td>
-            <td>
+            <td *ngIf="selectedEnrolled.matured== false">
               <button
                 *ngIf="selectedEnrolled.inst4 !== selectedEnrolled.inst4amount"
                 type="button"
@@ -504,6 +524,7 @@
                 Delete
               </button>
             </td>
+            
           </tr>
           <tr>
             <th scope="row">5</th>
@@ -522,13 +543,13 @@
                   selectedEnrolled.benefit == 5 ? '#90EE8F' : 'white'
               }"
             >
-              <div *ngIf="selectedEnrolled.benefit == 5">Benefit</div>
-              <div *ngIf="selectedEnrolled.benefit != 5">Paid</div>
+              <div *ngIf="selectedEnrolled.benefit == 5">Benefit <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst5date)"></i></div>
+              <div *ngIf="selectedEnrolled.benefit != 5">Paid <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst5date)"></i></div>
             </td>
             <td
               *ngIf="selectedEnrolled.inst5 !== selectedEnrolled.inst5amount"
             ></td>
-            <td>
+            <td *ngIf="selectedEnrolled.matured== false">
               <button
                 *ngIf="selectedEnrolled.inst5 !== selectedEnrolled.inst5amount"
                 type="button"
@@ -560,6 +581,7 @@
                 Delete
               </button>
             </td>
+            
           </tr>
           <tr>
             <th scope="row">6</th>
@@ -578,13 +600,13 @@
                   selectedEnrolled.benefit == 6 ? '#90EE8F' : 'white'
               }"
             >
-              <div *ngIf="selectedEnrolled.benefit == 6">Benefit</div>
-              <div *ngIf="selectedEnrolled.benefit != 6">Paid</div>
+              <div *ngIf="selectedEnrolled.benefit == 6">Benefit <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst6date)"></i></div>
+              <div *ngIf="selectedEnrolled.benefit != 6">Paid <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst6date)"></i></div>
             </td>
             <td
               *ngIf="selectedEnrolled.inst6 !== selectedEnrolled.inst6amount"
             ></td>
-            <td>
+            <td *ngIf="selectedEnrolled.matured== false">
               <button
                 *ngIf="selectedEnrolled.inst6 !== selectedEnrolled.inst6amount"
                 type="button"
@@ -616,6 +638,7 @@
                 Delete
               </button>
             </td>
+            
           </tr>
           <tr>
             <th scope="row">7</th>
@@ -634,13 +657,13 @@
                   selectedEnrolled.benefit == 7 ? '#90EE8F' : 'white'
               }"
             >
-              <div *ngIf="selectedEnrolled.benefit == 7">Benefit</div>
-              <div *ngIf="selectedEnrolled.benefit != 7">Paid</div>
+              <div *ngIf="selectedEnrolled.benefit == 7">Benefit <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst7date)"></i></div>
+              <div *ngIf="selectedEnrolled.benefit != 7">Paid <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst7date)"></i></div>
             </td>
             <td
               *ngIf="selectedEnrolled.inst7 !== selectedEnrolled.inst7amount"
             ></td>
-            <td>
+            <td *ngIf="selectedEnrolled.matured== false">
               <button
                 *ngIf="selectedEnrolled.inst7 !== selectedEnrolled.inst7amount"
                 type="button"
@@ -672,6 +695,7 @@
                 Delete
               </button>
             </td>
+            
           </tr>
           <tr>
             <th scope="row">8</th>
@@ -690,14 +714,14 @@
                   selectedEnrolled.benefit == 8 ? '#90EE8F' : 'white'
               }"
             >
-              <div *ngIf="selectedEnrolled.benefit == 8">Benefit</div>
-              <div *ngIf="selectedEnrolled.benefit != 8">Paid</div>
+              <div *ngIf="selectedEnrolled.benefit == 8">Benefit <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst8date)"></i></div>
+              <div *ngIf="selectedEnrolled.benefit != 8">Paid <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst8date)"></i></div>
             </td>
             <td
               *ngIf="selectedEnrolled.inst8 !== selectedEnrolled.inst8amount"
             ></td>
 
-            <td>
+            <td *ngIf="selectedEnrolled.matured== false">
               <button
                 *ngIf="selectedEnrolled.inst8 !== selectedEnrolled.inst8amount"
                 type="button"
@@ -729,6 +753,7 @@
                 Delete
               </button>
             </td>
+            
           </tr>
           <tr>
             <th scope="row">9</th>
@@ -747,14 +772,14 @@
                   selectedEnrolled.benefit == 9 ? '#90EE8F' : 'white'
               }"
             >
-              <div *ngIf="selectedEnrolled.benefit == 9">Benefit</div>
-              <div *ngIf="selectedEnrolled.benefit != 9">Paid</div>
+              <div *ngIf="selectedEnrolled.benefit == 9">Benefit <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst9date)"></i></div>
+              <div *ngIf="selectedEnrolled.benefit != 9">Paid <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst9date)"></i></div>
             </td>
             <td
               *ngIf="selectedEnrolled.inst9 !== selectedEnrolled.inst9amount"
             ></td>
 
-            <td>
+            <td *ngIf="selectedEnrolled.matured== false"> 
               <button
                 *ngIf="selectedEnrolled.inst9 !== selectedEnrolled.inst9amount"
                 type="button"
@@ -786,6 +811,7 @@
                 Delete
               </button>
             </td>
+            
           </tr>
           <tr>
             <th scope="row">10</th>
@@ -804,14 +830,14 @@
                   selectedEnrolled.benefit == 10 ? '#90EE8F' : 'white'
               }"
             >
-              <div *ngIf="selectedEnrolled.benefit == 10">Benefit</div>
-              <div *ngIf="selectedEnrolled.benefit != 10">Paid</div>
+              <div *ngIf="selectedEnrolled.benefit == 10">Benefit <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst10date)"></i></div>
+              <div *ngIf="selectedEnrolled.benefit != 10">Paid <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst10date)"></i></div>
             </td>
             <td
               *ngIf="selectedEnrolled.inst10 !== selectedEnrolled.inst10amount"
             ></td>
 
-            <td>
+            <td *ngIf="selectedEnrolled.matured== false">
               <button
                 *ngIf="
                   selectedEnrolled.inst10 !== selectedEnrolled.inst10amount
@@ -847,6 +873,7 @@
                 Delete
               </button>
             </td>
+            
           </tr>
           <tr>
             <th scope="row">11</th>
@@ -865,14 +892,14 @@
                   selectedEnrolled.benefit == 11 ? '#90EE8F' : 'white'
               }"
             >
-              <div *ngIf="selectedEnrolled.benefit == 11">Benefit</div>
-              <div *ngIf="selectedEnrolled.benefit != 11">Paid</div>
+              <div *ngIf="selectedEnrolled.benefit == 11">Benefit <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst11date)"></i></div>
+              <div *ngIf="selectedEnrolled.benefit != 11">Paid <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst11date)"></i></div>
             </td>
             <td
               *ngIf="selectedEnrolled.inst11 !== selectedEnrolled.inst11amount"
             ></td>
 
-            <td>
+            <td *ngIf="selectedEnrolled.matured== false">
               <button
                 *ngIf="
                   selectedEnrolled.inst11 !== selectedEnrolled.inst11amount
@@ -908,6 +935,7 @@
                 Delete
               </button>
             </td>
+            
           </tr>
           <tr>
             <th scope="row">12</th>
@@ -926,14 +954,14 @@
                   selectedEnrolled.benefit == 12 ? '#90EE8F' : 'white'
               }"
             >
-              <div *ngIf="selectedEnrolled.benefit == 12">Benefit</div>
-              <div *ngIf="selectedEnrolled.benefit != 12">Paid</div>
+              <div *ngIf="selectedEnrolled.benefit == 12">Benefit <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime(selectedEnrolled.inst12date)"></i></div>
+              <div *ngIf="selectedEnrolled.benefit != 12">Paid <i class="fa-solid fa-circle-info" placement="top" [ngbTooltip]="formatDateTime( selectedEnrolled.inst12date)"></i></div>
             </td>
             <td
               *ngIf="selectedEnrolled.inst12 !== selectedEnrolled.inst12amount"
             ></td>
 
-            <td>
+            <td *ngIf="selectedEnrolled.matured== false">
               <button
                 *ngIf="
                   selectedEnrolled.inst12 !== selectedEnrolled.inst12amount
@@ -969,6 +997,7 @@
                 Delete
               </button>
             </td>
+            
           </tr>
         </tbody>
       </table>
@@ -1024,6 +1053,41 @@
       ngxPrint
     >
       Print
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #maturityconfirm let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Are you Sure?</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+
+  <div class="m-4 d-flex justify-content-center align-items-center">
+<div>
+  Are you sure you want to mature the card ?
+</div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="modal.close('Close click')"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+
+      class="btn btn-primary"
+(click)="mature(maturityScheme, maturityCode )"
+    >
+      Mature
     </button>
   </div>
 </ng-template>
