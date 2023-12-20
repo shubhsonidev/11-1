@@ -52,10 +52,10 @@
                     <td>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst1 !== enrolled.data[selectedEnrolled].inst1amount" type="button"
                             class="btn btn-info py-0 ps-2 pe-2"
-                            (click)="payEmi(enrolled.data[selectedEnrolled].inst1amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,1)">Pay</button>
+                            (click)="payEmi(enrolled.data[selectedEnrolled].inst1amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],1)">Pay</button>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst1 === enrolled.data[selectedEnrolled].inst1amount" type="button"
                             class="btn btn-danger py-0 ps-2 pe-2"
-                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,1)">Delete</button>
+                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code, enrolled.data[selectedEnrolled],1)">Delete</button>
                     </td>
                 </tr>
                 <tr >
@@ -68,10 +68,10 @@
                     <td>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst2 !== enrolled.data[selectedEnrolled].inst2amount" type="button"
                             class="btn btn-info py-0 ps-2 pe-2"
-                            (click)="payEmi(enrolled.data[selectedEnrolled].inst2amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,2)">Pay</button>
+                            (click)="payEmi(enrolled.data[selectedEnrolled].inst2amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],2)">Pay</button>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst2 === enrolled.data[selectedEnrolled].inst2amount" type="button"
                             class="btn btn-danger py-0 ps-2 pe-2"
-                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,2)">Delete</button>
+                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],2)">Delete</button>
                     </td>
                 </tr>
                 <tr >
@@ -84,10 +84,10 @@
                     <td>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst3 !== enrolled.data[selectedEnrolled].inst3amount" type="button"
                             class="btn btn-info py-0 ps-2 pe-2"
-                            (click)="payEmi(enrolled.data[selectedEnrolled].inst3amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,3)">Pay</button>
+                            (click)="payEmi(enrolled.data[selectedEnrolled].inst3amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],3)">Pay</button>
                             <button *ngIf="enrolled.data[selectedEnrolled].inst3 === enrolled.data[selectedEnrolled].inst3amount" type="button"
                             class="btn btn-danger py-0 ps-2 pe-2"
-                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,3)">Delete</button>
+                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],3)">Delete</button>
                     </td>
                 </tr>
                 <tr >
@@ -100,10 +100,10 @@
                     <td>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst4 !== enrolled.data[selectedEnrolled].inst4amount" type="button"
                             class="btn btn-info py-0 ps-2 pe-2"
-                            (click)="payEmi(enrolled.data[selectedEnrolled].inst4amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,4)">Pay</button>
+                            (click)="payEmi(enrolled.data[selectedEnrolled].inst4amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],4)">Pay</button>
                             <button *ngIf="enrolled.data[selectedEnrolled].inst4 === enrolled.data[selectedEnrolled].inst4amount" type="button"
                             class="btn btn-danger py-0 ps-2 pe-2"
-                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,4)">Delete</button>
+                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],4)">Delete</button>
                     </td>
                 </tr>
                 <tr >
@@ -116,10 +116,10 @@
                     <td>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst5 !== enrolled.data[selectedEnrolled].inst5amount" type="button"
                             class="btn btn-info py-0 ps-2 pe-2"
-                            (click)="payEmi(enrolled.data[selectedEnrolled].inst5amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,5)">Pay</button>
+                            (click)="payEmi(enrolled.data[selectedEnrolled].inst5amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],5)">Pay</button>
                             <button *ngIf="enrolled.data[selectedEnrolled].inst5 === enrolled.data[selectedEnrolled].inst5amount" type="button"
                             class="btn btn-danger py-0 ps-2 pe-2"
-                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,5)">Delete</button>
+                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],5)">Delete</button>
                     </td>
                 </tr>
                 <tr >
@@ -132,10 +132,10 @@
                     <td>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst6 !== enrolled.data[selectedEnrolled].inst6amount" type="button"
                             class="btn btn-info py-0 ps-2 pe-2"
-                            (click)="payEmi(enrolled.data[selectedEnrolled].inst6amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,6)">Pay</button>
+                            (click)="payEmi(enrolled.data[selectedEnrolled].inst6amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],6)">Pay</button>
                             <button *ngIf="enrolled.data[selectedEnrolled].inst6 === enrolled.data[selectedEnrolled].inst6amount" type="button"
                             class="btn btn-danger py-0 ps-2 pe-2"
-                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,6)">Delete</button>
+                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],6)">Delete</button>
                     </td>
                 </tr>
                 <tr >
@@ -148,10 +148,10 @@
                     <td>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst7 !== enrolled.data[selectedEnrolled].inst7amount" type="button"
                             class="btn btn-info py-0 ps-2 pe-2"
-                            (click)="payEmi(enrolled.data[selectedEnrolled].inst7amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,7)">Pay</button>
+                            (click)="payEmi(enrolled.data[selectedEnrolled].inst7amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],7)">Pay</button>
                             <button *ngIf="enrolled.data[selectedEnrolled].inst7 === enrolled.data[selectedEnrolled].inst7amount" type="button"
                             class="btn btn-danger py-0 ps-2 pe-2"
-                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,7)">Delete</button>
+                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],7)">Delete</button>
                     </td>
                 </tr>
                 <tr >
@@ -165,10 +165,10 @@
                     <td>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst8 !== enrolled.data[selectedEnrolled].inst8amount" type="button"
                             class="btn btn-info py-0 ps-2 pe-2"
-                            (click)="payEmi(enrolled.data[selectedEnrolled].inst8amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,8)">Pay</button>
+                            (click)="payEmi(enrolled.data[selectedEnrolled].inst8amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],8)">Pay</button>
                             <button *ngIf="enrolled.data[selectedEnrolled].inst8 === enrolled.data[selectedEnrolled].inst8amount" type="button"
                             class="btn btn-danger py-0 ps-2 pe-2"
-                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,8)">Delete</button>
+                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],8)">Delete</button>
                     </td>
                 </tr>
                 <tr >
@@ -182,10 +182,10 @@
                     <td>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst9 !== enrolled.data[selectedEnrolled].inst9amount" type="button"
                             class="btn btn-info py-0 ps-2 pe-2"
-                            (click)="payEmi(enrolled.data[selectedEnrolled].inst9amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,9)">Pay</button>
+                            (click)="payEmi(enrolled.data[selectedEnrolled].inst9amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],9)">Pay</button>
                             <button *ngIf="enrolled.data[selectedEnrolled].inst9 === enrolled.data[selectedEnrolled].inst9amount" type="button"
                             class="btn btn-danger py-0 ps-2 pe-2"
-                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,9)">Delete</button>
+                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],9)">Delete</button>
                     </td>
                 </tr>
                 <tr >
@@ -199,10 +199,10 @@
                     <td>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst10 !== enrolled.data[selectedEnrolled].inst10amount" type="button"
                             class="btn btn-info py-0 ps-2 pe-2"
-                            (click)="payEmi(enrolled.data[selectedEnrolled].inst10amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,10)">Pay</button>
+                            (click)="payEmi(enrolled.data[selectedEnrolled].inst10amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],10)">Pay</button>
                             <button *ngIf="enrolled.data[selectedEnrolled].inst10 === enrolled.data[selectedEnrolled].inst10amount" type="button"
                             class="btn btn-danger py-0 ps-2 pe-2"
-                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,10)">Delete</button>
+                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],10)">Delete</button>
                     </td>
                 </tr>
                 <tr >
@@ -215,10 +215,10 @@
                     <td>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst11 !== enrolled.data[selectedEnrolled].inst11amount" type="button"
                             class="btn btn-info py-0 ps-2 pe-2"
-                            (click)="payEmi(enrolled.data[selectedEnrolled].inst11amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,11)">Pay</button>
+                            (click)="payEmi(enrolled.data[selectedEnrolled].inst11amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],11)">Pay</button>
                             <button *ngIf="enrolled.data[selectedEnrolled].inst11 === enrolled.data[selectedEnrolled].inst11amount" type="button"
                             class="btn btn-danger py-0 ps-2 pe-2"
-                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,11)">Delete</button>
+                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],11)">Delete</button>
                     </td>
                 </tr>
                 <tr >
@@ -233,10 +233,10 @@
                     <td>
                         <button *ngIf="enrolled.data[selectedEnrolled].inst12 !== enrolled.data[selectedEnrolled].inst12amount" type="button"
                             class="btn btn-info py-0 ps-2 pe-2"
-                            (click)="payEmi(enrolled.data[selectedEnrolled].inst12amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,12)">Pay</button>
+                            (click)="payEmi(enrolled.data[selectedEnrolled].inst12amount,enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],12)">Pay</button>
                             <button *ngIf="enrolled.data[selectedEnrolled].inst12 === enrolled.data[selectedEnrolled].inst12amount" type="button"
                             class="btn btn-danger py-0 ps-2 pe-2"
-                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,12)">Delete</button>
+                            (click)="payEmi('',enrolled.data[selectedEnrolled].sheetName,enrolled.data[selectedEnrolled].code,enrolled.data[selectedEnrolled],12)">Delete</button>
                     </td>
                 </tr>
 

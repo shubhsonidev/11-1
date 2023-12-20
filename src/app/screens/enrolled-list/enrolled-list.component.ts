@@ -16,6 +16,7 @@ import {
 import { SchemeService } from 'src/app/service/scheme.service';
 import { schemesResponse } from '../schemes-list/schemes-list.component';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { MessageConfigService } from 'src/app/service/message-config.service';
 
 
 
@@ -36,7 +37,7 @@ export class EnrolledListComponent {
   constructor(
     public enrolled: EnrolledService,
     private toastr: ToastrService,
-
+    private messageConfigService: MessageConfigService,
     private http: HttpClient,
     private apiservice: ApiUrlService,
     private schemeService: SchemeService
@@ -135,7 +136,7 @@ this.maturityScheme = sheetname
   selectSearch(value: any) {
     this.searchTerm = value;
   }
-  payEmi(amount: any, sheetName: any, code: any, emiNumber: any) {
+  payEmi(amount: any, sheetName: any, code: any, data: any, emiNumber: any, ) {
     this.loader = true;
     this.http
       .get<any>(
@@ -147,16 +148,28 @@ this.maturityScheme = sheetname
           '&emiNumber=' +
           emiNumber +
           '&code=' +
-          code +
-          '&custNumber=' +
-          this.selectedEnrolled.number +
-          '&custName=' +
-          this.selectedEnrolled.name
+          code 
       )
       .subscribe((res) => {
         if (res.data[0].status === 'success') {
           this.toastr.success('EMI Paid Successfully');
           this.loader = false;
+          const dateObject = new Date();
+
+
+          const formattedDate = `${dateObject.getDate()}/${dateObject.getMonth() + 1}/${dateObject.getFullYear()}`;
+          
+
+          const formattedTime = `${dateObject.getHours()}:${(dateObject.getMinutes() < 10 ? '0' : '') + dateObject.getMinutes()}`;
+          
+
+          const result = `${formattedDate} - ${formattedTime}`;
+          if(amount != ''){
+          if(this.messageConfigService.data[1].emiMessage){
+            this.http.get<any>('https://soft7.in/api/send?number=91' + data.number +'&type=text&message=सम्मानीय+' + data.name+',%0A%0Aआपकी+की+किश्त+('+amount+'/-)+%0A'+ result +'+को+जमा+कर+ली+गई+है|%0Aधन्यवाद%0A%0Aहरिदर्शन+ज्वेलर्स%0Aबीना&instance_id=65785DBA24637&access_token=6578021f0b174').subscribe((res) => {})
+          }
+        }
+
           this.enrolled.fetch().subscribe(
             (response: enrolledResponse) => {
               this.enrolled.data = response.data;
