@@ -60,6 +60,8 @@ export class DashboardComponent {
   total: any;
   totalAmont: any;
   isStarted = false;
+  blur = true;
+
   @ViewChild(BarcodeScannerLivestreamComponent)
   barcodeScanner: BarcodeScannerLivestreamComponent =
     new BarcodeScannerLivestreamComponent();
@@ -352,6 +354,10 @@ export class DashboardComponent {
     }
 
     return totalPaid;
+  }
+
+  changeBlur(){
+    this.blur = !this.blur;
   }
 
   calculateTotalAmount(dataList: any[]): number {
