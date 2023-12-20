@@ -166,7 +166,8 @@ this.maturityScheme = sheetname
           const result = `${formattedDate} - ${formattedTime}`;
           if(amount != ''){
           if(this.messageConfigService.data[1].emiMessage){
-            this.http.get<any>('https://soft7.in/api/send?number=91' + data.number +'&type=text&message=सम्मानीय+' + data.name+',%0A%0Aआपकी+की+किश्त+('+amount+'/-)+%0A'+ result +'+को+जमा+कर+ली+गई+है|%0Aधन्यवाद%0A%0Aहरिदर्शन+ज्वेलर्स%0Aबीना&instance_id=65785DBA24637&access_token=6578021f0b174').subscribe((res) => {})
+            this.http.get<any>('https://soft7.in/api/send?number=91' + data.number +'&type=text&message=सम्मानीय+' + data.name+',%0A%0Aआपकी+की+किश्त+('+amount+'/-)+%0A'+ result +'+को+जमा+कर+ली+गई+है|%0Aधन्यवाद%0A%0ACard+Number-'+code+'हरिदर्शन+ज्वेलर्स%0Aबीना&instance_id=65785DBA24637&access_token=6578021f0b174').subscribe((res) => {})
+
           }
         }
 
