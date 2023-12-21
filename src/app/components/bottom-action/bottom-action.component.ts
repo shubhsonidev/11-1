@@ -45,6 +45,7 @@ export class BottomActionComponent {
 
 
   selectedDelay: any = 5;
+selectInstRem: any = 'Select Installment';
 
   constructor(
     private toastr: ToastrService,
@@ -85,7 +86,30 @@ sendReminderToAll(){
     
   }  
   this.modalService.dismissAll()
+}
 
+sendReminderToSpecific(){
+  if(this.selectInstRem === 'Select Installment'){
+    this.toastr.error('Select Installment')
+    return;
+  }
+  this.loading = true;
+  for (let i = 0; i < this.enrolled.data.length; i++) {
+    if (this.enrolled.data[i] && this.enrolled.data[i]['inst' + this.selectInstRem] === "") {
+
+    setTimeout(() => {
+
+      this.http.get<any>('https://soft7.in/api/send?number=91' + this.enrolled.data[i].number + '&type=text&message=सम्मानीय+' + this.enrolled.data[i].name + ',%0Aआपकी+सुविधा+जमा+योजना+की+इस+माह+की+*किश्त*+जमा+नहीं+है+कृपया+इसे+जमा+करने+का+कष्ट+करें+|%0A%0A*हरिदर्शन+ज्वेलर्स*%0A*बीना*&instance_id=65785DBA24637&access_token=6578021f0b174')
+        .subscribe((res) => {
+         
+        });
+    
+    }, i * this.selectedDelay *1000); }
+    if(i === this.enrolled.data.length-1){
+      this.loading = false;
+    }
+  }  
+  this.modalService.dismissAll()
 }
 
 
@@ -175,6 +199,10 @@ sendReminderToAll(){
   }
   selectDelay(delay: any,) {
    this.selectedDelay = delay;
+  }
+
+  selectInst(inst: any,) {
+   this.selectInstRem = inst;
   }
 
 
