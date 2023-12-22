@@ -61,6 +61,7 @@ export class DashboardComponent {
   totalAmont: any;
   isStarted = false;
   blur = true;
+  dailyCollection:any;
 
   @ViewChild(BarcodeScannerLivestreamComponent)
   barcodeScanner: BarcodeScannerLivestreamComponent =
@@ -159,7 +160,7 @@ export class DashboardComponent {
         (response: enrolledResponse) => {
           this.enrolled.data = response.data;
           this.data = response.data;
-
+this.dailyCollection = this.calculateDailyCollection(this.enrolled.data)
           this.total = this.calculateTotalPaid(this.enrolled.data);
           this.totalAmont = this.calculateTotalAmount(this.enrolled.data);
           this.schemeNumber = this.countEntriesByScheme(this.enrolled.data);
@@ -381,6 +382,68 @@ export class DashboardComponent {
 
     return totalAmount;
   }
+  calculateDailyCollection(dataList: any[]): number {
+    let dailyCollection = 0;
+    const today = new Date();
+    for (const item of dataList) {
+      if (this.isPaymentWithinRange(item.inst1date, today)) {
+        dailyCollection += item.inst1amount;
+      }
+      if (this.isPaymentWithinRange(item.inst2date, today)) {
+        dailyCollection += item.inst2amount;
+      }
+      if (this.isPaymentWithinRange(item.inst3date, today)) {
+        dailyCollection += item.inst3amount;
+      }
+      if (this.isPaymentWithinRange(item.inst4date, today)) {
+        dailyCollection += item.inst4amount;
+      }
+      if (this.isPaymentWithinRange(item.inst5date, today)) {
+        dailyCollection += item.inst5amount;
+      }
+      if (this.isPaymentWithinRange(item.inst6date, today)) {
+        dailyCollection += item.inst6amount;
+      }
+      if (this.isPaymentWithinRange(item.inst7date, today)) {
+        dailyCollection += item.inst7amount;
+      }
+      if (this.isPaymentWithinRange(item.inst8date, today)) {
+        dailyCollection += item.inst8amount;
+      }
+      if (this.isPaymentWithinRange(item.inst9date, today)) {
+        dailyCollection += item.inst9amount;
+      }
+      if (this.isPaymentWithinRange(item.inst10date, today)) {
+        dailyCollection += item.inst10amount;
+      }
+      if (this.isPaymentWithinRange(item.inst11date, today)) {
+        dailyCollection += item.inst11amount;
+      }
+      if (this.isPaymentWithinRange(item.inst12date, today)) {
+        dailyCollection += item.inst12amount;
+      }
+    }
+
+    return dailyCollection;
+  }
+  isPaymentWithinRange(paymentDate: string | Date | undefined, currentDate: Date): boolean {
+    if (paymentDate === undefined) {
+        return false; // Handle the case when paymentDate is undefined
+    }
+
+    const paymentDateObj = new Date(paymentDate);
+    const currentMidnight = new Date(currentDate);
+    currentMidnight.setHours(0, 0, 0, 0); // Set time to midnight
+
+    const paymentDateMidnight = new Date(paymentDateObj);
+    paymentDateMidnight.setHours(0, 0, 0, 0); // Set time to midnight
+
+    return (
+        paymentDateMidnight &&
+        Math.abs(paymentDateMidnight.getTime() - currentMidnight.getTime()) <= 0
+    );
+}
+
   navigateToSelect() {
     localStorage.removeItem('selectedYear');
     this.router.navigate(['/selectYear']);
