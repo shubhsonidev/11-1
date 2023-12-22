@@ -151,7 +151,7 @@ export class DashboardComponent {
 
   calculateTotalAndFetchEnrolled() {
     this.loader = true;
-
+    this.dailyCollection = this.calculateDailyCollection(this.enrolled.data)
     this.total = this.calculateTotalPaid(this.enrolled.data);
     this.totalAmont = this.calculateTotalAmount(this.enrolled.data);
     this.schemeNumber = this.countEntriesByScheme(this.enrolled.data);
