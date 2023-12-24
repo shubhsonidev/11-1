@@ -19,7 +19,7 @@ import { BarcodeScannerLivestreamModule } from "ngx-barcode-scanner";
 import { FilterPipe } from './filter.pipe';
 import { AgChartsAngularModule } from 'ag-charts-angular';
 import { AgChartOptions } from 'ag-charts-community';
-
+import { DatePipe } from '@angular/common';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -33,6 +33,7 @@ import { BottomActionComponent } from './components/bottom-action/bottom-action.
 import {NgxPrintModule} from 'ngx-print';
 import { ScannerComponent } from './components/scanner/scanner.component';
 import { PayemiMobComponent } from './screens/payemi-mob/payemi-mob.component';
+import { BankComponent } from './screens/bank/bank.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { PayemiMobComponent } from './screens/payemi-mob/payemi-mob.component';
     FilterPipe,
     BottomActionComponent,
      ScannerComponent,
-     PayemiMobComponent
+     PayemiMobComponent,
+     BankComponent
   ],
   imports: [
     NgbDatepickerModule,
@@ -67,7 +69,7 @@ import { PayemiMobComponent } from './screens/payemi-mob/payemi-mob.component';
     ToastrModule.forRoot(),
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [
+  providers: [DatePipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptor,

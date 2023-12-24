@@ -8,6 +8,7 @@ import { OtpVerifyComponent } from './screens/otp-verify/otp-verify.component';
 import { EnrolledListComponent } from './screens/enrolled-list/enrolled-list.component';
 import { SchemesListComponent } from './screens/schemes-list/schemes-list.component';
 import { PayemiMobComponent } from './screens/payemi-mob/payemi-mob.component';
+import { BankComponent } from './screens/bank/bank.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'selectYear', component: SelectYearComponent, canActivate: [AuthGuard] },
   { path: 'enrolled', component: EnrolledListComponent, canActivate: [AuthGuard] },
   { path: 'schemes-list', component: SchemesListComponent, canActivate: [AuthGuard] },
+  { path: 'bank', component: BankComponent, canActivate: [AuthGuard] },
   { path: 'pay-emi', component: PayemiMobComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to home when the app starts

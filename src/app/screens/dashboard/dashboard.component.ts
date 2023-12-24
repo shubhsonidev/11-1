@@ -11,7 +11,7 @@ import { ApiUrlService } from 'src/app/service/api-url.service';
 import { ToastrService } from 'ngx-toastr';
 import { SchemeService } from 'src/app/service/scheme.service';
 import { schemesResponse } from '../schemes-list/schemes-list.component';
-
+import { formatDate } from '@angular/common';
 import { MessageConfigService } from 'src/app/service/message-config.service';
 import { AgChartsAngularModule } from 'ag-charts-angular';
 import { AgChartOptions } from 'ag-charts-community';
@@ -22,6 +22,7 @@ import {
 } from 'src/app/service/enrolled.service';
 import { BarcodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
 import { Router } from '@angular/router';
+import { BankService } from 'src/app/services/bank.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -59,9 +60,13 @@ export class DashboardComponent {
   data: any[] = [];
   total: any;
   totalAmont: any;
+  loading: any;
   isStarted = false;
-  blur = true;
-  dailyCollection:any;
+  blur = false;
+  type: any;
+  dailyCollection: any;
+  bankAmout: any;
+  bankData: any[] = [];
 
   @ViewChild(BarcodeScannerLivestreamComponent)
   barcodeScanner: BarcodeScannerLivestreamComponent =
@@ -70,13 +75,14 @@ export class DashboardComponent {
   schemeNumber: any = null;
   totalmonthamt: any = 0;
   public chartOptions!: AgChartOptions;
+  id: any;
   constructor(
     private toastr: ToastrService,
     private http: HttpClient,
     private apiservice: ApiUrlService,
     private schemeService: SchemeService,
     private messageConfigService: MessageConfigService,
-
+    private bank: BankService,
     public enrolled: EnrolledService,
     private router: Router
   ) {}
@@ -85,6 +91,24 @@ export class DashboardComponent {
   ngOnInit(): void {
     this.loader = true;
     this.year = localStorage.getItem('selectedYear');
+
+    if (this.bank.data.length === 0) {
+      this.loader = true;
+
+      this.http
+        .get<bankResponse>(
+          this.apiservice.url + 'apifor=bank-amount' + '&sheetName=' + this.year
+        )
+        .subscribe((response) => {
+          this.bankData = response.data;
+          this.bank.data = response.data;
+
+          this.loader = true;
+        });
+    } else {
+      this.bankData = this.bank.data;
+      this.loader = true;
+    }
 
     if (this.schemeService.data.length === 0) {
       this.loader = true;
@@ -138,6 +162,104 @@ export class DashboardComponent {
     this.barcodeScanner.start();
   }
 
+  transaction() {
+    this.year = localStorage.getItem('selectedYear');
+    let sign;
+    if (!this.bankAmout) {
+      this.toastr.warning('Please fill correctly !!');
+    } else {
+      if (this.type == 'add') {
+        sign = '+';
+      } else {
+        sign = '-';
+      }
+      this.loading = true;
+      this.http
+        .get<any>(
+          this.apiservice.url +
+            'apifor=bank&sheetName=' +
+            this.year +
+            '&amount=' +
+            sign +
+            this.bankAmout +
+            '&date=' +
+            new Date()
+        )
+        .subscribe((res) => {
+          if (res.data[0].status === 'success') {
+            this.toastr.success('Amount Saved Successfully !');
+            this.loading = false;
+            this.modalService.dismissAll();
+            this.http
+              .get<bankResponse>(
+                this.apiservice.url +
+                  'apifor=bank-amount' +
+                  '&sheetName=' +
+                  this.year
+              )
+              .subscribe((response) => {
+                this.bankData = response.data;
+                this.bank.data = response.data;
+              });
+          } else {
+            alert('error');
+            this.loading = false;
+          }
+        });
+    }
+  }
+
+  editTransaction() {
+    this.year = localStorage.getItem('selectedYear');
+    let sign;
+    if (!this.bankAmout) {
+      this.toastr.warning('Please fill correctly !!');
+    } else {
+  
+      this.loading = true;
+      this.http
+        .get<any>(
+          this.apiservice.url +
+            'apifor=edit-bank&sheetName=' +
+            this.year +
+            '&amount=' +
+            this.bankAmout +
+            '&id=' +
+            this.id
+        )
+        .subscribe((res) => {
+          if (res.data[0].status === 'success') {
+            this.toastr.success('Amount Saved Successfully !');
+            this.loading = false;
+            this.modalService.dismissAll();
+            this.http
+              .get<bankResponse>(
+                this.apiservice.url +
+                  'apifor=bank-amount' +
+                  '&sheetName=' +
+                  this.year
+              )
+              .subscribe((response) => {
+                this.bankData = response.data;
+                this.bank.data = response.data;
+              });
+          } else {
+            alert('error');
+            this.loading = false;
+          }
+        });
+    }
+  }
+
+  totalDeposited(data: any) {
+    let total = 0;
+
+    for (let i = 0; i < data.length; i++) {
+      total += data[i].amount;
+    }
+    return total;
+  }
+
   onValueChanges(result: { codeResult: { code: any } }) {
     this.barcodeScanner.stop();
 
@@ -151,7 +273,7 @@ export class DashboardComponent {
 
   calculateTotalAndFetchEnrolled() {
     this.loader = true;
-    this.dailyCollection = this.calculateDailyCollection(this.enrolled.data)
+    this.dailyCollection = this.calculateDailyCollection(this.enrolled.data);
     this.total = this.calculateTotalPaid(this.enrolled.data);
     this.totalAmont = this.calculateTotalAmount(this.enrolled.data);
     this.schemeNumber = this.countEntriesByScheme(this.enrolled.data);
@@ -160,7 +282,9 @@ export class DashboardComponent {
         (response: enrolledResponse) => {
           this.enrolled.data = response.data;
           this.data = response.data;
-this.dailyCollection = this.calculateDailyCollection(this.enrolled.data)
+          this.dailyCollection = this.calculateDailyCollection(
+            this.enrolled.data
+          );
           this.total = this.calculateTotalPaid(this.enrolled.data);
           this.totalAmont = this.calculateTotalAmount(this.enrolled.data);
           this.schemeNumber = this.countEntriesByScheme(this.enrolled.data);
@@ -337,15 +461,17 @@ this.dailyCollection = this.calculateDailyCollection(this.enrolled.data)
   getTotalSum(property: string): number {
     // Check if this.schemeNumber is not null
     if (this.schemeNumber !== null) {
-      this.totalmonthamt = this.schemeNumber.reduce((sum: any, item: { [x: string]: any; }) => sum + (item[property] || 0), 0);
+      this.totalmonthamt = this.schemeNumber.reduce(
+        (sum: any, item: { [x: string]: any }) => sum + (item[property] || 0),
+        0
+      );
     } else {
       // Handle the case where this.schemeNumber is null
       this.totalmonthamt = 0;
     }
-  
+
     return this.totalmonthamt;
   }
-  
 
   calculateTotalPaid(dataList: any[]): number {
     let totalPaid = 0;
@@ -357,7 +483,7 @@ this.dailyCollection = this.calculateDailyCollection(this.enrolled.data)
     return totalPaid;
   }
 
-  changeBlur(){
+  changeBlur() {
     this.blur = !this.blur;
   }
 
@@ -426,9 +552,12 @@ this.dailyCollection = this.calculateDailyCollection(this.enrolled.data)
 
     return dailyCollection;
   }
-  isPaymentWithinRange(paymentDate: string | Date | undefined, currentDate: Date): boolean {
+  isPaymentWithinRange(
+    paymentDate: string | Date | undefined,
+    currentDate: Date
+  ): boolean {
     if (paymentDate === undefined) {
-        return false; // Handle the case when paymentDate is undefined
+      return false; // Handle the case when paymentDate is undefined
     }
 
     const paymentDateObj = new Date(paymentDate);
@@ -439,10 +568,10 @@ this.dailyCollection = this.calculateDailyCollection(this.enrolled.data)
     paymentDateMidnight.setHours(0, 0, 0, 0); // Set time to midnight
 
     return (
-        paymentDateMidnight &&
-        Math.abs(paymentDateMidnight.getTime() - currentMidnight.getTime()) <= 0
+      paymentDateMidnight &&
+      Math.abs(paymentDateMidnight.getTime() - currentMidnight.getTime()) <= 0
     );
-}
+  }
 
   navigateToSelect() {
     localStorage.removeItem('selectedYear');
@@ -452,6 +581,25 @@ this.dailyCollection = this.calculateDailyCollection(this.enrolled.data)
 
   openVerticallyCentered(content: TemplateRef<any>) {
     this.modalService.open(content, { centered: true, size: 'lg' });
+  }
+  openVerticallyCenteredxl(content: TemplateRef<any>) {
+    this.modalService.open(content, { centered: true, size: 'xl' });
+  }
+  
+  openVerticallyCenteredBank(content: TemplateRef<any>, type: string) {
+    this.bankAmout = '';
+    this.type = type;
+    this.modalService.open(content, { centered: true, size: 'md' });
+  }
+  openVerticallyCenteredEditBank(
+    content: TemplateRef<any>,
+    amount: any,
+    id: any,
+
+  ) {
+    this.id = id;
+    this.bankAmout = amount;
+    this.modalService.open(content, { centered: true, size: 'md' });
   }
   addScheme() {
     if (!this.schemeName || !this.prefix || !this.year || !this.benefit) {
@@ -656,4 +804,14 @@ this.dailyCollection = this.calculateDailyCollection(this.enrolled.data)
         });
     }
   }
+}
+
+export interface banks {
+  id: string;
+  amount: string;
+  date: string;
+}
+
+export interface bankResponse {
+  data: banks[];
 }

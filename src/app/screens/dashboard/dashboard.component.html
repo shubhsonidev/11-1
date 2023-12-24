@@ -1,10 +1,24 @@
 <app-block-loader [loading]="loader" [message]="'Fetching Data...'">
   <div class="button-grp p-3">
-    <button type="button" class="btn btn-primary me-3" *ngIf="blur ===false" style="width: 8rem;"
-        (click)="changeBlur()">Hide</button>
-    <button type="button" class="btn btn-primary me-3" *ngIf="blur ===true"  style="width: 8rem;"
-        (click)="changeBlur()">View</button>
-</div>
+    <button
+      type="button"
+      class="btn btn-primary me-3"
+      *ngIf="blur === false"
+      style="width: 8rem"
+      (click)="changeBlur()"
+    >
+      Hide
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary me-3"
+      *ngIf="blur === true"
+      style="width: 8rem"
+      (click)="changeBlur()"
+    >
+      View
+    </button>
+  </div>
   <div class="cam-mob-scanner" style="height: 100vh; background-color: black">
     <div class="d-flex justify-content-center align-items-center p-3">
       <button
@@ -39,7 +53,7 @@
     </div>
   </div>
   <app-navbar class="clip1"></app-navbar>
-  <div [ngClass]="{blur: blur === true }">
+  <div [ngClass]="{ blur: blur === true }">
     <div class="clip1">
       <div class="d-flex flex-row justify-content-around mt-2">
         <div class="card p-4" style="width: 19vw">
@@ -117,9 +131,9 @@
         <div class="card p-4" style="width: 19vw">
           <div class="d-flex flex-row justify-content-between">
             <div class="d-flex flex-column">
-              <h4 class="text-white">₹ {{dailyCollection}}</h4>
+              <h4 class="text-white">₹ {{ dailyCollection }}</h4>
               <div class="font-weight-normal" style="color: #ffffff7a">
-                Daily Collection 
+                Daily Collection
               </div>
             </div>
             <div
@@ -146,7 +160,7 @@
                 <button
                   class="btn btn-primary"
                   style="padding: 1px 6px"
-                  (click)="openVerticallyCentered(monthStats)"
+                  (click)="openVerticallyCenteredxl(monthStats)"
                   type="button"
                 >
                   View all
@@ -248,13 +262,95 @@
         <div class="card p-3 mt-2" style="width: 30vw; height: 65vh">
           <div class="d-flex flex-row justify-content-between w-100 h-100">
             <div class="d-flex flex-column w-100 h-100">
-              <h6 class="text-white">Scheme Wise Enrollment</h6>
-              <div class="d-flex flex-column gap-3 mt-3 h-100">
-                <ag-charts-angular
+              <h6 class="text-white">Bank</h6>
+              <div class="d-flex flex-column justify-content-between gap-3 mt-3 h-100">
+                <!-- <ag-charts-angular
                   style="height: 100%"
                   [options]="chartOptions"
                 >
-                </ag-charts-angular>
+                </ag-charts-angular> -->
+                <div
+                  class="d-flex flex-row justify-content-between gap-3 align-items-center"
+                >
+                  <div
+                    style="width: 50%"
+                    class="d-flex text-white flex-column ustify-content-center align-items-center"
+                  >
+                    <h5
+                      class="d-flex justify-content-center align-items-center m-0"
+                    >
+                      Deposited
+                    </h5>
+                    <p
+                      class="d-flex justify-content-center align-items-center m-0"
+                    >
+                      {{ totalDeposited(bankData) }}
+                    </p>
+                  </div>
+                  <div style="height: 3rem; border-left: 1px solid white"></div>
+                  <div
+                    style="width: 50%"
+                    class="d-flex text-white flex-column justify-content-center align-items-center"
+                  >
+                    <h5
+                      class="d-flex justify-content-center align-items-center m-0"
+                    >
+                      Left
+                    </h5>
+                    <p
+                      class="d-flex justify-content-center align-items-center m-0"
+                    >
+                      {{ total - totalDeposited(bankData) }}
+                    </p>
+                  </div>
+                </div>
+                <div style="overflow: scroll; height: 44vh;">
+                <table class="table table-dark table-striped ">
+                  <thead>
+                    <tr style="text-align: center">
+                      <th scope="col" style="text-align: left">Id</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      style="text-align: center"
+                      *ngFor="let txns of bankData"
+                      [ngClass]="{
+                        'table-success': txns.amount > 0,
+                        'table-danger': txns.amount < 0
+                      }"
+                    >
+                      <td style="text-align: left">{{ txns.id }}</td>
+                      <td>{{ txns.date | date : "dd/MM/yyyy" }}</td>
+                      <td>{{ txns.amount }}</td>
+                      <td><i class="fa-solid fa-pen-to-square pointer" (click)="openVerticallyCenteredEditBank(bankedit,txns.amount,txns.id)"></i></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+                <div
+                  class="d-flex flex-row justify-content-between gap-3 align-items-center"
+                >
+                  <button
+                    (click)="openVerticallyCenteredBank(bank, 'add')"
+                    class="btn btn-success"
+                    style="width: 50%"
+                    type="button"
+                  >
+                    ADD
+                  </button>
+                  <button
+                    class="btn btn-danger"
+                    style="width: 50%"
+                    (click)="openVerticallyCenteredBank(bank, 'substract')"
+                    type="button"
+                  >
+                    WITHDRAW
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -639,6 +735,105 @@
     </button>
     <button type="button" class="btn btn-primary" (click)="navigateToSelect()">
       Yes
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #bank let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" *ngIf="type == 'add'">DEPOSIT AMOUNT</h4>
+    <h4 class="modal-title" *ngIf="type != 'add'">WITHDRAW AMOUNT</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="p-5">
+    <label for="exampleInputEmail1" class="form-label" *ngIf="type == 'add'"
+      >DEPOSIT AMOUNT</label
+    >
+    <label for="exampleInputEmail1" class="form-label" *ngIf="type != 'add'"
+      >WITHDRAW AMOUNT</label
+    >
+    <input
+      type="number"
+      autocomplete="off"
+      class="form-control"
+      id="exampleInputEmail1"
+      [ngModelOptions]="{ standalone: true }"
+      [(ngModel)]="bankAmout"
+      aria-describedby="emailHelp"
+    />
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="modal.close('Close click')"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      *ngIf="!loading"
+      (click)="transaction()"
+    >
+      Save
+    </button>
+    <button class="btn btn-primary" *ngIf="loading" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+      <span role="status">Loading...</span>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #bankedit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Edit</h4>
+
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="p-5">
+    <label for="exampleInputEmail1" class="form-label"
+      > AMOUNT</label
+    >
+    <input
+      type="number"
+      autocomplete="off"
+      class="form-control"
+      id="exampleInputEmail1"
+      [ngModelOptions]="{ standalone: true }"
+      [(ngModel)]="bankAmout"
+      aria-describedby="emailHelp"
+    />
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="modal.close('Close click')"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      *ngIf="!loading"
+      (click)="editTransaction()"
+    >
+      Save
+    </button>
+    <button class="btn btn-primary" *ngIf="loading" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+      <span role="status">Loading...</span>
     </button>
   </div>
 </ng-template>
