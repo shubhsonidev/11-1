@@ -15,7 +15,7 @@ import { formatDate } from '@angular/common';
 import { MessageConfigService } from 'src/app/service/message-config.service';
 import { AgChartsAngularModule } from 'ag-charts-angular';
 import { AgChartOptions } from 'ag-charts-community';
-
+import { DatePipe } from '@angular/common';
 import {
   EnrolledService,
   enrolledResponse,
@@ -66,6 +66,8 @@ export class DashboardComponent {
   type: any;
   dailyCollection: any;
   bankAmout: any;
+  formattedDate: any;
+
   bankData: any[] = [];
 
   @ViewChild(BarcodeScannerLivestreamComponent)
@@ -79,6 +81,7 @@ export class DashboardComponent {
 bankDesc: any = 'Select Type'
 bankSearchDesc: any = 'All'
   constructor(
+    private datePipe: DatePipe,
     private toastr: ToastrService,
     private http: HttpClient,
     private apiservice: ApiUrlService,
@@ -87,7 +90,9 @@ bankSearchDesc: any = 'All'
     private bank: BankService,
     public enrolled: EnrolledService,
     private router: Router
-  ) {}
+  ) {
+
+  }
 
   private modalService = inject(NgbModal);
   ngOnInit(): void {
@@ -212,7 +217,21 @@ this.bankDesc
         });
     }
   }
+  
 
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    // Adjusting for the local time zone offset
+    const localDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+    const day = this.addLeadingZero(localDate.getDate());
+    const month = this.addLeadingZero(localDate.getMonth() + 1);
+    const year = localDate.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
+  private addLeadingZero(value: number): string {
+    return value < 10 ? `0${value}` : `${value}`;
+  }
   editTransaction() {
     this.year = localStorage.getItem('selectedYear');
     let sign;

@@ -366,7 +366,7 @@
                           'table-danger': txns.amount < 0
                         }"
                       >
-                        <td>{{ txns.date | date : "dd/MM/yyyy" }}</td>
+                        <td>{{formatDate(txns.date) }}</td>
                         <td>{{ txns.amount }}</td>
                         <td>{{ txns.desc }}</td>
 
