@@ -167,7 +167,7 @@ bankSearchDesc: any = 'All'
   transaction() {
     this.year = localStorage.getItem('selectedYear');
     let sign;
-    if (!this.bankAmout) {
+    if (!this.bankAmout || this.bankSearchDesc) {
       this.toastr.warning('Please fill correctly !!');
     } else {
       if (this.type == 'add') {

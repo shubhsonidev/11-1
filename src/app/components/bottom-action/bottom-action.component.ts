@@ -75,7 +75,7 @@ sendReminderToAll(){
   this.loading = true;
   for (let i = 0; i < this.enrolled.data.length; i++) {
     setTimeout(() => {
-      this.http.get<any>('https://soft7.in/api/send?number=91' + this.enrolled.data[i].number + '&type=text&message=सम्मानीय+' + this.enrolled.data[i].name + ',%0Aअपनी+सुविधा+जमा+योजना+की+इस+माह+की+*किश्त*+जमा+करने+का+कष्ट+करें+|%0Aअगर+किश्त+जमा+हो+तो+इस+मेसेज+को+अनदेखा+करें+|%0A%0A*हरिदर्शन+ज्वेलर्स*%0A*बीना*%0A%0ADear+customer,%0APlease+make+efforts+to+deposit+this+months+*installment*+of+your+Suvidha+Deposit+Scheme.%0AIf+the+installment+is+deposited+then+ignore+this+message.%0A%0A*Haridarshan+Jewellers*%0A*Bina*&instance_id=65785DBA24637&access_token=6578021f0b174')
+      this.http.get<any>('https://soft7.in/api/send?number=91' + this.enrolled.data[i].number + '&type=text&message=सम्मानीय+' + this.enrolled.data[i].name + ',%0Aअपनी+सुविधा+जमा+योजना+की+इस+माह+की+*किश्त*+जमा+करने+का+कष्ट+करें+|%0Aअगर+किश्त+जमा+हो+तो+इस+मेसेज+को+अनदेखा+करें+|%0A%0A*हरिदर्शन+ज्वेलर्स*%0A*बीना*%0A%0ADear+customer,%0APlease+make+efforts+to+deposit+this+months+*installment*+of+your+Suvidha+Deposit+Scheme.%0AIf+the+installment+is+deposited+then+ignore+this+message.%0A%0A*Haridarshan+Jewellers*%0A*Bina*&instance_id=658976BB30348&access_token=6578021f0b174')
         .subscribe((res) => {
          
         });
@@ -99,7 +99,7 @@ sendReminderToSpecific(){
 
     setTimeout(() => {
 
-      this.http.get<any>('https://soft7.in/api/send?number=91' + this.enrolled.data[i].number + '&type=text&message=सम्मानीय+' + this.enrolled.data[i].name + ',%0Aआपकी+सुविधा+जमा+योजना+की+इस+माह+की+*किश्त*+जमा+नहीं+है+कृपया+इसे+जमा+करने+का+कष्ट+करें+|%0A%0A*हरिदर्शन+ज्वेलर्स*%0A*बीना*&instance_id=65785DBA24637&access_token=6578021f0b174')
+      this.http.get<any>('https://soft7.in/api/send?number=91' + this.enrolled.data[i].number + '&type=text&message=सम्मानीय+' + this.enrolled.data[i].name + ',%0Aआपकी+सुविधा+जमा+योजना+की+इस+माह+की+*किश्त*+जमा+नहीं+है+कृपया+इसे+जमा+करने+का+कष्ट+करें+|%0A%0A*हरिदर्शन+ज्वेलर्स*%0A*बीना*&instance_id=658976BB30348&access_token=6578021f0b174')
         .subscribe((res) => {
          
         });
@@ -231,10 +231,10 @@ sendReminderToSpecific(){
         if(this.messageConfigService.data[0].enrollMessage){
           if(this.messageConfigService.data[2].isImage){
 
-          this.http.get<any>('https://soft7.in/api/send?number=91' + this.custNumber +'&type=media&message=Dear%20' + this.custName.toUpperCase() + ',%0AYou%20are%20successfully%20enrolled%20in%20' + this.selectedSchemeName + '.%0A%0AHaridarshan%20jewellers%0ABina&media_url=' + this.messageConfigService.data[3].imageUrl +'&instance_id=65785DBA24637&access_token=6578021f0b174').subscribe((res) => {})
+          this.http.get<any>('https://soft7.in/api/send?number=91' + this.custNumber +'&type=media&message=Dear%20' + this.custName.toUpperCase() + ',%0AYou%20are%20successfully%20enrolled%20in%20' + this.selectedSchemeName + '.%0A%0AHaridarshan%20jewellers%0ABina&media_url=' + this.messageConfigService.data[3].imageUrl +'&instance_id=658976BB30348&access_token=6578021f0b174').subscribe((res) => {})
         }
         else{
-          this.http.get<any>('https://soft7.in/api/send?number=91' + this.custNumber +'&type=media&message=Dear%20' + this.custName.toUpperCase() + ',%0AYou%20are%20successfully%20enrolled%20in%20' + this.selectedSchemeName + '.%0A%0AHaridarshan%20jewellers%0ABina&instance_id=65785DBA24637&access_token=6578021f0b174').subscribe((res) => {})
+          this.http.get<any>('https://soft7.in/api/send?number=91' + this.custNumber +'&type=media&message=Dear%20' + this.custName.toUpperCase() + ',%0AYou%20are%20successfully%20enrolled%20in%20' + this.selectedSchemeName + '.%0A%0AHaridarshan%20jewellers%0ABina&instance_id=658976BB30348&access_token=6578021f0b174').subscribe((res) => {})
         }
       }
           this.custName = ''
