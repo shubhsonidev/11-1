@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxBarcode6Module } from 'ngx-barcode6';
 import { BarcodeScannerLivestreamModule } from "ngx-barcode-scanner";
 import { FilterPipe } from './filter.pipe';
+import { BankPipe } from './bank.pipe';
 import { AgChartsAngularModule } from 'ag-charts-angular';
 import { AgChartOptions } from 'ag-charts-community';
 import { DatePipe } from '@angular/common';
@@ -47,7 +48,7 @@ import { BankComponent } from './screens/bank/bank.component';
     SchemesListComponent,
     EnrolledListComponent,
     OtpVerifyComponent,
-    FilterPipe,
+    FilterPipe,BankPipe,
     BottomActionComponent,
      ScannerComponent,
      PayemiMobComponent,

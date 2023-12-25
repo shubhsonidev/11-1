@@ -76,6 +76,8 @@ export class DashboardComponent {
   totalmonthamt: any = 0;
   public chartOptions!: AgChartOptions;
   id: any;
+bankDesc: any = 'Select Type'
+bankSearchDesc: any = 'All'
   constructor(
     private toastr: ToastrService,
     private http: HttpClient,
@@ -183,7 +185,9 @@ export class DashboardComponent {
             sign +
             this.bankAmout +
             '&date=' +
-            new Date()
+            new Date() +
+            '&desc=' +
+this.bankDesc
         )
         .subscribe((res) => {
           if (res.data[0].status === 'success') {
@@ -591,6 +595,7 @@ export class DashboardComponent {
     this.type = type;
     this.modalService.open(content, { centered: true, size: 'md' });
   }
+
   openVerticallyCenteredEditBank(
     content: TemplateRef<any>,
     amount: any,
@@ -707,6 +712,13 @@ export class DashboardComponent {
     this.selectedBenefit = scheme.benefit;
   }
 
+  selectType(type: any) {
+   this.bankDesc = type
+  }
+  selectSearchType(type: any) {
+   this.bankSearchDesc = type
+  }
+
   enroll() {
     if (
       !this.custName ||
@@ -810,6 +822,7 @@ export interface banks {
   id: string;
   amount: string;
   date: string;
+  desc: string;
 }
 
 export interface bankResponse {

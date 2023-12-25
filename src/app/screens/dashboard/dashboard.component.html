@@ -262,8 +262,50 @@
         <div class="card p-3 mt-2" style="width: 30vw; height: 65vh">
           <div class="d-flex flex-row justify-content-between w-100 h-100">
             <div class="d-flex flex-column w-100 h-100">
+              <div class="d-flex flex-row justify-content-between align-items-center">
               <h6 class="text-white">Bank</h6>
-              <div class="d-flex flex-column justify-content-between gap-3 mt-3 h-100">
+              <div ngbDropdown class="d-inline-block" >
+                <button
+                  type="button"
+                  class="btn btn-outline-primary drop"
+                  id="dropdownBasic1"
+                  ngbDropdownToggle
+                  style="    
+                  padding: 1px 6px;
+                  background-color: #085ED6;
+                  color: white;"
+                >
+                  {{ bankSearchDesc }}
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+                  <button
+                  ngbDropdownItem
+                  (click)="selectSearchType('All')"
+                  style="text-align: center; width: 100%"
+                >
+                  All
+                </button>
+                  <button
+                    ngbDropdownItem
+                    (click)="selectSearchType('Invested')"
+                    style="text-align: center; width: 100%"
+                  >
+                    Invested
+                  </button>
+                  <button
+                    ngbDropdownItem
+                    (click)="selectSearchType('Bank')"
+                    style="text-align: center; width: 100%"
+                  >
+                    Bank
+                  </button>
+                
+                </div>
+              </div>
+            </div>
+              <div
+                class="d-flex flex-column justify-content-between gap-3 mt-3 h-100"
+              >
                 <!-- <ag-charts-angular
                   style="height: 100%"
                   [options]="chartOptions"
@@ -304,33 +346,46 @@
                     </p>
                   </div>
                 </div>
-                <div style="overflow: scroll; height: 44vh;">
-                <table class="table table-dark table-striped ">
-                  <thead>
-                    <tr style="text-align: center">
-                      <th scope="col" style="text-align: left">Id</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Amount</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr
-                      style="text-align: center"
-                      *ngFor="let txns of bankData"
-                      [ngClass]="{
-                        'table-success': txns.amount > 0,
-                        'table-danger': txns.amount < 0
-                      }"
-                    >
-                      <td style="text-align: left">{{ txns.id }}</td>
-                      <td>{{ txns.date | date : "dd/MM/yyyy" }}</td>
-                      <td>{{ txns.amount }}</td>
-                      <td><i class="fa-solid fa-pen-to-square pointer" (click)="openVerticallyCenteredEditBank(bankedit,txns.amount,txns.id)"></i></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+                <div style="overflow: scroll; height: 44vh">
+                  <table class="table table-dark table-striped">
+                    <thead>
+                      <tr style="text-align: center">
+
+                        <th scope="col">Date</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Desc</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        style="text-align: center"
+                        *ngFor="let txns of bankData  | bank : bankSearchDesc;"
+                        [ngClass]="{
+                          'table-success': txns.amount > 0,
+                          'table-danger': txns.amount < 0
+                        }"
+                      >
+                        <td>{{ txns.date | date : "dd/MM/yyyy" }}</td>
+                        <td>{{ txns.amount }}</td>
+                        <td>{{ txns.desc }}</td>
+
+                        <td>
+                          <i
+                            class="fa-solid fa-pen-to-square pointer"
+                            (click)="
+                              openVerticallyCenteredEditBank(
+                                bankedit,
+                                txns.amount,
+                                txns.id
+                              )
+                            "
+                          ></i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 <div
                   class="d-flex flex-row justify-content-between gap-3 align-items-center"
                 >
@@ -767,6 +822,35 @@
       aria-describedby="emailHelp"
     />
   </div>
+  <div class="d-flex justify-content-center align-items-center mb-5" *ngIf="type == 'add'">
+  <div ngbDropdown class="d-inline-block" style="width: 70%">
+    <button
+      type="button"
+      class="btn btn-outline-primary drop"
+      id="dropdownBasic1"
+      ngbDropdownToggle
+      style="width: 100%"
+    >
+      {{ bankDesc }}
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="width: 80%">
+      <button
+        ngbDropdownItem
+        (click)="selectType('Invested')"
+        style="text-align: center; width: 100%"
+      >
+        Invested
+      </button>
+      <button
+        ngbDropdownItem
+        (click)="selectType('Bank')"
+        style="text-align: center; width: 100%"
+      >
+        Bank
+      </button>
+    </div>
+  </div>
+</div>
   <div class="modal-footer">
     <button
       type="button"
@@ -802,9 +886,7 @@
     ></button>
   </div>
   <div class="p-5">
-    <label for="exampleInputEmail1" class="form-label"
-      > AMOUNT</label
-    >
+    <label for="exampleInputEmail1" class="form-label"> AMOUNT</label>
     <input
       type="number"
       autocomplete="off"
