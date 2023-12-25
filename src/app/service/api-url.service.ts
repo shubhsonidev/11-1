@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ApiUrlService {
-  public url: any = "https://script.google.com/macros/s/AKfycbxgRg5XMV3flDrOLjY5UoEED7c4cuF9nui0CkBhlbNf_duXRPi38ma1436Ha0hclfS7/exec?";
+  public url: any = "https://script.google.com/macros/s/AKfycbw5Tdf4V8VfwzUOW2fAWDiCpAIr6hnostTBm8t9I8vsZVpEmW-v51UNDXLRvBqpecFU/exec?";
   constructor() {
   }
 }
