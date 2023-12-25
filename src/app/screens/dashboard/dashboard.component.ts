@@ -62,7 +62,7 @@ export class DashboardComponent {
   totalAmont: any;
   loading: any;
   isStarted = false;
-  blur = false;
+  blur = true;
   type: any;
   dailyCollection: any;
   bankAmout: any;
