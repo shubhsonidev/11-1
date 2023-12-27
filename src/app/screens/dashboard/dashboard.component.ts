@@ -60,6 +60,7 @@ export class DashboardComponent {
   data: any[] = [];
   total: any;
   totalAmont: any;
+  totalBenefit: any;
   loading: any;
   isStarted = false;
   blur = true;
@@ -299,6 +300,7 @@ this.bankDesc
     this.dailyCollection = this.calculateDailyCollection(this.enrolled.data);
     this.total = this.calculateTotalPaid(this.enrolled.data);
     this.totalAmont = this.calculateTotalAmount(this.enrolled.data);
+    this.totalBenefit = this.calculateTotalBenefit(this.enrolled.data);
     this.schemeNumber = this.countEntriesByScheme(this.enrolled.data);
     if (this.enrolled.data.length === 0) {
       this.enrolled.fetch().subscribe(
@@ -310,6 +312,8 @@ this.bankDesc
           );
           this.total = this.calculateTotalPaid(this.enrolled.data);
           this.totalAmont = this.calculateTotalAmount(this.enrolled.data);
+    this.totalBenefit = this.calculateTotalBenefit(this.enrolled.data);
+
           this.schemeNumber = this.countEntriesByScheme(this.enrolled.data);
           this.chartOptions = {
             data: this.schemeNumber,
@@ -530,6 +534,64 @@ this.bankDesc
     }
 
     return totalAmount;
+  }
+
+  calculateTotalBenefit(dataList: any[]): number {
+    let totalBenefit = 0;
+
+    for (const item of dataList) {
+
+      if (item.benefit === 1) {
+        totalBenefit += item.inst1amount;
+      }
+      
+      if (item.benefit === 2) {
+        totalBenefit += item.inst2amount;
+      }
+      
+      if (item.benefit === 3) {
+        totalBenefit += item.inst3amount;
+      }
+      
+      if (item.benefit === 4) {
+        totalBenefit += item.inst4amount;
+      }
+      
+      if (item.benefit === 5) {
+        totalBenefit += item.inst5amount;
+      }
+      
+      if (item.benefit === 6) {
+        totalBenefit += item.inst6amount;
+      }
+      
+      if (item.benefit === 7) {
+        totalBenefit += item.inst7amount;
+      }
+      
+      if (item.benefit === 8) {
+        totalBenefit += item.inst8amount;
+      }
+      
+      if (item.benefit === 9) {
+        totalBenefit += item.inst9amount;
+      }
+      
+      if (item.benefit === 10) {
+        totalBenefit += item.inst10amount;
+      }
+      
+      if (item.benefit === 11) {
+        totalBenefit += item.inst11amount;
+      }
+      
+      if (item.benefit === 12) {
+        totalBenefit += item.inst12amount;
+      }
+      
+    }
+
+    return totalBenefit;
   }
   calculateDailyCollection(dataList: any[]): number {
     let dailyCollection = 0;
