@@ -79,8 +79,8 @@ export class DashboardComponent {
   totalmonthamt: any = 0;
   public chartOptions!: AgChartOptions;
   id: any;
-bankDesc: any = 'Select Type'
-bankSearchDesc: any = 'All'
+  bankDesc: any = 'Select Type';
+  bankSearchDesc: any = 'All';
   constructor(
     private datePipe: DatePipe,
     private toastr: ToastrService,
@@ -91,9 +91,7 @@ bankSearchDesc: any = 'All'
     private bank: BankService,
     public enrolled: EnrolledService,
     private router: Router
-  ) {
-
-  }
+  ) {}
 
   private modalService = inject(NgbModal);
   ngOnInit(): void {
@@ -193,7 +191,7 @@ bankSearchDesc: any = 'All'
             '&date=' +
             new Date() +
             '&desc=' +
-this.bankDesc
+            this.bankDesc
         )
         .subscribe((res) => {
           if (res.data[0].status === 'success') {
@@ -218,12 +216,13 @@ this.bankDesc
         });
     }
   }
-  
 
   formatDate(dateString: string): string {
     const date = new Date(dateString);
     // Adjusting for the local time zone offset
-    const localDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+    const localDate = new Date(
+      date.getTime() + date.getTimezoneOffset() * 60000
+    );
     const day = this.addLeadingZero(localDate.getDate());
     const month = this.addLeadingZero(localDate.getMonth() + 1);
     const year = localDate.getFullYear();
@@ -239,7 +238,6 @@ this.bankDesc
     if (!this.bankAmout) {
       this.toastr.warning('Please fill correctly !!');
     } else {
-  
       this.loading = true;
       this.http
         .get<any>(
@@ -312,7 +310,7 @@ this.bankDesc
           );
           this.total = this.calculateTotalPaid(this.enrolled.data);
           this.totalAmont = this.calculateTotalAmount(this.enrolled.data);
-    this.totalBenefit = this.calculateTotalBenefit(this.enrolled.data);
+          this.totalBenefit = this.calculateTotalBenefit(this.enrolled.data);
 
           this.schemeNumber = this.countEntriesByScheme(this.enrolled.data);
           this.chartOptions = {
@@ -409,35 +407,35 @@ this.bankDesc
         schemeCount[schemeName].number++;
         schemeCount[schemeName].sum += instSum;
         schemeCount[schemeName].turnover += instAmountSum;
-        schemeCount[schemeName].month1coll += entry.inst1amount;
-        schemeCount[schemeName].month2coll += entry.inst2amount;
-        schemeCount[schemeName].month3coll += entry.inst3amount;
-        schemeCount[schemeName].month4coll += entry.inst4amount;
-        schemeCount[schemeName].month5coll += entry.inst5amount;
-        schemeCount[schemeName].month6coll += entry.inst6amount;
-        schemeCount[schemeName].month7coll += entry.inst7amount;
-        schemeCount[schemeName].month8coll += entry.inst8amount;
-        schemeCount[schemeName].month9coll += entry.inst9amount;
-        schemeCount[schemeName].month10coll += entry.inst10amount;
-        schemeCount[schemeName].month11coll += entry.inst11amount;
-        schemeCount[schemeName].month12coll += entry.inst12amount;
+        schemeCount[schemeName].month1coll += entry.benefit !== 1 ? entry.inst1amount : 0;
+        schemeCount[schemeName].month2coll += entry.benefit !== 2 ? entry.inst2amount : 0;
+        schemeCount[schemeName].month3coll += entry.benefit !== 3 ? entry.inst3amount: 0;
+        schemeCount[schemeName].month4coll += entry.benefit !== 4 ? entry.inst4amount : 0;
+        schemeCount[schemeName].month5coll += entry.benefit !== 5 ? entry.inst5amount : 0;
+        schemeCount[schemeName].month6coll += entry.benefit !== 6 ? entry.inst6amount : 0;
+        schemeCount[schemeName].month7coll += entry.benefit !== 7 ? entry.inst7amount : 0;
+        schemeCount[schemeName].month8coll += entry.benefit !== 8 ? entry.inst8amount : 0;
+        schemeCount[schemeName].month9coll += entry.benefit !== 9 ? entry.inst9amount : 0;
+        schemeCount[schemeName].month10coll += entry.benefit !== 10 ? entry.inst10amount : 0;
+        schemeCount[schemeName].month11coll += entry.benefit !== 11 ? entry.inst11amount : 0;
+        schemeCount[schemeName].month12coll += entry.benefit !== 12 ? entry.inst12amount : 0;
       } else {
         schemeCount[schemeName] = {
           number: 1,
           sum: instSum,
           turnover: instAmountSum,
-          month1coll: entry.inst1amount,
-          month2coll: entry.inst2amount,
-          month3coll: entry.inst3amount,
-          month4coll: entry.inst4amount,
-          month5coll: entry.inst5amount,
-          month6coll: entry.inst6amount,
-          month7coll: entry.inst7amount,
-          month8coll: entry.inst8amount,
-          month9coll: entry.inst9amount,
-          month10coll: entry.inst10amount,
-          month11coll: entry.inst11amount,
-          month12coll: entry.inst12amount,
+          month1coll: entry.benefit !== 1 ? entry.inst1amount : 0,
+          month2coll: entry.benefit !== 2 ? entry.inst2amount : 0,
+          month3coll: entry.benefit !== 3 ? entry.inst3amount : 0,
+          month4coll: entry.benefit !== 4 ? entry.inst4amount : 0,
+          month5coll: entry.benefit !== 5 ? entry.inst5amount : 0,
+          month6coll: entry.benefit !== 6 ? entry.inst6amount : 0,
+          month7coll: entry.benefit !== 7 ? entry.inst7amount : 0,
+          month8coll: entry.benefit !== 8 ? entry.inst8amount : 0,
+          month9coll: entry.benefit !== 9 ? entry.inst9amount : 0,
+          month10coll: entry.benefit !== 10 ? entry.inst10amount : 0,
+          month11coll: entry.benefit !== 11 ? entry.inst11amount : 0,
+          month12coll: entry.benefit !== 12 ? entry.inst12amount : 0,
         };
       }
     });
@@ -540,55 +538,53 @@ this.bankDesc
     let totalBenefit = 0;
 
     for (const item of dataList) {
-
       if (item.benefit === 1) {
         totalBenefit += item.inst1amount;
       }
-      
+
       if (item.benefit === 2) {
         totalBenefit += item.inst2amount;
       }
-      
+
       if (item.benefit === 3) {
         totalBenefit += item.inst3amount;
       }
-      
+
       if (item.benefit === 4) {
         totalBenefit += item.inst4amount;
       }
-      
+
       if (item.benefit === 5) {
         totalBenefit += item.inst5amount;
       }
-      
+
       if (item.benefit === 6) {
         totalBenefit += item.inst6amount;
       }
-      
+
       if (item.benefit === 7) {
         totalBenefit += item.inst7amount;
       }
-      
+
       if (item.benefit === 8) {
         totalBenefit += item.inst8amount;
       }
-      
+
       if (item.benefit === 9) {
         totalBenefit += item.inst9amount;
       }
-      
+
       if (item.benefit === 10) {
         totalBenefit += item.inst10amount;
       }
-      
+
       if (item.benefit === 11) {
         totalBenefit += item.inst11amount;
       }
-      
+
       if (item.benefit === 12) {
         totalBenefit += item.inst12amount;
       }
-      
     }
 
     return totalBenefit;
@@ -670,7 +666,7 @@ this.bankDesc
   openVerticallyCenteredxl(content: TemplateRef<any>) {
     this.modalService.open(content, { centered: true, size: 'xl' });
   }
-  
+
   openVerticallyCenteredBank(content: TemplateRef<any>, type: string) {
     this.bankAmout = '';
     this.type = type;
@@ -680,8 +676,7 @@ this.bankDesc
   openVerticallyCenteredEditBank(
     content: TemplateRef<any>,
     amount: any,
-    id: any,
-
+    id: any
   ) {
     this.id = id;
     this.bankAmout = amount;
@@ -794,10 +789,10 @@ this.bankDesc
   }
 
   selectType(type: any) {
-   this.bankDesc = type
+    this.bankDesc = type;
   }
   selectSearchType(type: any) {
-   this.bankSearchDesc = type
+    this.bankSearchDesc = type;
   }
 
   enroll() {
