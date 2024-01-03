@@ -71,22 +71,51 @@ selectInstRem: any = 'Select Installment';
     }
   }
 
-sendReminderToAll(){
-  this.loading = true;
-  for (let i = 0; i < this.enrolled.data.length; i++) {
-    setTimeout(() => {
-      this.http.get<any>('https://soft7.in/api/send?number=91' + this.enrolled.data[i].number + '&type=text&message=सम्मानीय+' + this.enrolled.data[i].name + ',%0Aअपनी+सुविधा+जमा+योजना+की+इस+माह+की+*किश्त*+जमा+करने+का+कष्ट+करें+|%0Aअगर+किश्त+जमा+हो+तो+इस+मेसेज+को+अनदेखा+करें+|%0A%0A*हरिदर्शन+ज्वेलर्स*%0A*बीना*%0A%0ADear+customer,%0APlease+make+efforts+to+deposit+this+months+*installment*+of+your+Suvidha+Deposit+Scheme.%0AIf+the+installment+is+deposited+then+ignore+this+message.%0A%0A*Haridarshan+Jewellers*%0A*Bina*&instance_id=658976BB30348&access_token=6578021f0b174')
-        .subscribe((res) => {
-         
-        });
-        if(i === this.enrolled.data.length-1){
+  sendReminderToAll() {
+    this.loading = true;
+  
+    // Create a Set to store unique numbers
+    const uniqueNumbersSet = new Set();
+  
+    // Iterate through the data to populate the Set with unique numbers
+    this.enrolled.data.forEach((item) => {
+      uniqueNumbersSet.add(item.number);
+    });
+  
+    // Convert the Set back to an array
+    const uniqueNumbersArray = Array.from(uniqueNumbersSet);
+  
+    // Iterate through the unique numbers array to send reminders
+    uniqueNumbersArray.forEach((uniqueNumber, index) => {
+      setTimeout(() => {
+        this.http
+          .get<any>(
+            'https://soft7.in/api/send?number=91' +
+              uniqueNumber +
+              '&type=text&message=सम्मानीय+' +
+              this.getNameByNumber(uniqueNumber) +
+              ',%0Aअपनी+सुविधा+जमा+योजना+की+इस+माह+की+*किश्त*+जमा+करने+का+कष्ट+करें+|%0Aअगर+किश्त+जमा+हो+तो+इस+मेसेज+को+अनदेखा+करें+|%0A%0A*हरिदर्शन+ज्वेलर्स*%0A*बीना*%0ADear+customer,%0APlease+make+efforts+to+deposit+this+months+*installment*+of+your+Suvidha+Deposit+Scheme.%0AIf+the+installment+is+deposited+then+ignore+this+message.%0A%0A*Haridarshan+Jewellers*%0A*Bina*&instance_id=658976BB30348&access_token=6578021f0b174'
+          )
+          .subscribe((res) => {
+            // Handle response if needed
+          });
+  
+        // Check if this is the last iteration to stop loading
+        if (index === uniqueNumbersArray.length - 1) {
           this.loading = false;
         }
-    }, i * this.selectedDelay *1000); 
-    
-  }  
-  this.modalService.dismissAll()
-}
+      }, index * this.selectedDelay * 1000);
+    });
+  
+    this.modalService.dismissAll();
+  }
+  
+  // Helper function to get the name by number
+  getNameByNumber(number: any) {
+    const matchingItem = this.enrolled.data.find((item) => item.number === number);
+    return matchingItem ? matchingItem.name : '';
+  }
+  
 
 sendReminderToSpecific(){
   if(this.selectInstRem === 'Select Installment'){
