@@ -58,13 +58,14 @@ selectInstRem: any = 'Select Installment';
   private modalService = inject(NgbModal);
   ngOnInit(): void {
     this.year = localStorage.getItem('selectedYear')
+    this.schemeData = this.schemeService.data
 
     if (this.schemeService.data.length === 0) {
-      // this.http.get<schemesResponse>(this.apiservice.url + "apifor=schemes" + "&year=" + this.year).subscribe(response => {
-      //   this.schemeData = response.data;
-      //   this.schemeService.data = response.data
-      //   console.log(this.schemeService.data)
-      // })
+      this.http.get<schemesResponse>(this.apiservice.url + "apifor=schemes" + "&year=" + this.year).subscribe(response => {
+        this.schemeData = response.data;
+        this.schemeService.data = response.data
+        console.log(this.schemeService.data)
+      })
     }
     else {
       this.schemeData = this.schemeService.data
