@@ -2,50 +2,51 @@
 <app-bottom-action></app-bottom-action>
 
 <app-loader [loading]="loader" [message]="'Saving...'">
-  <div style="overflow: scroll; height: 86vh">
-    <div class="d-flex flex-row gap-2 p-2">
-      <div class="d-flex flex-row justify-content-center align-items-center">
-        <!-- Add a search input field -->
+  <div class="d-flex flex-row gap-2 p-2">
+    <div class="d-flex flex-row justify-content-center align-items-center">
+      <!-- Add a search input field -->
 
-        <input
-          style="width: 15rem"
-          type="text"
-          autocomplete="off"
-          class="form-control"
-          placeholder="Search here"
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="searchTerm"
-        />
-      </div>
+      <input
+        style="width: 15rem"
+        type="text"
+        autocomplete="off"
+        class="form-control"
+        placeholder="Search here"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="searchTerm"
+      />
+    </div>
+    <div
+      ngbDropdown
+      class="d-inline-block d-flex justify-content-center align-items-center"
+    >
+      <button
+        type="button"
+        class="btn btn-outline-primary drop"
+        id="dropdownBasic1"
+        ngbDropdownToggle
+        style="width: 15rem"
+      >
+        Select Scheme
+      </button>
       <div
-        ngbDropdown
-        class="d-inline-block d-flex justify-content-center align-items-center"
+        ngbDropdownMenu
+        aria-labelledby="dropdownBasic1"
+        style="width: 15rem"
       >
         <button
-          type="button"
-          class="btn btn-outline-primary drop"
-          id="dropdownBasic1"
-          ngbDropdownToggle
-          style="width: 15rem"
+          ngbDropdownItem
+          (click)="selectSearch(scheme.name)"
+          *ngFor="let scheme of schemeData"
+          style="text-align: center"
         >
-          Select Scheme
+          {{ scheme.name }}
         </button>
-        <div
-          ngbDropdownMenu
-          aria-labelledby="dropdownBasic1"
-          style="width: 15rem"
-        >
-          <button
-            ngbDropdownItem
-            (click)="selectSearch(scheme.name)"
-            *ngFor="let scheme of schemeData"
-            style="text-align: center"
-          >
-            {{ scheme.name }}
-          </button>
-        </div>
       </div>
     </div>
+  </div>
+  <div style="overflow: scroll; height: 86vh">
+    
     <div class="d-flex flex-row justify-content-center align-items-center">
       <table class="table" style="width: 98vw">
         <thead>
