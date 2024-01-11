@@ -95,7 +95,7 @@ selectInstRem: any = 'Select Installment';
               uniqueNumber +
               '&type=text&message=सम्मानीय+' +
               this.getNameByNumber(uniqueNumber) +
-              ',%0Aअपनी+सुविधा+जमा+योजना+की+इस+माह+की+*किश्त*+जमा+करने+का+कष्ट+करें+|%0Aअगर+किश्त+जमा+हो+तो+इस+मेसेज+को+अनदेखा+करें+|%0A%0A*हरिदर्शन+ज्वेलर्स*%0A*बीना*%0ADear+customer,%0APlease+make+efforts+to+deposit+this+months+*installment*+of+your+Suvidha+Deposit+Scheme.%0AIf+the+installment+is+deposited+then+ignore+this+message.%0A%0A*Haridarshan+Jewellers*%0A*Bina*&instance_id=658976BB30348&access_token=6578021f0b174'
+              ',%0Aअपनी+सुविधा+जमा+योजना+की+इस+माह+की+*किश्त*+जमा+करने+का+कष्ट+करें+|%0Aअगर+किश्त+जमा+हो+तो+इस+मेसेज+को+अनदेखा+करें+|%0A%0A*हरिदर्शन+ज्वेलर्स*%0A*बीना*%0ADear+customer,%0APlease+make+efforts+to+deposit+this+months+*installment*+of+your+Suvidha+Deposit+Scheme.%0AIf+the+installment+is+deposited+then+ignore+this+message.%0A%0A*Haridarshan+Jewellers*%0A*Bina*%0A%0A9425733322&instance_id=658976BB30348&access_token=6578021f0b174'
           )
           .subscribe((res) => {
             // Handle response if needed
@@ -129,7 +129,12 @@ sendReminderToSpecific(){
 
     setTimeout(() => {
 
-      this.http.get<any>('https://soft7.in/api/send?number=91' + this.enrolled.data[i].number + '&type=text&message=सम्मानीय+' + this.enrolled.data[i].name + ',%0Aआपकी+सुविधा+जमा+योजना+की+इस+माह+की+*किश्त*+जमा+नहीं+है+कृपया+इसे+जमा+करने+का+कष्ट+करें+|%0A%0A*हरिदर्शन+ज्वेलर्स*%0A*बीना*&instance_id=658976BB30348&access_token=6578021f0b174')
+      this.http.get<any>( 'https://soft7.in/api/send?number=91' +
+      this.enrolled.data[i].number +
+      '&type=text&message=सम्मानीय+' +
+      this.enrolled.data[i].name +
+      ',%0Aअपनी+सुविधा+जमा+योजना+की+इस+माह+की+*किश्त*+जमा+करने+का+कष्ट+करें+|%0Aअगर+किश्त+जमा+हो+तो+इस+मेसेज+को+अनदेखा+करें+|%0A%0A*हरिदर्शन+ज्वेलर्स*%0A*बीना*%0ADear+customer,%0APlease+make+efforts+to+deposit+this+months+*installment*+of+your+Suvidha+Deposit+Scheme.%0AIf+the+installment+is+deposited+then+ignore+this+message.%0A%0A*Haridarshan+Jewellers*%0A*Bina*%0A%0A9425733322&instance_id=658976BB30348&access_token=6578021f0b174'
+  )
         .subscribe((res) => {
          
         });
