@@ -353,6 +353,18 @@ export class DashboardComponent {
     month10coll: number;
     month11coll: number;
     month12coll: number;
+    month1: number;
+    month2: number;
+    month3: number;
+    month4: number;
+    month5: number;
+    month6: number;
+    month7: number;
+    month8: number;
+    month9: number;
+    month10: number;
+    month11: number;
+    month12: number;
   }[] {
     const schemeCount: {
       [key: string]: {
@@ -371,6 +383,18 @@ export class DashboardComponent {
         month10coll: number;
         month11coll: number;
         month12coll: number;
+        month1: number;
+        month2: number;
+        month3: number;
+        month4: number;
+        month5: number;
+        month6: number;
+        month7: number;
+        month8: number;
+        month9: number;
+        month10: number;
+        month11: number;
+        month12: number;
       };
     } = {};
 
@@ -407,18 +431,46 @@ export class DashboardComponent {
         schemeCount[schemeName].number++;
         schemeCount[schemeName].sum += instSum;
         schemeCount[schemeName].turnover += instAmountSum;
-        schemeCount[schemeName].month1coll += entry.benefit !== 1 ? entry.inst1amount : 0;
-        schemeCount[schemeName].month2coll += entry.benefit !== 2 ? entry.inst2amount : 0;
-        schemeCount[schemeName].month3coll += entry.benefit !== 3 ? entry.inst3amount: 0;
-        schemeCount[schemeName].month4coll += entry.benefit !== 4 ? entry.inst4amount : 0;
-        schemeCount[schemeName].month5coll += entry.benefit !== 5 ? entry.inst5amount : 0;
-        schemeCount[schemeName].month6coll += entry.benefit !== 6 ? entry.inst6amount : 0;
-        schemeCount[schemeName].month7coll += entry.benefit !== 7 ? entry.inst7amount : 0;
-        schemeCount[schemeName].month8coll += entry.benefit !== 8 ? entry.inst8amount : 0;
-        schemeCount[schemeName].month9coll += entry.benefit !== 9 ? entry.inst9amount : 0;
-        schemeCount[schemeName].month10coll += entry.benefit !== 10 ? entry.inst10amount : 0;
-        schemeCount[schemeName].month11coll += entry.benefit !== 11 ? entry.inst11amount : 0;
-        schemeCount[schemeName].month12coll += entry.benefit !== 12 ? entry.inst12amount : 0;
+        schemeCount[schemeName].month1coll +=
+          entry.benefit !== 1 ? entry.inst1amount : 0;
+        schemeCount[schemeName].month2coll +=
+          entry.benefit !== 2 ? entry.inst2amount : 0;
+        schemeCount[schemeName].month3coll +=
+          entry.benefit !== 3 ? entry.inst3amount : 0;
+        schemeCount[schemeName].month4coll +=
+          entry.benefit !== 4 ? entry.inst4amount : 0;
+        schemeCount[schemeName].month5coll +=
+          entry.benefit !== 5 ? entry.inst5amount : 0;
+        schemeCount[schemeName].month6coll +=
+          entry.benefit !== 6 ? entry.inst6amount : 0;
+        schemeCount[schemeName].month7coll +=
+          entry.benefit !== 7 ? entry.inst7amount : 0;
+        schemeCount[schemeName].month8coll +=
+          entry.benefit !== 8 ? entry.inst8amount : 0;
+        schemeCount[schemeName].month9coll +=
+          entry.benefit !== 9 ? entry.inst9amount : 0;
+        schemeCount[schemeName].month10coll +=
+          entry.benefit !== 10 ? entry.inst10amount : 0;
+        schemeCount[schemeName].month11coll +=
+          entry.benefit !== 11 ? entry.inst11amount : 0;
+        schemeCount[schemeName].month12coll +=
+          entry.benefit !== 12 ? entry.inst12amount : 0;
+          schemeCount[schemeName].month1 += Number(entry.inst1) || 0;
+          schemeCount[schemeName].month2 += Number(entry.inst2) || 0;
+          schemeCount[schemeName].month3 += Number(entry.inst3) || 0;
+          schemeCount[schemeName].month4 += Number(entry.inst4) || 0;
+          schemeCount[schemeName].month5 += Number(entry.inst5) || 0;
+          schemeCount[schemeName].month6 += Number(entry.inst6) || 0;
+          schemeCount[schemeName].month7 += Number(entry.inst7) || 0;
+          schemeCount[schemeName].month8 += Number(entry.inst8) || 0;
+          schemeCount[schemeName].month9 += Number(entry.inst9) || 0;
+          schemeCount[schemeName].month10 += Number(entry.inst10) || 0;
+          schemeCount[schemeName].month11 += Number(entry.inst11) || 0;
+          schemeCount[schemeName].month12 += Number(entry.inst12) || 0;
+          
+          
+          
+          
       } else {
         schemeCount[schemeName] = {
           number: 1,
@@ -436,6 +488,19 @@ export class DashboardComponent {
           month10coll: entry.benefit !== 10 ? entry.inst10amount : 0,
           month11coll: entry.benefit !== 11 ? entry.inst11amount : 0,
           month12coll: entry.benefit !== 12 ? entry.inst12amount : 0,
+          month1: Number(entry.inst1) || 0,
+          month2: Number(entry.inst2) || 0,
+          month3: Number(entry.inst3) || 0,
+          month4: Number(entry.inst4) || 0,
+          month5: Number(entry.inst5) || 0,
+          month6: Number(entry.inst6) || 0,
+          month7: Number(entry.inst7) || 0,
+          month8: Number(entry.inst8) || 0,
+          month9: Number(entry.inst9) || 0,
+          month10: Number(entry.inst10) || 0,
+          month11: Number(entry.inst11) || 0,
+          month12: Number(entry.inst12) || 0,
+      
         };
       }
     });
@@ -459,6 +524,18 @@ export class DashboardComponent {
           month10coll,
           month11coll,
           month12coll,
+          month1,
+          month2,
+          month3,
+          month4,
+          month5,
+          month6,
+          month7,
+          month8,
+          month9,
+          month10,
+          month11,
+          month12,
         },
       ]) => ({
         name,
@@ -477,6 +554,18 @@ export class DashboardComponent {
         month10coll,
         month11coll,
         month12coll,
+        month1,
+        month2,
+        month3,
+        month4,
+        month5,
+        month6,
+        month7,
+        month8,
+        month9,
+        month10,
+        month11,
+        month12,
       })
     );
 

@@ -173,56 +173,80 @@
                   <tr style="text-align: center">
                     <th scope="col" style="text-align: left">Months</th>
                     <th scope="col">Total</th>
+                    <th scope="col">Collected</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr style="text-align: center">
                     <td style="text-align: left">Month 1</td>
                     <td>{{ getTotalSum("month1coll") }}</td>
+                    <td>{{ getTotalSum("month1") }}</td>
                   </tr>
                   <tr style="text-align: center">
                     <td style="text-align: left">Month 2</td>
                     <td>{{ getTotalSum("month2coll") }}</td>
+                    <td>{{ getTotalSum("month2") }}</td>
+
                   </tr>
                   <tr style="text-align: center">
                     <td style="text-align: left">Month 3</td>
                     <td>{{ getTotalSum("month3coll") }}</td>
+                    <td>{{ getTotalSum("month3") }}</td>
+
                   </tr>
                   <tr style="text-align: center">
                     <td style="text-align: left">Month 4</td>
                     <td>{{ getTotalSum("month4coll") }}</td>
+                    <td>{{ getTotalSum("month4") }}</td>
+
                   </tr>
                   <tr style="text-align: center">
                     <td style="text-align: left">Month 5</td>
                     <td>{{ getTotalSum("month5coll") }}</td>
+                    <td>{{ getTotalSum("month5") }}</td>
+
                   </tr>
                   <tr style="text-align: center">
                     <td style="text-align: left">Month 6</td>
                     <td>{{ getTotalSum("month6coll") }}</td>
+                    <td>{{ getTotalSum("month6") }}</td>
+
                   </tr>
                   <tr style="text-align: center">
                     <td style="text-align: left">Month 7</td>
                     <td>{{ getTotalSum("month7coll") }}</td>
+                    <td>{{ getTotalSum("month7") }}</td>
+
                   </tr>
                   <tr style="text-align: center">
                     <td style="text-align: left">Month 8</td>
                     <td>{{ getTotalSum("month8coll") }}</td>
+                    <td>{{ getTotalSum("month8") }}</td>
+
                   </tr>
                   <tr style="text-align: center">
                     <td style="text-align: left">Month 9</td>
                     <td>{{ getTotalSum("month9coll") }}</td>
+                    <td>{{ getTotalSum("month9") }}</td>
+
                   </tr>
                   <tr style="text-align: center">
                     <td style="text-align: left">Month 10</td>
                     <td>{{ getTotalSum("month10coll") }}</td>
+                    <td>{{ getTotalSum("month10") }}</td>
+
                   </tr>
                   <tr style="text-align: center">
                     <td style="text-align: left">Month 11</td>
                     <td>{{ getTotalSum("month11coll") }}</td>
+                    <td>{{ getTotalSum("month11") }}</td>
+
                   </tr>
                   <tr style="text-align: center">
                     <td style="text-align: left">Month 12</td>
                     <td>{{ getTotalSum("month12coll") }}</td>
+                    <td>{{ getTotalSum("month12") }}</td>
+
                   </tr>
                 </tbody>
               </table>
@@ -1005,6 +1029,45 @@
         </div>
         <div style="text-align: center">
           {{ getTotalSum("month12coll") }}
+        </div>
+      </div>
+      <div class="d-flex m-2 flex-column gap-2 mt-3">
+        <div style="text-align: center">COLLECTED</div>
+        <div style="text-align: center">
+          {{ getTotalSum("month1") }}
+        </div>
+        <div style="text-align: center">
+          {{ getTotalSum("month2") }}
+        </div>
+        <div style="text-align: center">
+          {{ getTotalSum("month3") }}
+        </div>
+        <div style="text-align: center">
+          {{ getTotalSum("month4") }}
+        </div>
+        <div style="text-align: center">
+          {{ getTotalSum("month5") }}
+        </div>
+        <div style="text-align: center">
+          {{ getTotalSum("month6") }}
+        </div>
+        <div style="text-align: center">
+          {{ getTotalSum("month7") }}
+        </div>
+        <div style="text-align: center">
+          {{ getTotalSum("month8") }}
+        </div>
+        <div style="text-align: center">
+          {{ getTotalSum("month9") }}
+        </div>
+        <div style="text-align: center">
+          {{ getTotalSum("month10") }}
+        </div>
+        <div style="text-align: center">
+          {{ getTotalSum("month11") }}
+        </div>
+        <div style="text-align: center">
+          {{ getTotalSum("month12") }}
         </div>
       </div>
     </div>
