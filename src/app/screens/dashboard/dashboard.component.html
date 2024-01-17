@@ -253,8 +253,8 @@
             </div>
           </div>
         </div>
-
-        <div class="card p-3 mt-2" style="width: 35vw; height: 65vh">
+<div class="d-flex flex-column  justify-content-between">
+        <div class="card p-3 mt-2" style="width: 36vw; height: 32vh">
           <div class="d-flex flex-row justify-content-between w-100">
             <div class="d-flex flex-column w-100">
               <h6 class="text-white">No of Enrolled in schemes</h6>
@@ -281,9 +281,31 @@
                   </tbody>
                 </table>
               </div>
+              <!-- <ag-charts-angular
+
+              [options]="chartOptions"
+            >
+            </ag-charts-angular> -->
             </div>
+             
           </div>
         </div>
+        <div class="card p-3 mt-2" style="width: 36vw; height: 32vh">
+          <div class="d-flex flex-row justify-content-between w-100">
+            <div class="d-flex flex-column w-100">
+              <!-- <h6 class="text-white">No of Enrolled in schemes</h6> -->
+              
+              <ag-charts-angular
+style="height: 30vh;"
+              [options]="chartOptions"
+              
+            >
+            </ag-charts-angular>
+            </div>
+             
+          </div>
+        </div>
+      </div>
         <div class="card p-3 mt-2" style="width: 30vw; height: 65vh">
           <div class="d-flex flex-row justify-content-between w-100 h-100">
             <div class="d-flex flex-column w-100 h-100">

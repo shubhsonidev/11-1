@@ -148,7 +148,8 @@ export class DashboardComponent {
         background: {
           fill: '#24272F',
         },
-        series: [{ type: 'pie', angleKey: 'number', legendItemKey: 'name' }],
+        series: [{ type: 'pie', angleKey: 'number', legendItemKey: 'name',innerRadiusRatio: 0.6,
+      }],
       };
     } else {
       this.chartOptions = {
@@ -158,7 +159,8 @@ export class DashboardComponent {
         background: {
           fill: '#24272F',
         },
-        series: [{ type: 'pie', angleKey: 'number', legendItemKey: 'name' }],
+        series: [{ type: 'pie', angleKey: 'number', legendItemKey: 'name',innerRadiusRatio: 0.6,
+      }],
       };
     }
   }
