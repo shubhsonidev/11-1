@@ -35,7 +35,8 @@ import {NgxPrintModule} from 'ngx-print';
 import { ScannerComponent } from './components/scanner/scanner.component';
 import { PayemiMobComponent } from './screens/payemi-mob/payemi-mob.component';
 import { BankComponent } from './screens/bank/bank.component';
-
+import { OrderListComponent } from './screens/order-list/order-list.component';
+import { ReactiveFormsModule } from '@angular/forms'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,10 +53,12 @@ import { BankComponent } from './screens/bank/bank.component';
     BottomActionComponent,
      ScannerComponent,
      PayemiMobComponent,
-     BankComponent
+     BankComponent,
+     OrderListComponent
   ],
   imports: [
     NgbDatepickerModule,
+    ReactiveFormsModule,
     AgChartsAngularModule,
     BrowserModule,
     AppRoutingModule,

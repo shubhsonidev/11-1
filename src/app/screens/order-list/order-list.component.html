@@ -1,0 +1,194 @@
+<app-navbar></app-navbar>
+<div class="d-flex flex-row justify-content-center align-items-center">
+  <table class="table mt-4" style="width: 98vw">
+    <thead>
+      <tr>
+        <th scope="col">Sr No.</th>
+        <th scope="col">Order Date</th>
+        <th scope="col">Name</th>
+        <th scope="col">Number</th>
+
+        <th scope="col">Status</th>
+        <th scope="col">Delivery Date</th>
+        <th scope="col">Inhand Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of data; let i = index">
+        <th
+          [ngStyle]="{
+            'background-color': order.status === 'Delivered' ? '#ffccd5' : ''
+          }"
+        >
+          {{ i + 1 }}
+        </th>
+        <th
+          [ngStyle]="{
+            'background-color': order.status === 'Delivered' ? '#ffccd5' : ''
+          }"
+        >
+          {{ order.orderDate }}
+        </th>
+        <th
+          [ngStyle]="{
+            'background-color': order.status === 'Delivered' ? '#ffccd5' : ''
+          }"
+        >
+          {{ order.name }}
+        </th>
+        <th
+          [ngStyle]="{
+            'background-color': order.status === 'Delivered' ? '#ffccd5' : ''
+          }"
+        >
+          {{ order.number }}
+        </th>
+
+        <th
+          [ngStyle]="{
+            'background-color': order.status === 'Delivered' ? '#ffccd5' : ''
+          }"
+        >
+          {{ order.status }}
+        </th>
+        <th
+          [ngStyle]="{
+            'background-color': order.status === 'Delivered' ? '#ffccd5' : ''
+          }"
+        >
+          {{ order.deliveryDate }}
+        </th>
+        <th
+          [ngStyle]="{
+            'background-color': order.status === 'Delivered' ? '#ffccd5' : ''
+          }"
+        >
+          {{ order.inhandDate }}
+        </th>
+        <th class="d-flex flex-row gap-3"
+          [ngStyle]="{
+            'background-color': order.status === 'Delivered' ? '#ffccd5' : ''
+          }"
+        >
+          <!-- <button
+            type="button"
+            class="btn btn-success"
+            style="padding: 0px 10px"
+          >
+            Edit
+          </button> -->
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="padding: 0px 10px"
+            (click)="openVerticallyCentered(content, order.discription)"
+          >
+            View
+          </button>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-loader [loading]="loading" [message]="'Saving... '">
+  <div class="button-grp p-3">
+    <button
+      type="button"
+      class="btn btn-primary me-3"
+      style="width: 8rem"
+      (click)="openVerticallyCentered(contents)"
+    >
+      ADD ORDER
+    </button>
+  </div>
+</app-loader>
+
+<ng-template #contents let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">ADD ORDER</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="px-4 pt-4">
+    <form [formGroup]="myForm" (ngSubmit)="addOrder()" class="needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="name" formControlName="name" required>
+          <div class="invalid-feedback" *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched">
+            <div *ngIf="myForm.get('name')?.hasError('required')">Name is required.</div>
+          </div>
+        </div>
+      
+        <div class="mb-3">
+          <label for="number" class="form-label">Number:</label>
+          <input type="number" class="form-control" id="number" formControlName="number" required pattern="^[0-9]+$">
+          <div class="invalid-feedback" *ngIf="myForm.get('number')?.invalid && myForm.get('number')?.touched">
+            <div *ngIf="myForm.get('number')?.hasError('required')">Number is required.</div>
+            <div *ngIf="myForm.get('number')?.hasError('pattern')">Please enter a valid number.</div>
+          </div>
+        </div>
+      
+        <div class="mb-3">
+          <label for="description" class="form-label">Description:</label>
+          <textarea class="form-control" id="description" formControlName="description" required></textarea>
+          <div class="invalid-feedback" *ngIf="myForm.get('description')?.invalid && myForm.get('description')?.touched">
+            <div *ngIf="myForm.get('description')?.hasError('required')">Description is required.</div>
+          </div>
+        </div>
+      
+        <div class="mb-3">
+          <label for="deliveryDate" class="form-label">Delivery Date:</label>
+          <input type="date" class="form-control" id="deliveryDate" formControlName="deliveryDate" required>
+          <div class="invalid-feedback" *ngIf="myForm.get('deliveryDate')?.invalid && myForm.get('deliveryDate')?.touched">
+            <div *ngIf="myForm.get('deliveryDate')?.hasError('required')">Delivery Date is required.</div>
+          </div>
+        </div>
+      
+        <div class="modal-footer">
+            <button class="btn btn-primary" *ngIf="loading" type="button" disabled>
+              <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+              <span role="status">Loading...</span>
+            </button>
+        
+            <button
+            [disabled]="myForm.invalid"
+              type="button"
+              class="btn btn-primary"
+              *ngIf="loading == false"
+              (click)="addOrder()"
+            >
+              Save
+            </button>
+          </div>
+      </form>
+      
+      
+  </div>
+ 
+</ng-template>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">ORDER DISCRIPTION</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="p-4 d-flex justify-content-center align-items-center" style="white-space: pre-line;">
+
+{{selectedDisc}}
+   
+  </div>
+ 
+</ng-template>

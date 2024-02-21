@@ -9,6 +9,7 @@ import { EnrolledListComponent } from './screens/enrolled-list/enrolled-list.com
 import { SchemesListComponent } from './screens/schemes-list/schemes-list.component';
 import { PayemiMobComponent } from './screens/payemi-mob/payemi-mob.component';
 import { BankComponent } from './screens/bank/bank.component';
+import { OrderListComponent } from './screens/order-list/order-list.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'bank', component: BankComponent, canActivate: [AuthGuard] },
   { path: 'pay-emi', component: PayemiMobComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'order', component: OrderListComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to home when the app starts
   { path: '**', redirectTo: '/login', pathMatch: 'full' } //
 ];

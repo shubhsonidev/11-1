@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import {
   Component,
-  NgModule,
+
   TemplateRef,
-  ViewChild,
   inject,
 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

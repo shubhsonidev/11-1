@@ -1,93 +1,166 @@
 <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
-    <nav class="navbar " style="width: 100vw;">
-        <div class="container-fluid ">
-            <div class="d-flex flex-row align-items-center justify-content-center">
-                <i class="fa-solid fa-bars me-3 pointer" style="color: white; font-size: 1.6rem;"
-                    (click)="open(content)"></i>
-                <p class="navbar-brand" href="#" style="margin: 0;">
-                    SUVIDHA SCHEME | {{year}}
-                </p>
-                <i class="fa-solid fa-pen ms-2 pointer" (click)="openVerticallyCentered(contents)"
-                    style="color: white;"></i>
-            </div>
-            <div class="d-flex flex-row align-items-center justify-content-center">
+  <nav class="navbar" style="width: 100vw">
+    <div class="container-fluid">
+      <div class="d-flex flex-row align-items-center justify-content-center">
+        <i
+          class="fa-solid fa-bars me-3 pointer"
+          style="color: white; font-size: 1.6rem"
+          (click)="open(content)"
+        ></i>
+        <p class="navbar-brand" href="#" style="margin: 0">
+          SUVIDHA SCHEME | {{ year }}
+        </p>
+        <i
+          class="fa-solid fa-pen ms-2 pointer"
+          (click)="openVerticallyCentered(contents)"
+          style="color: white"
+        ></i>
+      </div>
+      <div class="d-flex flex-row align-items-center justify-content-center">
+        <i
+          class="fa-solid fa-gear me-3 pointer"
+          style="color: white; font-size: 1.3rem"
+          (click)="open(setting)"
+        ></i>
 
-                <i class="fa-solid fa-gear me-3 pointer" style="color: white; font-size: 1.3rem;"
-                    (click)="open(setting)"></i>
-
-                <div class="d-flex flex-row align-items-center justify-content-center pointer" (click)="logout()">
-                    <i class="fa-solid fa-right-from-bracket me-2" style="color: white;"></i>
-                    <a class="navbar-brand">Logout</a>
-                </div>
-            </div>
+        <div
+          class="d-flex flex-row align-items-center justify-content-center pointer"
+          (click)="logout()"
+        >
+          <i
+            class="fa-solid fa-right-from-bracket me-2"
+            style="color: white"
+          ></i>
+          <a class="navbar-brand">Logout</a>
         </div>
-    </nav>
+      </div>
+    </div>
+  </nav>
 </nav>
 <ng-template #content let-offcanvas>
-    <div class="offcanvas-header">
-        <!-- <h4 class="offcanvas-title" id="offcanvas-basic-title">Profile update</h4> -->
-        <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
-    </div>
-    <div class="offcanvas-body">
-<p routerLink="/dashboard">Dashboard</p>
-<p routerLink="/enrolled">Enrolled List</p>
-<p routerLink="/schemes-list">Schemes List</p>
-
-    </div>
+  <div class="offcanvas-header">
+    <!-- <h4 class="offcanvas-title" id="offcanvas-basic-title">Profile update</h4> -->
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="offcanvas.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <p class="pointer" routerLink="/dashboard">Dashboard</p>
+    <p class="pointer" routerLink="/enrolled">Enrolled List</p>
+    <p class="pointer" routerLink="/schemes-list">Schemes List</p>
+    <p class="pointer" routerLink="/order">Order List</p>
+  </div>
 </ng-template>
 <ng-template #setting let-offcanvas>
-    <div class="offcanvas-header">
-        <h4 class="offcanvas-title" id="offcanvas-basic-title">Settings</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title" id="offcanvas-basic-title">Settings</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="offcanvas.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="offcanvas-body" style="width: 100%">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div
+        class="form-check mb-3 form-switch d-flex flex-row justify-content-between align-items-center w-100"
+      >
+        <label class="form-check-label" for="flexSwitchCheckDefault"
+          >Message for Enrollment</label
+        >
+        <input
+          class="form-check-input"
+          (change)="changeEnrollMessageConfig(enrollMessage)"
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="enrollMessage"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckDefault"
+        />
+      </div>
+      <div
+        class="form-check form-switch d-flex flex-row justify-content-between align-items-center w-100"
+      >
+        <label class="form-check-label" for="flexSwitchCheckDefault"
+          >Message for Adding-EMI</label
+        >
+        <input
+          class="form-check-input"
+          (change)="changeEMIMessageConfig(emiMessage)"
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="emiMessage"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckDefault"
+        />
+      </div>
+      <hr style="width: 100%" />
+      <div
+        class="form-check w-100 form-switch d-flex flex-row justify-content-between align-items-center"
+      >
+        <label class="form-check-label" for="flexSwitchCheckDefault"
+          >Add Image with message</label
+        >
+        <input
+          class="form-check-input"
+          (change)="changeIsImageConfig(addImage)"
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="addImage"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckDefault"
+        />
+      </div>
+      <div class="mb-3 w-100 mt-3" *ngIf="addImage">
+        <label for="exampleInputEmail1" class="form-label">Scheme name</label>
+        <input
+          type="text"
+          autocomplete="off"
+          class="form-control"
+          id="exampleInputEmail1"
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="imageUrl"
+          aria-describedby="emailHelp"
+        />
+
+        <button
+          type="button"
+          (click)="addImageUrl(imageUrl)"
+          class="btn btn-success mt-3"
+        >
+          Save
+        </button>
+      </div>
     </div>
-    <div class="offcanvas-body" style="width: 100%;">
-
-        <div class="d-flex flex-column justify-content-center align-items-center">
-
-            <div class="form-check mb-3 form-switch d-flex flex-row justify-content-between align-items-center w-100">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Message for Enrollment</label>
-                <input class="form-check-input" (change)="changeEnrollMessageConfig(enrollMessage)"
-                    [ngModelOptions]="{standalone: true}" [(ngModel)]="enrollMessage" type="checkbox" role="switch"
-                    id="flexSwitchCheckDefault">
-            </div>
-            <div class="form-check  form-switch d-flex flex-row justify-content-between align-items-center w-100">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Message for Adding-EMI</label>
-                <input class="form-check-input" (change)="changeEMIMessageConfig(emiMessage)"
-                    [ngModelOptions]="{standalone: true}" [(ngModel)]="emiMessage" type="checkbox" role="switch"
-                    id="flexSwitchCheckDefault">
-
-            </div>
-            <hr style="width: 100%;">
-            <div class="form-check w-100 form-switch d-flex flex-row justify-content-between align-items-center">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Add Image with message</label>
-                <input class="form-check-input" (change)="changeIsImageConfig(addImage)" [ngModelOptions]="{standalone: true}" [(ngModel)]="addImage"
-                    type="checkbox" role="switch" id="flexSwitchCheckDefault">
-
-            </div>
-            <div class="mb-3 w-100 mt-3" *ngIf="addImage">
-                <label for="exampleInputEmail1" class="form-label">Scheme name</label>
-                <input type="text" autocomplete="off"  class="form-control"
-                    id="exampleInputEmail1" [ngModelOptions]="{standalone: true}" [(ngModel)]="imageUrl"
-                    aria-describedby="emailHelp">
-
-                <button type="button" (click)="addImageUrl(imageUrl)"  class="btn btn-success mt-3">Save</button>
-
-            </div>
-
-        </div>
-    </div>
-
+  </div>
 </ng-template>
 
 <ng-template #contents let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title">Alert </h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-    </div>
+  <div class="modal-header">
+    <h4 class="modal-title">Alert</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
 
-    <p class="p-3">Are you sure you want to change year ?</p>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">No</button>
-        <button type="button" class="btn btn-primary" (click)="navigateToSelect()">Yes</button>
-    </div>
+  <p class="p-3">Are you sure you want to change year ?</p>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="modal.close('Close click')"
+    >
+      No
+    </button>
+    <button type="button" class="btn btn-primary" (click)="navigateToSelect()">
+      Yes
+    </button>
+  </div>
 </ng-template>
