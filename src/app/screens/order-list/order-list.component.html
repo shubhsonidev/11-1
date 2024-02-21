@@ -1,3 +1,4 @@
+
 <app-navbar></app-navbar>
 <div class="d-flex flex-row justify-content-center align-items-center">
   <table class="table mt-4" style="width: 98vw">
@@ -71,13 +72,15 @@
             'background-color': order.status === 'Delivered' ? '#ffccd5' : ''
           }"
         >
-          <!-- <button
+          <button
             type="button"
             class="btn btn-success"
             style="padding: 0px 10px"
+            (click)="openVerticallyCentered2(status, order.status ,order.orderId)"
+
           >
-            Edit
-          </button> -->
+            Update Status
+          </button>
 
           <button
             type="button"
@@ -191,4 +194,42 @@
    
   </div>
  
+</ng-template>
+
+<ng-template #status let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">UPDATE STATUS</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="p-4 d-flex justify-content-center align-items-center" style="white-space: pre-line;">
+
+    <div ngbDropdown class="d-inline-block d-flex justify-content-center align-items-center" style="width: 100%;">
+        <button type="button" class="btn btn-outline-primary drop" id="dropdownBasic1" ngbDropdownToggle
+            style="width: 70.3%;">
+            {{selectedStatus}}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="width: 70.3%;">
+            <button ngbDropdownItem (click)="selectStatus('Pending')" 
+                style="text-align: center;">Pending</button>
+            <button ngbDropdownItem (click)="selectStatus('In Making')" 
+                style="text-align: center;">In Making</button>
+            <button ngbDropdownItem (click)="selectStatus('Delivered')" 
+                style="text-align: center;">Delivered</button>
+        </div>
+    </div>
+   
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" *ngIf="loading" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span role="status">Loading...</span>
+    </button>
+
+    <button type="button" class="btn btn-primary" *ngIf="loading == false" (click)="updateStatus()">Save</button>
+</div>
 </ng-template>
